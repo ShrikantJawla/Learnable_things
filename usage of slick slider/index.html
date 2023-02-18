@@ -21,15 +21,19 @@
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"
 		/>
+		<link rel="stylesheet" href="./index.css" />
 	</head>
-	<body>
-		<div class="container" style="display: flex; width: 90%; margin: auto">
-			<div style="width: 200px; height: 200px; border: 1px solid red"></div>
-			<div style="width: 200px; height: 200px; border: 1px solid red"></div>
-			<div style="width: 200px; height: 200px; border: 1px solid red"></div>
-			<div style="width: 200px; height: 200px; border: 1px solid red"></div>
-			<div style="width: 200px; height: 200px; border: 1px solid red"></div>
-			<div style="width: 200px; height: 200px; border: 1px solid red"></div>
+	<body style="background-color: rgb(198, 208, 217)">
+		<div class="crausel_container">
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
+			<div class="crausel_item"></div>
 		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -40,7 +44,7 @@
 			referrerpolicy="no-referrer"
 		></script>
 		<script>
-			$(".container").slick({
+			$(".crausel_container").slick({
 				dots: true,
 				infinite: true,
 				speed: 300,

@@ -1,0 +1,15 @@
+/** @format */
+
+.crausel_container {
+	width: 90%;
+	margin: auto;
+}
+.slick-arrow::before {
+	font-size: 22px;
+	color: rgb(114, 100, 100);
+}
+.crausel_item {
+	width: 30%;
+	height: 340px;
+	border: 1px solid red;
+}
