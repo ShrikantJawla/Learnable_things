@@ -1,0 +1,82 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			* {
+				padding: 0%;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			.categories_container {
+				width: 100%;
+				height: 60px;
+				overflow-x: auto;
+				overflow-y: hidden;
+				display: flex;
+				align-items: center;
+				gap: 40px;
+				padding: 0 25px;
+				box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+			}
+			.categories_container::-webkit-scrollbar {
+				height: 7px;
+			}
+			.categories_container::-webkit-scrollbar-thumb {
+				background-color: rgb(165, 165, 227);
+			}
+			.categories_container > a {
+				text-decoration: none;
+				font-size: 20px;
+				color: black;
+				white-space: nowrap;
+			}
+			.categories_container > a:hover {
+				text-decoration: underline;
+				text-decoration-color: rgb(209, 81, 81);
+			}
+			.categories_container > a.active {
+				color: rgb(203, 81, 81);
+				font-weight: 500;
+			}
+		</style>
+	</head>
+	<body>
+		<div onclick="setActive(event)" class="categories_container">
+			<a href="#" class="cat_anchor active">View all</a>
+			<a href="#" class="cat_anchor">Men's fashion</a>
+			<a href="#" class="cat_anchor">Personal care</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+			<a href="#" class="cat_anchor">cars</a>
+		</div>
+		<script src="./index.js"></script>
+	</body>
+</html>
