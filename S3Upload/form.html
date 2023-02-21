@@ -1,0 +1,28 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<input type="file" name="image" id="fileUpload" />
+		<button onclick="uploadFile()">Submit</button>
+	</body>
+	<script>
+		function uploadFile() {
+			const file = document.getElementById("fileUpload").files[0];
+			let form = new FormData();
+			form.append("image", file);
+			fetch("/upload", {
+				method: "POST",
+				body: form,
+			})
+				.then((res) => {})
+				.catch((err) => console.log(err));
+		}
+	</script>
+</html>
