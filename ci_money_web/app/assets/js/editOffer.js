@@ -1,5 +1,37 @@
 const id = window.location.search.split("id=")[1];
 
+fetchCurrentOfferToDisplay();
+
+async function fetchCurrentOfferToDisplay() {
+  try {
+    const prom = await fetch(`/offers/getSingleOffer/${id}`);
+    const data = await prom.json();
+    const {
+      of_name,
+      of_desc,
+      of_image_url,
+      of_sequence,
+      of_active_status,
+      of_logo,
+      of_share_link,
+      of_private_status,
+    } = data.allData;
+    appendDataToInputs(
+      of_name,
+      of_desc,
+      of_sequence,
+      of_active_status,
+      of_image_url,
+      of_logo,
+      of_share_link,
+      of_private_status
+    );
+    showPreviewOnLoad(cat_img);
+  } catch (error) {
+    console.log(error);
+    alert(error.message);
+  }
+}
 
 function getParameters() {
   let urlString = window.location.href;
@@ -11,7 +43,7 @@ function getParameters() {
   }
 }
 
-getParameters()
+getParameters();
 
 function editOffer() {
   const offer_name = document.querySelector("#offer_name").value;

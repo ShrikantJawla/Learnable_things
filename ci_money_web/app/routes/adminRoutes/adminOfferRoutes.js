@@ -22,24 +22,23 @@ router.delete("/deleteRow/:id", adminOfferControllerObject.deleteAnyData);
 
 router.post("/get-filtered-offers", adminOfferControllerObject.displayAllData);
 
-router.post("/addOfferByRequest", async (req, res) => {
-  const {
-    name,
-    desc,
-    sequence,
-    status,
-    share_link,
-  } = req.body;
-  try {
-    console.log(req.file)
-    return;
-  } catch (error) {
-    return res.json({
-      status: 500,
-      message: error,
-    });
-  }
-});
+router.get('/getSingleOffer/:id',adminOfferControllerObject.getSingleOffer)
+
+
+router.post(
+  "/addOfferByRequest",
+  uploadObject.upload.array("img", 2),
+  adminOfferControllerObject.addNewOffer
+);
+
+router.patch(
+  "/updateAnyExistingOffer/:id",
+  uploadObject.upload.fields([
+    { name: "img", maxCount: 1 },
+    { name: "logo", maxCount: 1 },
+  ]),
+  adminOfferControllerObject.updateAnyExistingOffer
+);
 
 router.upload;
 

@@ -35,12 +35,12 @@
                                     <div class="col">
                                         <div class="app-content">
                                             <h1 class="application-title  bold">
-                                                Edit Offer
+                                                Add a Offer
                                             </h1>
                                             <div class="top-btns">
                                                 <!-- <button class="ci-btn ci-btn-red d-none" data-bs-toggle="modal" data-bs-target="#deleteModal" >Delete</button> -->
-                                                <!-- <button class="ci-btn" id="publish" data-bs-toggle="modal" data-bs-target="#publishModal" onclick="addAOffer()">Publish</button> -->
-                                                <button class="ci-btn ci-btn-green" id="update" onclick="editOffer()">Update</button>
+                                                <button class="ci-btn" id="publish" data-bs-toggle="modal" data-bs-target="#publishModal" onclick="addAOffer() ">Publish</button>
+                                                <!-- <button class="ci-btn ci-btn-green" id="update" disabled>Update</button> -->
 
                                             </div>
                                         </div>
@@ -49,53 +49,67 @@
                                 <div class="row">
                                     <div class="card bg-card">
                                         <form >
-                                            <div class="ci-card-body newoffer card-body">
+                                            <div class="ci-card-body newoffer card-body ">
                                                 <div class="col-8 shadowBox p-4" id="left-form">
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <div class="row">
-                                                                <label for="offer_name" class="form-label ">Offer Name<span class="required">*</span></label>
-                                                                <input type="text" class="form-control" id="offer_name" name="BrandName" required>
+                                                                <label for="name" class="form-label ">Name<span class="required">*</span></label>
+                                                                <input type="text" class="form-control" id="name" name="name" required>
                                                             </div>
                                                             <div class="row mt-3">
-                                                                <label for="offer_desc" class="form-label ">Offer Description</label>
-                                                                <input type="text" class="form-control" id="offer_desc" name="BrandWebsite" required>
+                                                                <label for="desc" class="form-label ">Description</label>
+                                                                <input type="text" class="form-control" id="desc" name="desc" required>
                                                             </div>
                                                             <div class="row px-0 mt-3">
                                                                 <div class="col-6">
-                                                                    <label for="offer_sequence" class="form-label ">Offer sequence</label>
-                                                                    <input type="number" class="form-control" id="offer_sequence" name="BrandAlexa" required>
+                                                                    <label for="sequence" class="form-label ">sequence</label>
+                                                                    <input type="number" class="form-control" id="sequence" name="sequence" required>
                                                                 </div>
                                                                 <div class="col-6" style="display: flex; flex-direction: column;">
-                                                                    <label for="offer_status" style="display:inline-block;" class="form-label d-inline-block">Offer Status</label>
-                                                                    <select name="offer_status" id="offer_status">
-                                                                        <option value="on">ON</option>
-                                                                        <option value="off">OFF</option>
+                                                                    <label for="status" style="display:inline-block;" class="form-label d-inline-block">Status</label>
+                                                                    <select name="status" id="status">
+                                                                        <option value="true">ON</option>
+                                                                        <option value="false">OFF</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
+                                                            <div class="row mt-3">
+                                                                <label for="share_link" class="form-label ">Share link</label>
+                                                                <input type="text" class="form-control" id="share_link" name="share_link" required>
+                                                            </div>
                                                         </div>
-                                                        <!-- Offer image -->
+                                                        <!-- image adn logo uploading-->
                                                         <div class="col-6" style="display: flex; flex-direction: column; justify-content: flex-start; padding: 0 20px ; ">
-                                                            <label for="offer_img" class="form-label ">Offer Image</label>
+                                                            <label for="img" class="form-label ">Image</label>
                                                             <div class="imageUploadBox form-input ">
                                                                 <div class="preview">
-                                                                    <img id="offer_img-preview" class="previewImg" src="">
+                                                                    <img id="img-preview" class="previewImg" src="">
                                                                 </div>
-                                                               <i class="material-icons has-sub-menu action-btns deleteImage" onclick="clearPreview()">close</i>
-                                                                <label for="offer_img" class="">Choose</label>
-                                                                <input type="file" id="offer_img" accept="image/*" onchange="showPreview(event);">
+                                                               <i class="material-icons has-sub-menu action-btns deleteImage" onclick="clearImgPreview();">close</i>
+                                                                <label for="img" class="">Choose</label>
+                                                                <!-- <input type="file" id="brandLogo" accept="image/*" onchange="showPreview(event);"> -->
+                                                                <input type="file" id="img" accept="image/*" onchange="showImgPreview(event);">
                                                             </div>
-
+                                                            <label for="logo" class="form-label ">Image</label>
+                                                            <div class="imageUploadBox form-input ">
+                                                                <div class="preview">
+                                                                    <img id="logo-preview" class="previewImg" src="">
+                                                                </div>
+                                                               <i class="material-icons has-sub-menu action-btns deleteImage" onclick="clearLogoPreview();">close</i>
+                                                                <label for="logo" class="">Choose</label>
+                                                                <!-- <input type="file" id="brandLogo" accept="image/*" onchange="showPreview(event);"> -->
+                                                                <input type="file" id="logo" accept="image/*" onchange="showLogoPreview(event);">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row ">
-                                                        
                                                         
                                                     </div>
+                                                    <!-- <div class="row ">
+                                                        
+                                                    </div> -->
 
                                                 </div>
-                                                <div class="col-4 " style="padding-left: 28px!important;">
+                                                <div class="col-4" style="padding-left: 28px!important;">
                                                     <div class="col-md-12 ">
                                                         
                                                        <div class="px-4 py-2 h-2 rounded-1 my-0 py-0 shadowBox information">
@@ -116,7 +130,7 @@
                                                         </div>
                                                         <div class=" form-group d-flex flex-column gap-3 mt-4 " id="multiSelectWrapper">
 
-                                                            <div class="selectBox" id="offersSelectBox" >
+                                                            <!-- <div class="selectBox" id="offersSelectBox" >
                                                                 <label 
                                                                     class="multiInputLabel"
                                                                     id="offersLabel"
@@ -143,7 +157,7 @@
                                                                     class="selectBoxDropdown dropdownHidden "
                                                                 ></div>
                                                                 <div class="selectBoxSelected" id="offersSelectBoxSelected"></div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                        
                                                     </div>
@@ -170,7 +184,7 @@
                 <script src="/app/assets/js/utils/blockModalsEsacping.js"></script>
                 <script src="/app/assets/js/utils/multiUniSelectObject.js"></script>
                 <script src="/app/assets/js/commonEdit.js"></script>
-                <script src="/app/assets/js/editOffers.js"></script>
+                <script src="/app/assets/js/editOffer.js"></script>
 </body>
 
 </html>
