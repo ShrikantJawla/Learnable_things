@@ -1,0 +1,28 @@
+<% 
+for(let i =0; i < reportData.length; i++){ %>
+    <tr class="dynamicTableRow" style=" font-size:13px;" id="table-row-2">
+        
+        <td><%=reportData[i].sn_id%></td>
+        <td><%=reportData[i].sn_title%></td>
+        <td><%=reportData[i].sn_text%></td>
+        <td><%=reportData[i].sn_time%></td>
+        <td><%=reportData[i].sn_usersegment%></td>
+        <td><%
+            for(let j = 0; j < reportData[i].sn_payload.length; j++){%>
+               <%=JSON.stringify(reportData[i].sn_payload[j])%>
+            <%}
+            %></td>
+        <td><a target="_blank" href="<%=reportData[i].sn_img_url%>"><%=reportData[i].sn_img_url%></a></td>
+        <td><%=reportData[i].sn_fcm_token%></td>
+        <td><%=reportData[i].sn_topic_val%></td>
+        <td><%=JSON.stringify(reportData[i].sn_result)%></td>
+        <td><%=reportData[i].sn_target_device%></td>
+        <td><%=reportData[i].sn_target_messagetopics%></td>
+        <td><%=reportData[i].created_at%></td>
+        
+        
+    </tr>
+<%    }
+%>
+
+<input id="newTotalCount" type="hidden" value="<%=totalCount%>"></input>

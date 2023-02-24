@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CI-money</title>
+    <link
+      href="./admin/assets/plugins/flatpickr/flatpickr.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link
+      href="/app/assets/plugins/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/app/assets/plugins/perfectscroll/perfect-scrollbar.css"
+      rel="stylesheet"
+    />
+    <link href="/app/assets/plugins/pace/pace.css" rel="stylesheet" />
+
+    <link href="/app/assets/css/chosen/chosen.css" rel="stylesheet" />
+    <!-- Theme Styles -->
+    <link href="/app/assets/css/custom2.css" rel="stylesheet" />
+    <link href="/app/assets/css/main.min.css" rel="stylesheet" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./admin/assets/images/cardInsiderImages/card-insider-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./admin/assets/images/cardInsiderImages/card-insider-icon.png"
+    />
+  </head>
+
+  <body>
+    <div class="app align-content-stretch d-flex flex-wrap">
+      <%- include('../../common/sidebar.ejs'); %>
+      <div class="app-container ci-table-padding">
+        <div class="d-flex flex-column">
+          <div class="app-content">
+            <h1 class="application-title pb-1">Offers</h1>
+          </div>
+          <div
+            style="
+              display: flex;
+              margin-bottom: 10px;
+              gap: 10px;
+              margin-left: auto;
+            "
+          >
+            <button class="btn btn-success" id="filterReset">
+              Reset Filters
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="window.open('/offers/addOffer','_blank')"
+            >
+              Add Item
+            </button>
+            <button class="btn btn-info">Export csv</button>
+          </div>
+        </div>
+        <div class="card ci-scrollX" ">
+        <header class="card-header d-flex justify-content-between">
+          <div
+            class="d-flex align-items-center"
+            style="margin-bottom: 20px; gap: 12px"
+          >
+            <select name="entriesPerPage" id="entriesPerPage">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+            </select>
+            <label for="entriesPerPage" style="color: rgb(128, 128, 128)">
+              entries / page</label
+            >
+          </div>
+          <icon
+            class="material-icons material-symbols-outlined"
+            style="cursor: pointer"
+            data-bs-toggle="collapse"
+            href="#table-filter-row"
+            role="button"
+          >
+            filter_list
+          </icon>
+        </header>
+
+        <table class="table">
+          <thead style="color: rgb(128, 128, 128) !important">
+            <tr
+              style="text-align: center"
+              id="table-header"
+              data-filter-value="0"
+              data-filter="none"
+            >
+              <!-- id -->
+              <th
+                data-filter-value="0"
+                data-filter="id"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="id">ID</span>
+                  <icon
+                    data-filter="id"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+              <!-- name -->
+              <th
+                data-filter-value="0"
+                data-filter="OfferName"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="OfferName"
+                    >Name</span
+                  >
+                  <icon
+                    data-filter="OfferName"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+              <!-- description -->
+              <th
+                data-filter-value="0"
+                data-filter="offer_desc"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="offer_desc"
+                    >Description</span
+                  >
+                  <icon
+                    data-filter="offer_desc"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+              <!-- Img_url -->
+              <th
+                data-filter-value="0"
+                data-filter="img_url"
+                style="color: rgb(128, 128, 128) !important;"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="img_url"
+                    >Img_url</span
+                  >
+                  <icon
+                    data-filter="img_url"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+
+
+              <!-- logo -->
+              <th
+                data-filter-value="0"
+                data-filter="img_url"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="img_url"
+                    >Logo</span
+                  >
+                  <icon
+                    data-filter="img_url"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+
+              <!-- Status -->
+              <th
+                data-filter-value="0"
+                data-filter="status"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="status"
+                    >Status</span
+                  >
+                  <icon
+                    data-filter="status"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+
+              <!-- sequence -->
+              <th
+                data-filter-value="0"
+                data-filter="sequence"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="sequence"
+                    >Sequence</span
+                  >
+                  <icon
+                    data-filter="sequence"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+
+               <!-- ShareLink -->
+               <th
+               data-filter-value="0"
+               data-filter="share_link"
+               style="color: rgb(128, 128, 128) !important"
+             >
+               <div class="d-flex">
+                 <span style="cursor: pointer" data-filter="share_link"
+                   >ShareLink</span
+                 >
+                 <icon
+                   data-filter="share_link"
+                   class="material-icons material-symbols-outlined invisible"
+                   style="cursor: pointer"
+                 >
+                   straight
+                 </icon>
+               </div>
+             </th>
+
+              <!-- updated_by -->
+              <th
+                data-filter-value="0"
+                data-filter="updated_by"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="updated_by"
+                    >updated_by</span
+                  >
+                  <icon
+                    data-filter="published_at"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+
+               <!-- updated_at -->
+               <th
+               data-filter-value="0"
+               data-filter="created_at"
+               style="color: rgb(128, 128, 128) !important"
+             >
+               <div class="d-flex">
+                 <span style="cursor: pointer" data-filter="created_at"
+                   >updated_at</span
+                 >
+                 <icon
+                   data-filter="created_at"
+                   class="material-icons material-symbols-outlined invisible"
+                   style="cursor: pointer"
+                 >
+                   straight
+                 </icon>
+               </div>
+             </th>
+
+            <!-- publish_at -->
+             <th
+                data-filter-value="0"
+                data-filter="published_at"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="published_at"
+                    >PublAt</span
+                  >
+                  <icon
+                    data-filter="published_at"
+                    class="material-icons material-symbols-outlined invisible"
+                    style="cursor: pointer"
+                  >
+                    straight
+                  </icon>
+                </div>
+              </th>
+
+              <!-- Actions -->
+              <th
+                data-filter-value="0"
+                style="color: rgb(128, 128, 128) !important"
+              >
+                <div class="d-flex">
+                  <span style="cursor: pointer" data-filter="Actions"
+                    >Actions</span
+                  >
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tr
+            id="table-filter-row"
+            style="border-bottom: 1px solid rgb(199, 199, 199)"
+          >
+            <!-- ID -->
+            <th>
+              <input
+                type="text"
+                name="id"
+                class="form-control px-1"
+                id="id"
+                style="max-width: 50px !important"
+              />
+            </th>
+            <!-- name -->
+            <th>
+              <textarea
+                type="text"
+                name="name"
+                class="form-control"
+                style="
+                  padding: 0;
+                  height: 44px;
+                  min-height: 44px;
+                  width: 80px;
+                  min-width: 80px;
+                  max-width: 200px;
+                  max-height: 200px;
+                  font-size: 12px;
+                  resize: both;
+                "
+                id="OfferName"
+              ></textarea>
+            </th>
+
+            <!-- desc -->
+            <th>
+              <textarea
+                type="text"
+                name="desc"
+                class="form-control"
+                style="
+                  padding: 0;
+                  height: 44px;
+                  min-height: 44px;
+                  width: 80px;
+                  min-width: 80px;
+                  max-width: 200px;
+                  max-height: 200px;
+                  font-size: 12px;
+                  resize: both;
+                "
+                id="offer_desc"
+              ></textarea>
+            </th>
+
+            <!-- img_url -->
+            <th>
+              <input
+                type="text"
+                id="img"
+                name="BrandPrivate"
+                class="form-control"
+                style="width: 150px"
+              />
+            </th>
+
+            <!-- logo -->
+            <th>
+              <input
+                type="text"
+                id="logo"
+                name="BrandPrivate"
+                class="form-control"
+                style="width: 150px"
+              />
+            </th>
+
+            <!-- status -->
+            <th>
+              <select
+                id="status"
+                name="status"
+                class="form-control"
+                style="min-width: 70px; padding: 10px 5px"
+              >
+                <option selected value="any">Select</option>
+                <option value="Draft">On</option>
+                <option value="Published">Off</option>
+              </select>
+            </th>
+
+            <!-- sequence -->
+            <th>
+              <input
+                type="number"
+                id="sequence"
+                name="sequence"
+                class="form-control"
+                style="width: 100px;"
+              />
+            </th>
+
+            <!-- Share Link -->
+            <th>
+              <input
+                type="text"
+                id="share_link"
+                name="BrandPrivate"
+                class="form-control"
+                style="width: 150px"
+              />
+            </th>
+
+            <!-- Updated by -->
+            <th>
+              <input
+                type="number"
+                id="updated_by"
+                name="updated_by"
+                class="form-control"
+                style="width: 100px"
+              />
+            </th>
+
+            <!-- updated_at -->
+            <th>
+              <div class="d-flex" style="margin-bottom: 2px">
+                <span
+                  style="
+                    font-size: 12px;
+                    width: 40px;
+                    color: rgb(128, 128, 128) !important;
+                  "
+                  >From</span
+                >
+                <input
+                  type="date"
+                  id="from_updated_at"
+                  name="from_updated_at"
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  style="
+                    width: 90px;
+                    padding: 0;
+                    height: 20px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                  "
+                />
+              </div>
+
+              <div class="d-flex">
+                <span
+                  style="
+                    font-size: 12px;
+                    width: 40px;
+                    color: rgb(128, 128, 128) !important;
+                  "
+                  >To
+                </span>
+                <input
+                  type="date"
+                  id="to_updated_at"
+                  name="to_updated_at"
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  style="
+                    width: 90px;
+                    padding: 0;
+                    height: 20px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                  "
+                />
+              </div>
+            </th>
+
+            <!-- created at -->
+            <th>
+              <div class="d-flex" style="margin-bottom: 2px">
+                <span
+                  style="
+                    font-size: 12px;
+                    width: 40px;
+                    color: rgb(128, 128, 128) !important;
+                  "
+                  >From</span
+                >
+                <input
+                  type="date"
+                  id="from_Created_at"
+                  name="from_Created_at"
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  style="
+                    width: 90px;
+                    padding: 0;
+                    height: 20px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                  "
+                />
+              </div>
+
+              <div class="d-flex">
+                <span
+                  style="
+                    font-size: 12px;
+                    width: 40px;
+                    color: rgb(128, 128, 128) !important;
+                  "
+                  >To
+                </span>
+                <input
+                  type="date"
+                  id="to_updated_at"
+                  name="to_updated_at"
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  style="
+                    width: 90px;
+                    padding: 0;
+                    height: 20px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                  "
+                />
+              </div>
+            </th>
+            <th></th>
+          </tr>
+          <tbody id="data-to-show">
+            <tr>
+              <td colspan="13">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="sbl-circ-path"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td
+                colspan="13"
+                style="text-align: center; color: black !important"
+              >
+                <div
+                  class="display: flex; align-items: center; justify-content: center; flex-direction: column;"
+                >
+                  <%# prevPageBtn %>
+                  <span
+                    class="material-icons material-symbols-outlined"
+                    style="
+                      position: relative;
+                      top: 4px;
+                      right: 8px;
+                      font-size: 18px;
+                      color: white;
+                      background: rgb(128, 128, 128) !important;
+                      padding: 2px;
+                      border-radius: 50%;
+                      cursor: pointer;
+                    "
+                    id="prevPage"
+                  >
+                    west
+                  </span>
+                  <%# total pages label %>
+                  <label
+                    for="pageNo"
+                    style="
+                      margin-right: 10px;
+                      color: rgb(128, 128, 128) !important;
+                    "
+                    >Page No:</label
+                  >
+                  <%# input %>
+                  <input
+                    type="number"
+                    style="
+                      width: 50px;
+                      display: inline;
+                      height: 20px;
+                      border-radius: 0 !important;
+                      padding-right: 0 !important;
+                      padding-left: 2px !important;
+                    "
+                    id="page-no"
+                    name="pageNo"
+                    class="form-control"
+                    max="50"
+                    min="1"
+                    value="1"
+                  />
+                  <%# /50 %>
+
+                  <span
+                    style="
+                      margin-left: 10px;
+                      color: rgb(128, 128, 128) !important;
+                    "
+                    id="pages"
+                    >/ 50</span
+                  >
+                  <%# no of entries %>
+
+                  <span
+                    style="
+                      margin-left: 10px;
+                      color: rgb(128, 128, 128) !important;
+                    "
+                    id="entries"
+                    >(2000 entries)</span
+                  >
+
+                  <span
+                    class="material-icons material-symbols-outlined"
+                    style="
+                      position: relative;
+                      top: 4px;
+                      left: 8px;
+                      font-size: 18px;
+                      color: white;
+                      background: rgb(128, 128, 128) !important;
+                      padding: 2px;
+                      border-radius: 50%;
+                      cursor: pointer;
+                    "
+                    id="nextPage"
+                  >
+                    east
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <!-- Javascripts -->
+    <script src="/app/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+    <script src="/app/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="/app/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/app/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+    <script src="/app/assets/plugins/pace/pace.min.js"></script>
+    <script src="/app/assets/plugins/highlight/highlight.pack.js"></script>
+    <script src="/app/assets/plugins/datatables/datatables.min.js"></script>
+
+    <script src="/app/assets/js/main.min.js"></script>
+    <script src="/app/assets/js/custom.js"></script>
+    <script src="/app/assets/js/pages/datatables.js"></script>
+    <script src="/app/assets/plugins/flatpickr/flatpickr.js"></script>
+    <script src="/app/assets/js/utils/blockModalsEsacping.js"></script>
+    <script src="/app/assets/js/offer.js"></script>
+    <script src="/app/assets/js/common.js"></script>
+  </body>
+</html>

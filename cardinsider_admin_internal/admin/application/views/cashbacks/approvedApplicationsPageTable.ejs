@@ -1,0 +1,73 @@
+<table id="datatable1" class="display text-center" style="width:100%">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Application no.</th>
+            <th>Phone</th>
+            <th>Application Status</th>
+            <th>Application Date</th>
+            <th>Application through</th>
+            <th>Cb Applicable</th>
+            <th>Cb Paid</th>
+            <th>Actions</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <% for(let i=0; i < approvedApplications.length; i++){ %>
+            <tr onclick="">
+
+                <td>
+                    <%=approvedApplications[i]['id']%>
+                </td>
+                <td>
+                    <%=approvedApplications[i]['Application_number']%>
+                </td>
+                <td>
+                    <%=approvedApplications[i]['Phone_Number']%>
+                </td>
+
+                <td>
+                    <%=approvedApplications[i]['Application_Status']%>
+                </td>
+                <td>
+                    <%=approvedApplications[i]['Application_date']%>
+                </td>
+                <td>
+                    <%=approvedApplications[i]['application_through']%>
+                </td>
+                <td>
+                    <%=approvedApplications[i]['Cashback_applicable']%>
+                </td>
+
+                <td>
+                    <%=approvedApplications[i]['Cashback_paid']%>
+                </td>
+                <td>
+                    <% if(approvedApplications[i]['Cashback_paid'] === true){%>
+                        <button class="ci-btn paid">
+                    Paid
+                </button>
+                        </div>
+                        <%} else{%>
+                            <div>
+                                <button onclick="APPROVEDAPPLICATIONS.markApplicationAsPaid(`<%=approvedApplications[i]['id']%>`)" id="button-<%=approvedApplications[i][ 'id']%>" class="ci-btn">
+                        Pay
+                    </button>
+                            </div>
+
+                            <%}%>
+
+                </td>
+
+
+            </tr>
+
+            <% }%>
+
+    </tbody>
+</table>
+<script src="./admin/assets/plugins/datatables/datatables.min.js"></script>
+<script src="./admin/assets/js/pages/datatables.js"></script>

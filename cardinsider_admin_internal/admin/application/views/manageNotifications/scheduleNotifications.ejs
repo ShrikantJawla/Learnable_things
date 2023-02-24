@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../common/commonHeader'); %>
+        <link href="./admin/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="app align-content-stretch d-flex flex-wrap">
+        <div class="loader-show" id="loader">
+
+            <div class="sbl-circ-path loader-content"></div>
+
+        </div>
+        <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+        <div class="modal fade" id="ciAddNewAdminUserForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Schedule Notifications Help
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick=""></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li><b>Notification Title :</b> Here you have to set the Notification title</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="app-container">
+                <div class="app-content">
+                    <div class="content-wrapper">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="app-content">
+                                        <h1 class="application-title">Schedule Notifications
+                                            <a class="info-page" data-bs-toggle="modal"
+                                                data-bs-target="#ciAddNewAdminUserForm" onclick=""> <i
+                                                    class="material-icons-two-tone ">
+                                                    help
+                                                </i></a>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h1 class="card-title">Schedule New Notification</h1>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <form class="row g-4 m-5" id="notification-form">
+                                                    <div class="col-md-6">
+                                                        <label for="notificationTitle" class="form-label">Notification
+                                                            Title</label>
+                                                        <input type="text" class="form-control" name="notifictionTitle"
+                                                            id="notifictionTitle" required>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label for="" class="form-label">Notification Text</label>
+                                                        <input type="text" name="notificationText" class="form-control"
+                                                            id="notificationText" required>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label for="" class="form-label">Notification Image URl</label>
+                                                        <input type="text" name="notificationImageUrl"
+                                                            class="form-control" id="notificationImageUrl">
+                                                    </div>
+
+                                                    <label>Payload</label>
+                                                    <div class="container dynamicNoOfInputs g-4">
+                                                        <div class="row align-items-center  mb-2">
+                                                            <div class="col-1 text-end ">
+                                                                <button
+                                                                    class="material-icons material-symbols-outlined minusBtn"
+                                                                    disabled>
+                                                                    remove
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <!-- <input data-number="1" type="text" name="pageVal1" placeholder="Page" class="form-control pageInput"> -->
+                                                                <select name="pageVal1" class="form-control pageInput"
+                                                                    data-number="1" id="">
+                                                                    <option value="0">Select Payload</option>
+                                                                    <option value="page">page</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <!-- <input data-number="1" type="text" name="dataVal1" placeholder="Value" class="form-control valueInput"> -->
+                                                                <select name="dataVal1" class="form-control valueInput"
+                                                                    data-number="1" id="">
+                                                                    <option value="0">Select page</option>
+                                                                    <option value="offer">offer</option>
+                                                                    <option value="apply">apply</option>
+                                                                    <option value="lounges">lounges</option>
+                                                                    <option value="cards">cards</option>
+                                                                    <option value="paybills">paybills</option>
+                                                                    <option value="reminder">reminder</option>
+                                                                    <option value="referral">referral</option>
+                                                                    <option value="webview">webview</option>
+                                                                    <option value="ApplicationTracking">
+                                                                        ApplicationTracking
+                                                                    </option>
+                                                                    <option value="reviewTest">Review Test
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-1 text-start">
+                                                                <button
+                                                                    class="material-icons material-symbols-outlined plusBtn">
+                                                                    add
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <p>Target</p>
+                                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link active" id="pills-home-tab"
+                                                                data-bs-toggle="pill" data-bs-target="#pills-home"
+                                                                type="button" role="tab" aria-controls="pills-home"
+                                                                aria-selected="true">User Segment</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link" id="pills-profile-tab"
+                                                                data-bs-toggle="pill" data-bs-target="#pills-profile"
+                                                                type="button" role="tab" aria-controls="pills-profile"
+                                                                aria-selected="false">Topics</button>
+                                                        </li>
+
+                                                    </ul>
+                                                    <div class="tab-content col-md-6" id="pills-tabContent">
+                                                        <div class="tab-pane fade show active" id="pills-home"
+                                                            role="tabpanel" aria-labelledby="pills-home-tab">
+                                                            <label for="" class="form-label">Select User
+                                                                Segments</label>
+                                                            <select class="form-select"
+                                                                aria-label="Select User Segments"
+                                                                id="userSegmentFurtherForm">
+                                                                <option value="0" selected>Select User Segments</option>
+                                                                <option value="1">Send With FCM Token</option>
+                                                                <option value="2">Send To Devices</option>
+                                                                <option value="3">Send To Approved Applications</option>
+                                                            </select>
+                                                            <div class="g-4 m-2" id="furtherFormData"></div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                                            aria-labelledby="pills-profile-tab">
+                                                            <label for="" class="form-label">Select Message
+                                                                Topics*</label>
+                                                            <select class="form-select"
+                                                                aria-label="Select Message Topics"
+                                                                id="topicsSegmentFurtherForm">
+                                                                <option value="0" selected>Select Message Topics
+                                                                </option>
+                                                                <option value="1">Credit Cards Topics</option>
+                                                                <option value="2">Card Issuers Topics</option>
+                                                            </select>
+                                                            <div class="g-4 m-2" id="topicsFurther">
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <p>Time to Live</p>
+                                                    <div class="col-md-6">
+                                                        <label for="" class="form-label">Select Time To Live*</label>
+                                                        <select class="form-select" aria-label="Select Message Topics"
+                                                            id="schedulingSelect">
+                                                            <option value="0" selected>Now</option>
+                                                            <option value="1">Time To Live</option>
+                                                        </select>
+
+                                                        <div class="g-4 m-2" id="schedulingTimePicker"></div>
+                                                    </div>
+
+
+
+
+
+
+                                                    <div class="col-12">
+                                                        <a onclick="SCHEDULENOTIFICATIONS.postData()"
+                                                            class="btn btn-primary">Send
+                                                            Notification</a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Javascripts -->
+                            </script>
+                            <script src="./admin/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+                            <script src="./admin/assets/plugins/bootstrap/js/popper.min.js"></script>
+                            <script src="./admin/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                            <script src="./admin/assets/plugins/perfectscroll/perfect-scrollbar.min.js">
+                            </script>
+                            <script src="./admin/assets/plugins/pace/pace.min.js"></script>
+                            <script src="./admin/assets/plugins/highlight/highlight.pack.js"></script>
+                            <script src="./admin/assets/plugins/flatpickr/flatpickr.js"></script>
+                            <script src="./admin/assets/js/main.min.js"></script>
+                            <script src="./admin/assets/js/custom.js"></script>
+                            <script src="./admin/assets/js/scheduleNotifications.js"></script>
+
+
+
+
+</body>
+
+</html>

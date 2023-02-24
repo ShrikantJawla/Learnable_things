@@ -1,0 +1,119 @@
+<table id="datatable1" class="display" style="width: 100%">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Number</th>
+            <th>User</th>
+            <th>cbclaimed</th>
+            <th>Payment-method</th>
+            <th>Referral amount</th>
+            <th>Cashback Amount</th>
+            <th>Total amount</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i=0; i < cashbackList.length; i++){ %>
+        <!-- <a href="/cashbacks?id=<%=cashbackList[i]['id']%>" onclick="//console.log('hey im in this');"> -->
+        <tr
+            onclick="CashbackDATA.redirectToCashbackRequestDetail(`<%-cashbackList[i]['user_id']%>`)"
+        >
+            <td><%=cashbackList[i]['user_id']%></td>
+            <td><%=cashbackList[i]['ciu_number']%></td>
+            <td><%=cashbackList[i]['ciu_first_name']%></td>
+
+            <td><%=cashbackList[i]['cashback_claimed']%></td>
+            <td><%=cashbackList[i]['method']%></td>
+
+            <td><%=cashbackList[i]['totalReferrelCasback']%></td>
+            <td><%=cashbackList[i]['totalApplicationCasback']%></td>
+            <td><%=cashbackList[i]['totalCasback']%></td>
+
+            <td>
+                <div>
+                    <a class="ci-btn" onclick="CashbackDATA.markCashBackPaid('123', false)"> Paid </a>
+                    <!-- <a href="/creditcards-list?id=<%=cashbackList[i][ 'id']%>"><i
+                                class="material-icons has-sub-menu action-btns">edit</i></a>
+                            <a><i
+                                class="material-icons has-sub-menu action-btns">delete</i></a> -->
+                </div>
+            </td>
+        </tr>
+        <!-- </a> -->
+
+        <% }%>
+    </tbody>
+</table>
+<script src="./admin/assets/plugins/datatables/datatables.min.js"></script>
+<script src="./admin/assets/js/pages/datatables.js"></script>
+<script>
+    // $(document).ready(function() {
+    //     $("#datatable1_filter").prepend(`<label style="padding-right: 10px;display: inline-flex;padding-left: 10px;">Filter:<select name="datatable1_length" class="custom-select custom-select-sm form-control form-control-sm" style="margin-left: 10px;" id="js-filter-by"><option value="0">ALL</option><option value="Approved">APPROVED</option><option value="Rejected">REJECTED</option><option value="Processing">PROCESSING</option></select></label>`)
+    // });
+    let CashbackDATA = {};
+    CashbackDATA.exportDataAsCSV = function () {
+        //console.log("here");
+        let exportData = `<%- JSON.stringify(cashbackList) %>`;
+        let parsedData = JSON.parse(exportData);
+        //console.log(exportData, "export data");
+
+        //console.log(typeof exportData);
+
+        //console.log(parsedData, "export data");
+
+        //console.log(typeof parsedData);
+        const keys = Object.keys(parsedData[0]);
+        //console.log(keys, "keyskeys");
+        const commaSeparatedString = [
+            keys.join(","),
+            parsedData
+                .map((row) => keys.map((key) => row[key]).join(","))
+                .join("\n"),
+        ].join("\n");
+        //console.log(commaSeparatedString, "comaseparated");
+
+        const csvBlob = new Blob([commaSeparatedString], {
+            type: "text/csv;charset=utf-8",
+        });
+        const blobUrl = URL.createObjectURL(csvBlob);
+
+        var a = $("<a style='display: none;'/>");
+        a.attr("href", blobUrl);
+        a.attr("download", "cb-file.csv");
+        $("body").append(a);
+        a[0].click();
+        window.URL.revokeObjectURL(blobUrl);
+        a.remove();
+
+        // window.location.href = blobUrl;
+
+        URL.revokeObjectURL(blobUrl);
+    };
+    CashbackDATA.redirectToCashbackRequestDetail = function (id) {
+        //console.log("id here..... ------ ", id);
+        //CashbackDATA.ajaxRequestForCbDetail(id);
+
+        window.location.href = `/cashbacks?id=${id}`;
+    };
+
+
+    CashbackDATA.markCashBackPaid = async function(userId, paidVal){
+        console.log(userId, "-------userid---", paidVal, "----paidval-");
+    }
+
+    // CashbackDATA.ajaxRequestForCbDetail = function(requestObj) {
+
+    //     $.ajax({
+    //         url: "/get-earning-user-detail",
+    //         type: "GET",
+    //         data: {
+    //             "earningDetails": requestObj
+    //         },
+
+    //         success: function(result) {
+    //             //console.log(result, "resultresultresultresultresultresultresultresult");
+    //         }
+    //     });
+    // }
+</script>

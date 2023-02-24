@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../common/commonHeader'); %>
+        <link href="./admin/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!--  -->
+
+    <div class="app align-content-stretch d-flex flex-wrap">
+      <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+            <%- include('../common/commonModals'); %>
+            <%- include('../common/commonLoader'); %>
+                <div class="app-container">
+                    <div class="app-content">
+                        <div class="content-wrapper">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="app-content">
+                                            <h1 class="application-title  bold">
+                                                Edit Card Insider User
+                                            </h1>
+                                            <div class="top-btns">
+                                                <button class="ci-btn ci-btn-red d-none" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                                <button class="ci-btn" id="publish" data-bs-toggle="modal" data-bs-target="#publishModal" >Publish</button>
+                                                <button class="ci-btn ci-btn-green" id="update" disabled>Update</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="card bg-card">
+                                        <form >
+                                            <div class="ci-card-body newoffer card-body">
+                                                <div class="col-8 shadowBox p-4" id="left-form">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <label for="ciu_first_name" class="form-label ">CIU First Name<span class="required">*</span></label>
+                                                                <input type="text" class="form-control" id="ciu_first_name" name="ciu_first_name" required>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="ciu_last_name" class="form-label ">CIU Last Name</label>
+                                                                <input type="text" class="form-control" id="ciu_last_name" name="ciu_last_name" required>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <div class="col-6">
+                                                            <label for="ciu_email" class="form-label ">CIU Email</label>
+                                                                <input type="text" class="form-control" id="ciu_email" name="ciu_email" required>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="ciu_number" class="form-label ">CIU Contact No.</label>
+                                                                <input type="text" class="form-control" id="ciu_number" name="ciu_number" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <div class="col-6">
+                                                            <label for="ciu_pancard" class="form-label ">CIU Pan Card</label>
+                                                                <input type="text" class="form-control" id="ciu_pancard" name="ciu_pancard" required>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="ciu_dob" class="form-label ">CIU Date of Birth</label>
+                                                                <input type="date" class="form-control" id="ciu_dob" placeholder="yyyy-mm-dd" name="ciu_dob" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <div class="col-12">
+                                                            <label for="ciu_address1" class="form-label ">CIU Address 1</label>
+                                                                <input type="text" class="form-control" id="ciu_address1" name="ciu_address1" required>
+                                                        </div>
+                                                        <div class="col-12 mt-4">
+                                                            <label for="ciu_address2" class="form-label ">CIU Address 2</label>
+                                                                <input type="text" class="form-control" id="ciu_address2" name="ciu_address2" required>
+                                                        </div>
+                                                        <div class="col-6 mt-4">
+                                                            <label for="ciu_pincode" class="form-label ">CIU Pincode</label>
+                                                                <input type="text" class="form-control" id="ciu_pincode" name="ciu_pincode" required>
+                                                        </div>
+                                                        <div class="col-6 mt-4">
+                                                            <label for="ciu_city" class="form-label ">CIU City</label>
+                                                                <input type="text" class="form-control" id="ciu_city" name="ciu_city" required>
+                                                        </div>
+                                                         <div class="col-6 mt-4">
+                                                            <label for="ciu_gender" class="form-label ">CIU Gender</label>
+                                                                <select class="form-control form-select" id="ciu_gender" name="ciu_gender">
+                                                                    <option value="">Select</option>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                        </div>
+                                                        <div class="col-6 mt-4">
+                                                            <label for="ciu_annual_income" class="form-label ">CIU Annual Income</label>
+                                                                <select class="form-control form-select" id="ciu_annual_income" name="ciu_annual_income">
+                                                                    <option value="">Select</option>
+                                                                    <option value="i0to3">i0to3</option>
+                                                                    <option value="i3to6">i3to6</option>
+                                                                    <option value="i6to8">i6to8</option>
+                                                                    <option value="i8to10">i8to10</option>
+                                                                    <option value="i10to12">i10to12</option>
+                                                                    <option value="i12above">i12above</option>
+                                                                </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <div class="col-6 ">
+                                                            <div class="row">
+                                                                <div class="col-6 mt-3">
+                                                                    <label for="ciu_verified" class="form-label d-block">CIU Verified</label>
+                                                                    <label class="switch">
+                                                                        <input type="checkbox" name="ciu_verified" id="ciu_verified">
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-6  mt-3">
+                                                                    <label for="iOSCheck" class="form-label d-block">iOS Check</label>
+                                                                    <label class="switch">
+                                                                        <input type="checkbox" name="iOSCheck" id="iOSCheck">
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="row">
+                                                                
+                                                                <div class="col-6 mt-3">
+                                                                    <label for="Referral_commission_paid" class="form-label ">Ref Commission Paid</label>
+                                                                    <label class="switch">
+                                                                        <input type="checkbox" name="Referral_commission_paid" id="Referral_commission_paid">
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-6  mt-3">
+                                                                    <label for="cashback_claimed" class="form-label ">Cashback Claimed</label>
+                                                                    <label class="switch">
+                                                                        <input type="checkbox" name="cashback_claimed" id="cashback_claimed">
+                                                                        <span class="slider round"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="fcm_token" class="form-label ">FCM token</label>
+                                                            <textarea type="text" class="form-control form-textarea"  id="fcm_token" name="fcm_token" required> </textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <div class="col-6">
+                                                            <label for="Referrers_approved" class="form-label ">Referrers Approved</label>
+                                                                <input type="number" class="form-control" id="Referrers_approved" name="Referrers_approved" required>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="refer_amount" class="form-label ">Refer Amount</label>
+                                                                <input type="number" class="form-control" id="refer_amount" name="refer_amount" required>
+                                                        </div>
+                                                    </div>
+                                                    <label  class=" mt-4 text-primary ">Account Information</label>
+                                                    <div class="selectBox row">
+                                                        <div class="col-6">
+                                                            <label for="method" class="form-label ">Method</label>
+                                                            <select class="form-control form-select" id="method" name="method">
+                                                                <option value="">Select Method</option>
+                                                                <option value="bank">bank</option>
+                                                                <option value="upi">upi</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="account_name" class="form-label ">Account Name</label>
+                                                            <input type="text" class="form-control" id="account_name" name="account_name" required>
+                                                        </div>
+                                                        <div class="col-6 mt-4">
+                                                            <label for="account_number" class="form-label ">Account Number</label>
+                                                            <input type="text" class="form-control" id="account_number" name="account_number" required>
+                                                        </div>
+                                                        <div class="col-6 mt-4">
+                                                            <label for="bank_name" class="form-label ">Bank Name</label>
+                                                            <input type="text" class="form-control" id="bank_name" name="bank_name" required>
+                                                        </div>
+                                                        <div class="col-6 mt-4">
+                                                            <label for="ifsc_code" class="form-label ">IFSC Code</label>
+                                                            <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" required>
+                                                        </div>
+                                                        <div class="col-6 mt-4">
+                                                            <label for="upi_id" class="form-label ">UPI ID</label>
+                                                            <input type="text" class="form-control" id="upi_id" name="upi_id" required>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                                <div class="col-4 " style="padding-left: 28px!important;">
+                                                    <div class="col-md-12 ">
+                                                        <div class=" px-4 py-2 h-2 rounded-1 my-0 py-0 shadowBox information">
+                                                            <div class="">
+                                                                <label class="info-label"><span>Last Update</span> <span><%= `${ciUserDetail['updated_at'].getFullYear().toString().padStart(4, 0)}/${(ciUserDetail['updated_at'].getMonth() + 1).toString().padStart(2, 0)}/${ciUserDetail['updated_at'].getDate().toString().padStart(2, 0)} - ${ciUserDetail['updated_at'].getHours().toString().padStart(2, 0)}:${ciUserDetail['updated_at'].getMinutes().toString().padStart(2, 0)}` %></span></label>
+                                                            </div>
+                                                             <div class="">
+                                                                <label class="info-label"><span>Published at</span> <span><%= ciUserDetail.published_at? `${ciUserDetail['published_at'].getFullYear().toString().padStart(4, 0)}/${(ciUserDetail['published_at'].getMonth() + 1).toString().padStart(2, 0)}/${ciUserDetail['published_at'].getDate().toString().padStart(2, 0)} - ${ciUserDetail['published_at'].getHours().toString().padStart(2, 0)}:${ciUserDetail['published_at'].getMinutes().toString().padStart(2, 0)}`:'Draft' %></span></label>
+                                                            </div>
+                                                            <div class="">
+                                                                <label class="info-label"><span>By</span><span><%= ciUserDetail['ua_name']%></span> </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="requiredWrapper mt-4">
+                                                            <div class=""><span class="required">*</span> <span>Required</span></div>
+                                                        </div>
+                                                        <div class=" form-group d-flex flex-column gap-3  mt-4" id="multiSelectWrapper">
+                                                            <div class="selectBox" id="creditCardsSelectBox" >
+                                                                <label 
+                                                                    class="multiInputLabel"
+                                                                    id="creditCardsLabel"
+                                                                >
+                                                                    Credit Cards
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    name="creditCardsInput"
+                                                                    id="creditCardsInput"
+                                                                    class="multiSelectInput  form-control"
+                                                                    placeholder="Select Credit Cards"
+                                                                    autocomplete="off"
+                                                                />
+                                                                <button 
+                                                                    class="material-icons material-symbols-outlined input-expand-icon"
+                                                                    id="creditCardsDropdownIcon"
+                                                                >
+                                                                    expand_more
+                                                                </button>
+                                                                <div
+                                                                    id="creditCardsDropdown"
+                                                                    class="selectBoxDropdown dropdownHidden "
+                                                                ></div>
+                                                                <div class="selectBoxSelected" id="creditCardsSelectBoxSelected"></div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class=" form-group d-flex flex-column gap-3  mt-4" id="multiSelectWrapper">
+                                                            <div class="selectBox" id="cardApplicationsSelectBox" >
+                                                                <label 
+                                                                    class="multiInputLabel"
+                                                                    id="cardApplicationsLabel"
+                                                                >
+                                                                    Card Applications
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    name="cardApplicationsInput"
+                                                                    id="cardApplicationsInput"
+                                                                    class="multiSelectInput  form-control"
+                                                                    placeholder="Select Card Applications"
+                                                                    autocomplete="off"
+                                                                />
+                                                                <button 
+                                                                    class="material-icons material-symbols-outlined input-expand-icon"
+                                                                    id="cardApplicationsDropdownIcon"
+                                                                >
+                                                                    expand_more
+                                                                </button>
+                                                                <div
+                                                                    id="cardApplicationsDropdown"
+                                                                    class="selectBoxDropdown dropdownHidden "
+                                                                ></div>
+                                                                <div class="selectBoxSelected" id="cardApplicationsSelectBoxSelected"></div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class=" form-group d-flex flex-column gap-3  mt-4" id="multiSelectWrapper">
+                                                            <div class="selectBox" id="refferedBySelectBox" >
+                                                                <label 
+                                                                    class="multiInputLabel"
+                                                                    id="refferedByLabel"
+                                                                >
+                                                                    Reffered By
+                                                                </label>
+                                                                <input
+                                                                    type="text"
+                                                                    name="refferedByInput"
+                                                                    id="refferedByInput"
+                                                                    class="multiSelectInput  form-control"
+                                                                    placeholder="Select an item"
+                                                                    autocomplete="off"
+                                                                />
+                                                                <button 
+                                                                    class="material-icons material-symbols-outlined input-expand-icon"
+                                                                    id="refferedByDropdownIcon"
+                                                                >
+                                                                    expand_more
+                                                                </button>
+                                                                <div
+                                                                    id="refferedByDropdown"
+                                                                    class="selectBoxDropdown dropdownHidden "
+                                                                ></div>
+                                                                <div class="selectBoxSelected" id="refferedBySelectBoxSelected"></div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Javascripts -->
+                <script src="./admin/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+                <script src="./admin/assets/plugins/bootstrap/js/popper.min.js"></script>
+                <script src="./admin/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                <script src="./admin/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+                
+                <script src="./admin/assets/plugins/pace/pace.min.js"></script>
+                <script src="./admin/assets/plugins/highlight/highlight.pack.js"></script>
+                <script src="./admin/assets/js/main.min.js"></script>
+                <script src="./admin/assets/js/custom.js"></script>
+                <script src="./admin/assets/plugins/flatpickr/flatpickr.js"></script>
+                <script src="./admin/assets/js/utils/blockModalsEsacping.js"></script>
+                <script src="./admin/assets/js/utils/multiUniSelectObject.js"></script>
+                <script src="./admin/assets/js/commonEdit.js"></script>
+                <script src="./admin/assets/js/editCiUser.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<div class="app-sidebar">
+    <div class="logo" style="display: flex">
+        <a href="/">
+            <img src="./admin/assets/images/cardInsiderImages/card-insider-logo.png" class="logo-my" />
+            <!-- <a class="nav-link hide-sidebar-toggle-button" href="#"><i
+            class="material-icons">first_page</i></a> -->
+        </a>
+        <div class="nav-item" style="margin-top: 7px">
+            <a class="nav-link hide-sidebar-toggle-button" id="hide-sidebar-toggle-button" href="#"><i
+                    class="material-icons">first_page</i></a>
+        </div>
+        <div class="sidebar-user-switcher user-activity-online">
+            <a href="#">
+                <!--span class="activity-indicator"></span>
+                <span class="user-info-text">Chloe<br><span class="user-state-info">On a call</span></span-->
+            </a>
+        </div>
+    </div>
+    <div class="app-menu">
+        <ul class="accordion-menu">
+            <li class="sidebar-title">App</li>
+            <% for(let i=0; i < sidebarData.length; i++){%>
+                <li>
+                    <a href=""><i class="material-icons-two-tone">
+                            <%= sidebarData[i].icon %>
+                        </i>
+                        <%= sidebarData[i].title %><i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <% for(let k=0; k < sidebarData[i].child.length; k++){%>
+                            <li>
+                                <a href="<%=sidebarData[i].child[k].childUrl%>">
+                                    <%=sidebarData[i].child[k].childTitle%>
+                                </a>
+                            </li>
+                            <% }%>
+                    </ul>
+                </li>
+                <% }%>
+
+                    <li class="sidebar-title">Profile</li>
+                    <li class="sign-out-c">
+                        <a href="#" onclick="signOutUser()"><i class="material-icons-two-tone">exit_to_app</i><span>Sign
+                                Out</span></a>
+                    </li>
+        </ul>
+    </div>
+</div>

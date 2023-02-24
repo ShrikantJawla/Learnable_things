@@ -1,0 +1,44 @@
+<table id="datatable1" class="display text-center" style="width: 100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>User Role</th>
+            <th>Strapi User Id</th>
+            <th>Active User</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="js-append-offer-rows">
+        <% for(let i = 0; i < adminUserList.length; i++){ %>
+        <tr>
+            <td><%=adminUserList[i]['ua_id']%></td>
+            <td><%=adminUserList[i]['ua_name']%></td>
+            <td><%=adminUserList[i]['ua_email']%></td>
+            <td><%=adminUserList[i]['uap_role_name']%></td>
+            <td><%=adminUserList[i]['strapi_user_id']%></td>
+            <td><%=adminUserList[i]['active_user']%></td>
+            <td>
+                <a href="#"
+                    ><i
+                        data-bs-toggle="modal"
+                        data-bs-target="#ciUpdateAdminUserForm"
+                        data-up-id=" <%=adminUserList[i]['ua_id']%>"
+                        data-up-name="<%=adminUserList[i]['ua_name']%>"
+                        data-up-email="<%=adminUserList[i]['ua_email']%>"
+                        data-up-role="<%=adminUserList[i]['ua_role']%>"
+                        data-up-strapi_user_id="<%=adminUserList[i]['strapi_user_id']%>"
+                        data-up-active_user="<%=adminUserList[i]['active_user']%>"
+                        class="material-icons has-sub-menu action-btns"
+                        >edit</i
+                    ></a
+                >
+                <!-- <a href="#"><i class="material-icons has-sub-menu action-btns">delete</i></a> -->
+            </td>
+        </tr>
+        <% }%>
+    </tbody>
+</table>
+<script src="./admin/assets/plugins/datatables/datatables.min.js"></script>
+<script src="./admin/assets/js/pages/datatables.js"></script>

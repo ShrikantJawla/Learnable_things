@@ -1,0 +1,380 @@
+<!-- Modal -->
+
+<!-- delete modal here..... -->
+<!-- onclick="USERADMINPERMISSIONS.removePermssion()" -->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are You sure to want to Delete this ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="deleteCloseBtn">
+                    Close
+                </button>
+                <button type="button" id="finalDeleteButton" class="btn btn-danger">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Are you sure -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you Sure ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="payCloseBtn">
+                    Close
+                </button>
+                <button type="button" id="finalPayBtn" class="btn btn-primary">
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cashbackModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Response</h5>
+            </div>
+            <div class="modal-body">
+                <div style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        gap: 10px;
+                    " id="status-body">
+                    <p id="wait">Please Wait ....</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="reload" class="btn btn-primary" disabled>
+                    Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- add new Permission modal form here.....  -->
+
+<div class="modal fade" id="ciFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add New Permission
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-10">
+                    <label for="permissionRoute" class="form-label">Permission Route</label>
+                    <input type="text" class="form-control" id="permissionRoute" name="permissionRoute" required />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" id="ciFormModalBtn" class="ci-btn"
+                    onclick="USERADMINPERMISSIONS.addNewPermission()">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- edit permission modal here........... -->
+
+<div class="modal fade" id="ciFormModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add New Permission
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-10">
+                    <label for="permissionRoute" class="form-label">Permission Route</label>
+                    <input type="text" class="form-control" id="permissionRouteEdit" name="permissionRoute" required />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" id="ciFormModalBtnEdit" class="ci-btn"
+                    onclick="USERADMINPERMISSIONS.updatePermission()">
+                    Change
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- add new admin user modal here...... -->
+
+<div class="modal fade" id="ciAddNewAdminUserForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add New Admin User
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    onclick="$('#errorShow').html('')"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="adminName" class="form-label">User Name*</label>
+                        <input type="text" class="form-control" id="adminUserName" name="adminUserName" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="adminEmail" class="form-label">Email*</label>
+                        <input type="email" class="form-control" id="adminEmail" name="adminEmail" required />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="adminPassword" class="form-label">Password*</label>
+                        <input type="password" class="form-control" id="adminPassword" name="adminPassword" required />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="" class="form-label">User Role*</label>
+                        <select class="form-select" aria-label="Select User Roles" id="userAdminRolesHere" required>
+                            <option value="0" selected>Select User Role</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="strapi_user_id" class="form-label">Strapi user Id</label>
+                        <input type="number" class="form-control" id="new_strapi_user_id" name="strapi_user_id"
+                            required />
+                    </div>
+                    <div class="col-md-3 py-4">
+                        <div class="form-check">
+                            <label class="form-check-label" for="new_active_user">
+                                Active user
+                            </label>
+                            <input class="form-check-input" type="checkbox" value="" class="form-check-input"
+                                name="new_active_user" id="new_active_user" required checked />
+                        </div>
+                        <!-- <label for="active_user" class="form-label"
+                            >Active user</label
+                        >
+                        <input type="checkbox" class="form-check-input" name="active_user" id="edit_active_user"   required> -->
+                        <!-- <input
+                            type="number"
+                            class="form-control"
+                            id=""
+                            name="strapi_user_id"
+                            required
+                        /> -->
+                    </div>
+                </div>
+                <br />
+                <div id="errorShow"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    onclick="$('#errorShow').html('')">
+                    Cancel
+                </button>
+                <button type="button" id="ciFormModalBtnEdit" class="ci-btn" onclick="USERADMINS.addNewAdminUser()">
+                    Add User
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- update  admin user modal here...... -->
+
+<div class="modal fade" id="ciUpdateAdminUserForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Update Admin User
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    onclick="$('#errorShowu').html('')"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="adminName" class="form-label">User Name*</label>
+                        <input type="text" class="form-control" id="adminUserNameu" name="adminUserNameu" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="adminEmail" class="form-label">Email*</label>
+                        <input type="email" class="form-control" id="adminEmailu" name="adminEmailu" required />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="adminPassword" class="form-label">Password*</label>
+                        <input type="password" class="form-control" id="adminPasswordu" name="adminPasswordu"
+                            required />
+                    </div>
+                    <div class="col-md-3">
+                        <label for="" class="form-label">User Role*</label>
+                        <select class="form-select" aria-label="Select User Roles" name="userAdminRolesHereu"
+                            id="userAdminRolesHereu" required>
+                            <option value="0" selected>Select User Role</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="strapi_user_id" class="form-label">Strapi user Id</label>
+                        <input type="number" class="form-control" id="edit_strapi_user_id" name="strapi_user_id"
+                            required />
+                    </div>
+                    <div class="col-md-2 py-4">
+                        <div class="form-check">
+                            <label class="form-check-label" for="active_user">
+                                Active user
+                            </label>
+                            <input class="form-check-input" type="checkbox" value="" class="form-check-input"
+                                name="active_user" id="edit_active_user" required />
+                        </div>
+                        <!-- <label for="active_user" class="form-label"
+                            >Active user</label
+                        >
+                        <input type="checkbox" class="form-check-input" name="active_user" id="edit_active_user"   required> -->
+                        <!-- <input
+                            type="number"
+                            class="form-control"
+                            id=""
+                            name="strapi_user_id"
+                            required
+                        /> -->
+                    </div>
+                </div>
+                <br />
+                <div id="errorShowu"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    onclick="$('#errorShowu').html('')">
+                    Cancel
+                </button>
+                <button type="button" id="ciFormModalBtnEditu" class="ci-btn" onclick=" USERADMINS.updateAdminUser()">
+                    Update
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- user admin new role modal here..... -->
+
+<div class="modal fade" id="ciAddNewRoleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Role</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-10">
+                    <label for="permissionRoute" class="form-label">Role Name</label>
+                    <input type="text" class="form-control" id="roleName" name="roleName" required />
+                </div>
+                <br />
+                <div class="error-text"></div>
+            </div>
+
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" id="ciFormModalBtn" class="ci-btn"
+                    onclick="USERROLES.postNewRoleData(document.getElementById('roleName').value)">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Save Button -->
+<div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="saveModalTitle">
+                    Saving new item. . . .
+                </h5>
+            </div>
+
+            <div class="publish-modal-body">
+                <div class="loader" id="saveLoader" role="status"></div>
+                <div style="
+                        display: flex !important;
+                        justify-content: center !important;
+                        width: 100%;
+                        margin-top: 130px;
+                        font-weight: 600;
+                    " id="publishText">
+                    <!-- Do you want to Publish it now? -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="laterBtn" disabled>
+                    May be Later
+                </button>
+                <button type="button" class="btn btn-primary" id="publishBtn" disabled>
+                    Publish
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Publish Modal -->
+<div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">
+                    Publishing changes ..
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="publish-modal-body">
+                <div class="loader" id="publishLoader" role="status"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast bg-danger text-white rounded-top" id="errorToast" data-bs-autohide="true" data-bs-delay="3000"
+    style="position: absolute; top: 10px; right: 10px; z-index: 1000">
+    <div class="toast-header rounded-top" style="transform: translateX(1px)">
+        <strong class="me-auto"><i class="bi-gift-fill"></i> Error!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body" id="errorToastMessage">
+        It's been a long time since you visited us. We've something special for
+        you.
+    </div>
+</div>

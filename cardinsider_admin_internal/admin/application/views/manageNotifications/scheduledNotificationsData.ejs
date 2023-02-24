@@ -1,0 +1,36 @@
+<% 
+for(let i =0; i < reportData.length; i++){ %>
+    <tr class="dynamicTableRow" style=" font-size:13px;" id="table-row-2">
+        <td><input type="checkbox" id="<%=reportData[i].id%>"></td>
+        <td><%=reportData[i].id%></td>
+        <td><%=reportData[i].user_name%></td>
+        <td><%=reportData[i].payment_type%></td>
+        <td><%=reportData[i].payment_amount%></td>
+        <td><%=reportData[i].bank_name%></td>
+        <td><%=reportData[i].application_number%></td>
+        <td><%=reportData[i].referred_to_id%></td>
+        <td><%=reportData[i].is_paid%></td>
+        <td><%=reportData[i].notes%></td>
+        <td><%=reportData[i].transaction_id%></td>
+        <td><%=reportData[i].cashback_claimed%></td>
+        <td><%=reportData[i].method%></td>
+        <td><%=reportData[i].upi_id%></td>
+        <td><%=reportData[i].is_upi_valid%></td>
+        <td><%=reportData[i].is_bank_valid%></td>
+        <td><%=reportData[i].upi_valid_name%></td>
+        <td><%=reportData[i].payment_date%></td>
+        <td><%=reportData[i].created_at%></td>
+        <td><%=reportData[i].updated_at%></td>
+        <td>
+
+            <% if (reportData[i].transaction_id) { %>
+                <button disabled class="btn btn-primary">Process</button>
+                <%} else { %>
+                    <button onclick="processRequest('<%=reportData[i].id%>')" class="btn btn-primary">Process</button>
+                <% } %>
+        </td>
+    </tr>
+<%    }
+%>
+
+<input id="newTotalCount" type="hidden" value="<%=totalCount%>"></input>
