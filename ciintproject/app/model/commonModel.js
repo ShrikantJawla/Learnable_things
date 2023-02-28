@@ -29,19 +29,6 @@ commonModelObj.getUserAdminRole = async function (userId) {
     returnData = resultData
     return returnData
 }
-commonModelObj.getUserAdminRole = async function (userId) {
-    let resultData = {}
-    let returnData = false
-    let query = `SELECT ua_role from "user_admin" where ua_id = ` + userId
-    try {
-        let queryData = await pool.query(query)
-        resultData = queryData.rows
-    } catch (err) {
-        //console.log(err);
-    }
-    returnData = resultData
-    return returnData
-}
 
 
 commonModelObj.checkIsHavePermission = async function (roleId, cUrl) {
@@ -71,6 +58,7 @@ commonModelObj.checkIsHavePermission = async function (roleId, cUrl) {
 * @developer : Rahul Bhatia
 */
 commonModelObj.getDataOrCount = async function (sql = '', data = '', need = 'D', consoleData = false) {
+    // console.log('sfddff...................',sql,data)
 
     let deferred = q.defer();
 
@@ -404,7 +392,7 @@ commonModelObj.getDataByPagination = async function ({ body, currenUserId, selec
     }
    
 
-    console.log(whereCondition, "isNullConditionisNullCondition");
+    // console.log(whereCondition, "isNullConditionisNullCondition");
 
 
     let newSelect = ``;
@@ -416,7 +404,7 @@ commonModelObj.getDataByPagination = async function ({ body, currenUserId, selec
         `;
     let finalQuery = getAllApplicationsSql + queryLastValues;
 
-    console.log(finalQuery, "<<<<<<<< Final Query to DB")
+    // console.log(finalQuery, "<<<<<<<< Final Query to DB")
     let result = await commonModelObj.getDataOrCount(finalQuery, [], 'D');
 
 
@@ -483,14 +471,19 @@ commonModelObj.insert = async function (tablename, data, onlySqlQuery = false) {
 
 }
 commonModelObj.getDistinctValuesCommon = async function (column, table) {
+    // console.log(column,table)
     let returnData = [];
-    let query = `SELECT DISTINCT  CAST(${column} as varchar) FROM ${table} where ${column} is not null AND ${column} != ''`;
+    let query = `SELECT DISTINCT CAST(${column} as varchar) FROM ${table} where ${column} is not null AND ${column} != ''`;
+    // let query = `SELECT DISTINCT '${column}' FROM '${table}' where '${column}' is not null AND '${column}' != ''`;
     let data = await commonModelObj.getDataOrCount(query, [], 'D');
     if (data) {
         returnData = data;
     }
+    // console.log(data)
     return returnData;
 };
+
+
 
 
 module.exports = commonModelObj

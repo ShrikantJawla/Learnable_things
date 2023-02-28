@@ -25,7 +25,7 @@ controllerObj.getUserAdminRolesUi = async function (req, res, next) {
 
 
 controllerObj.getUserAdminRolesAjax = async function (req, res, next) {
-    //console.log("getUserAdminRolesAjax");
+    console.log("getUserAdminRolesAjax");
     let returnData = {
         status: false,
         code: "ERROR-CIA-APP-USERADMINPANEL-105",

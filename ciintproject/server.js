@@ -148,7 +148,7 @@ app.use('/', router)
 
 
 // listening to port here....
-app.listen(port, function () {
+app.listen(port=8000, function () {
 	console.log("listening on port 👨‍💻 ----->>", port)
 })
 // }

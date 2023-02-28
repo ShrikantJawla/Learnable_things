@@ -36,15 +36,15 @@ authControllerObj.signinData = async function (req, res, next) {
   };
 
   dataFromDb = await authModel.getUserSignInData(req.body);
-
+  console.log(dataFromDb , "dataFromDbdataFromDb");
   let time = new Date();
   let current_hour = time.getHours();
   
-  if(current_hour >= 12){
-    let dailyPunchIn = await factoryModel.updatePunchOutStatus();
-  }else{
-    console.log("Before 6 PM")
-  }
+  // if(current_hour >= 12){
+  //   let dailyPunchIn = await factoryModel.updatePunchOutStatus();
+  // }else{
+  //   console.log("Before 6 PM")
+  // }
 
   if (!dataFromDb) {
     returnData.status = false;

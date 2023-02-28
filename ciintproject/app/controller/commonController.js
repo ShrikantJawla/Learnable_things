@@ -4,7 +4,6 @@ let commonControllerObj = {}
 commonControllerObj.commonSideBarData = async function (req) {
 
     let allSideBars = await commonModel.getSideBarData()
-    console.log(allSideBars)
     // console.log(allSideBars , "allUserDAta");
     let sideBarArray = []
     if (req && req.session && req.session.userToken) {

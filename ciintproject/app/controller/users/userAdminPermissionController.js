@@ -112,31 +112,6 @@ controllerObj.getUserManagePermission = async function(req, res, next){
    
 }
 
-controllerObj.updateTeleTeams = async function(req, res, next){
-
-    let returnData = {
-        status: false,
-        code: "ERROR-CIP-TELE-TEAMS-101",
-        payload: [],
-    }
-   
-    if (req && req.body && req.body.userId) {
-        let dataBody = req.body
-        //let dataFromDb = {};
-        let dataFromDb = await userAdminModel.updateTeleTeamsData({userId: req.body.userId, upsertData: req.body});
-        if (dataFromDb) {
-            returnData.status = true;
-            returnData.code = "CIP-TELE-TEAMS-101";
-            commonHelper.successHandler(res, returnData);
-        } else {
-            returnData.code = "ERROR-CIP-TELE-TEAMS-ERROR-102";
-            commonHelper.errorHandler(res, returnData);
-        }
-    } else {
-        returnData.code = "ERROR-CIP-TELE-TEAMS-ERROR-103";
-        commonHelper.errorHandler(res, returnData);
-    }
-}
 
 
 module.exports = controllerObj;

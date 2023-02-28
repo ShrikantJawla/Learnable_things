@@ -14,25 +14,20 @@ let router = require('express').Router()
 /* The below code is creating a route for the userAdminListUI function in the userController.js file. */
 router.get("/users-list-ui", userController.userAdminListUI)
 
-
 /* This is creating a route for the `getFilteredUserAdmins` function in the `userController.js` file. */
-router.post("/filteredUserAdmins", userController.getFilteredUserAdmins)
+router.post("/users-list-ui-ajax", userController.getUserAdminAjax)
 
+router.get('/edit-user-admin-ui', userController.editUserAdminUi)
 
+router.get('/usersAdminRoles',userController.getAllAdminRoles);
+
+router.patch('/updateExistingAdminUser/:id',userController.updateAdminUser)
 /* This is creating a route for the `getFilteredUserAdmins` function in the `userController.js` file. */
-router.post("/admin-add-new-user", userController.addNewAdminUser)
+router.post("/adminAddNewUser", userController.addNewAdminUser)
+
+router.get('/admin-get-single-user/:id',userController.getSingleUserAdmin)
 
 
-/* This is creating a route for the `updateAdminUser` function in the `userController.js` file. */
-router.post("/admin-update-user", userController.updateAdminUser);
-
-/* This is creating a route for the `getTeleCallersList` function in the `userController.js` file. */
-router.get('/get-telecallers-ajax', userController.getTeleCallersList);
-
-
-
-/* This is creating a route for the `getTeleCallersList` function in the `userController.js` file. */
-router.get('/get-telecallersInAssignment-ajax', userController.getTeleCallersListInAssignment);
 
 
 /* This is creating a route for the `getUserAdminRolesUi` function in the `userRolesController.js`
@@ -79,7 +74,6 @@ router.get('/manage-tele-permission', permissionsController.getUserManagePermiss
 
 /* This is creating a route for the `updateTeleTeams` function in the `permissionsController.js`
 file. */
-router.post('/update-tele-teams', permissionsController.updateTeleTeams);
 
 /* This is a catch all route. If the user tries to access a route that is not defined in the router,
 then this route will be executed. */
