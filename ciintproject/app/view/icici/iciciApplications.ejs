@@ -1,0 +1,983 @@
+<html lang="en">
+
+<head>
+    <%- include('../common/commonHeader'); %>
+        <link href="/./app/utils/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="app align-content-stretch d-flex flex-wrap">
+        <%- include('../common/commonLoader'); %>
+            <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+                <div class="app-container">
+                    <div class="d-flex flex-column ">
+                        <div class="app-content">
+                            <h1 class="application-title pb-1">
+                                ICICI Bank Applications
+                            </h1>
+
+                        </div>
+                        <div style="
+                                    display: flex;
+                                    margin-bottom: 10px;
+                                    gap: 10px;
+                                    margin-left: auto;
+                                    margin-top: 20px;
+                                ">
+                            <button class="btn btn-success" disabled id="assign">
+                                Assign
+                            </button>
+                            <button class="btn btn-info" id="filterReset">
+                                Reset Filters
+                            </button>
+                            <button class="btn btn-info" id="exportcsv" data-table="applications">Export
+                                csv</button>
+                        </div>
+                        <hr>
+                        <div class="card ci-scrollX p-4" id="applications-table-wrapper">
+                            <header class=" card-header d-flex justify-content-between">
+                                <div class="d-flex align-items-center" style="margin-bottom: 20px; gap: 12px"
+                                    id="entriesPerPageWrapper">
+                                    <select name="entriesPerPage" id="entriesPerPage">
+                                        <option selected value="200">200</option>
+                                        <option value="100">100</option>
+                                        <option value="50">50</option>
+                                        <option value="25">25</option>
+                                        <option value="10">10</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <label for="entriesPerPage" style="color: rgb(128, 128, 128)">Entries/Page</label>
+                                </div>
+                            </header>
+
+
+                            <table class="table">
+                                <thead style="color: rgb( 128, 128, 128) !important;">
+
+                                    <tr style="text-align: center" id="table-header" data-filter-value="0"
+                                        data-filter="none">
+                                        <th style="color: rgb(128, 128, 128) !important">
+                                            <p style="cursor: default;position:relative;top:14px;">Select</p>
+                                        </th>
+                                        <th data-filter-value="0" data-filter="id"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="ua_name">Assigned To</span>
+                                                <icon data-filter="ua_name"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+                                            <button class="Null -ua_name" data-filter="-ua_name">Null</button>
+                                            <button class="notNull ua_name" data-filter="ua_name">Not Null</button>
+                                        </th>
+                                        <th data-filter-value="0" data-filter="id"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_id">Id</span>
+                                                <icon data-filter="icici_id"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+                                            <button class="Null -icici_id" data-filter="-icici_id">Null</button>
+                                            <button class="notNull icici_id" data-filter="icici_id">Not Null</button>
+                                        </th>
+                                        <th data-filter-value="0" data-filter="icici_application_number"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_application_number">Application Number</span>
+                                                <icon data-filter="icici_application_number"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_application_number" data-filter="-icici_application_number">Null</button>
+                                            <button class="notNull icici_application_number" data-filter="icici_application_number">Not Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="ca_main_table"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="ca_main_table">Ca Main Table</span>
+                                                <icon data-filter="ca_main_table"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -ca_main_table"
+                                                data-filter="-ca_main_table">Null</button>
+                                            <button class="notNull ca_main_table"
+                                                data-filter="ca_main_table">Not
+                                                Null</button>
+
+                                        </th>
+                                        <th data-filter-value="0" data-filter="icici_applicant_name"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer;">Applicant Name</span>
+                                                <icon data-filter="icici_applicant_name"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_applicant_name"
+                                                data-filter="-icici_applicant_name">Null</button>
+                                            <button class="notNull icici_applicant_name" data-filter="icici_applicant_name">Not
+                                                Null</button>
+
+                                        </th>
+                                        <th data-filter-value="0" data-filter="icici_flow_type"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_flow_type">Flow Type</span>
+                                                <icon data-filter="icici_flow_type"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_flow_type"
+                                                data-filter="-icici_flow_type">Null</button>
+                                            <button class="notNull icici_flow_type"
+                                                data-filter="icici_flow_type">Not
+                                                Null</button>
+
+                                        </th>
+                                        <th data-filter-value="0" data-filter="icici_phone_number"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_phone_number">Phone Number</span>
+                                                <icon data-filter="icici_phone_number"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_phone_number"
+                                                data-filter="-icici_phone_number">Null</button>
+                                            <button class="notNull icici_phone_number"
+                                                data-filter="icici_phone_number">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_card_type"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_card_type">Card Type</span>
+                                                <icon data-filter="icici_card_type"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_card_type"
+                                                data-filter="-icici_card_type">Null</button>
+                                            <button class="notNull icici_card_type" data-filter="icici_card_type">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_pricing_code"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_pricing_code">Pricing Code</span>
+                                                <icon data-filter="icici_pricing_code"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_pricing_code"
+                                                data-filter="-icici_pricing_code">Null</button>
+                                            <button class="notNull icici_pricing_code"
+                                                data-filter="icici_pricing_code">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_is_card_applied"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_is_card_applied">Is Card Applied</span>
+                                                <icon data-filter="icici_is_card_applied"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_is_card_applied"
+                                                data-filter="-icici_is_card_applied">Null</button>
+                                            <button class="notNull icici_is_card_applied"
+                                                data-filter="icici_is_card_applied">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_rejection_reason"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_rejection_reason">Rejection Reason</span>
+                                                <icon data-filter="icici_rejection_reason"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_rejection_reason"
+                                                data-filter="-icici_rejection_reason">Null</button>
+                                            <button class="notNull icici_rejection_reason"
+                                                data-filter="icici_rejection_reason">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_approved_remarks"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_approved_remarks">Approved Remarks</span>
+                                                <icon data-filter="icici_approved_remarks"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_approved_remarks"
+                                                data-filter="-icici_approved_remarks">Null</button>
+                                            <button class="notNull icici_approved_remarks"
+                                                data-filter="icici_approved_remarks">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_req_income_doc"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_req_income_doc">Req Income Doc</span>
+                                                <icon data-filter="icici_req_income_doc"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_req_income_doc"
+                                                data-filter="-icici_req_income_doc">Null</button>
+                                            <button class="notNull icici_req_income_doc"
+                                                data-filter="icici_req_income_doc">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_current_address_pincode"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_current_address_pincode">Current Address Pincode</span>
+                                                <icon data-filter="icici_current_address_pincode"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_current_address_pincode"
+                                                data-filter="-icici_current_address_pincode">Null</button>
+                                            <button class="notNull icici_current_address_pincode"
+                                                data-filter="icici_current_address_pincode">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_permanent_address_pincode"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_permanent_address_pincode">Permanent Address Pincode</span>
+                                                <icon data-filter="icici_permanent_address_pincode"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_permanent_address_pincode"
+                                                data-filter="-icici_permanent_address_pincode">Null</button>
+                                            <button class="notNull icici_permanent_address_pincode"
+                                                data-filter="icici_permanent_address_pincode">Not
+                                                Null</button>
+
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_gems_arn"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_gems_arn">Gems Arn</span>
+                                                <icon data-filter="icici_gems_arn"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_gems_arn"
+                                                data-filter="-icici_gems_arn">Null</button>
+                                            <button class="notNull icici_gems_arn"
+                                                data-filter="icici_gems_arn">Not
+                                                Null</button>
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_bre_decision"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_bre_decision">Bre Decision</span>
+                                                <icon data-filter="icici_bre_decision"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_bre_decision"
+                                                data-filter="-icici_bre_decision">Null</button>
+                                            <button class="notNull icici_bre_decision"
+                                                data-filter="icici_bre_decision">Not
+                                                Null</button>
+                                        </th>
+                                        <th data-filter-value="0" data-filter="icici_ckyc_approver_decision"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_ckyc_approver_decision">Ckyc Approver Decision</span>
+                                                <icon data-filter="icici_ckyc_approver_decision"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_ckyc_approver_decision"
+                                                data-filter="-icici_ckyc_approver_decision">Null</button>
+                                            <button class="notNull icici_ckyc_approver_decision"
+                                                data-filter="icici_ckyc_approver_decision">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_current_status"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_current_status">Current Status</span>
+                                                <icon data-filter="icici_current_status"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_current_status"
+                                                data-filter="-icici_current_status">Null</button>
+                                            <button class="notNull icici_current_status"
+                                                data-filter="icici_current_status">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_app_status"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_app_status">Application Status</span>
+                                                <icon data-filter="icici_app_status"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_app_status"
+                                                data-filter="-icici_app_status">Null</button>
+                                            <button class="notNull icici_app_status"
+                                                data-filter="icici_app_status">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_idisb_dma"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_idisb_dma">IDISB DMA</span>
+                                                <icon data-filter="icici_idisb_dma"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_idisb_dma"
+                                                data-filter="-icici_idisb_dma">Null</button>
+                                            <button class="notNull icici_idisb_dma" data-filter="icici_idisb_dma">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_se_id"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_se_id">SE ID</span>
+                                                <icon data-filter="icici_se_id"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_se_id"
+                                                data-filter="-icici_se_id">Null</button>
+                                            <button class="notNull icici_se_id"
+                                                data-filter="icici_se_id">Not Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_status"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_status">Status</span>
+                                                <icon data-filter="icici_status"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_status"
+                                                data-filter="-icici_status">Null</button>
+                                            <button class="notNull icici_status"
+                                                data-filter="icici_status">Not Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_submission_status"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_submission_status">Submission Status</span>
+                                                <icon data-filter="icici_submission_status"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_submission_status"
+                                                data-filter="-icici_submission_status">Null</button>
+                                            <button class="notNull icici_submission_status"
+                                                data-filter="icici_submission_status">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_current_city"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_current_city">icici_current_city</span>
+                                                <icon data-filter="icici_current_city"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_current_city"
+                                                data-filter="-icici_current_city">Null</button>
+                                            <button class="notNull icici_current_city" data-filter="icici_current_city">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_region"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_region">Region</span>
+                                                <icon data-filter="icici_region"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_region"
+                                                data-filter="-icici_region">Null</button>
+                                            <button class="notNull icici_region" data-filter="icici_region">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_created_date"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_created_date">Created Date</span>
+                                                <icon data-filter="icici_created_date"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_created_date" data-filter="-icici_created_date">Null</button>
+                                            <button class="notNull icici_created_date" data-filter="icici_created_date">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_location"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_location">Location</span>
+                                                <icon data-filter="icici_location"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_location"
+                                                data-filter="-icici_location">Null</button>
+                                            <button class="notNull icici_location"
+                                                data-filter="icici_location">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="icici_rbm_name"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_rbm_name">Rbm Name</span>
+                                                <icon data-filter="icici_rbm_name"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_rbm_name"
+                                                data-filter="-icici_rbm_name">Null</button>
+                                            <button class="notNull icici_rbm_name"
+                                                data-filter="icici_rbm_name">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_emp_name"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_emp_name">EMP Name</span>
+                                                <icon data-filter="icici_emp_name"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_emp_name" data-filter="-icici_emp_name">Null</button>
+                                            <button class="notNull icici_emp_name" data-filter="icici_emp_name">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_delink_dat"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_delink_dat">Delink Dat</span>
+                                                <icon data-filter="icici_delink_dat"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_delink_dat"
+                                                data-filter="-icici_delink_dat">Null</button>
+                                            <button class="notNull icici_delink_dat"
+                                                data-filter="icici_delink_dat">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_delinker"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer"
+                                                    data-filter="icici_delinker">Delinker</span>
+                                                <icon data-filter="icici_delinker"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_delinker"
+                                                data-filter="-icici_delinker">Null</button>
+                                            <button class="notNull icici_delinker"
+                                                data-filter="icici_delinker">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_vkyc_opted_flag"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_vkyc_opted_flag">Vkyc Opted Flag</span>
+                                                <icon data-filter="icici_vkyc_opted_flag"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_vkyc_opted_flag" data-filter="-icici_vkyc_opted_flag">Null</button>
+                                            <button class="notNull icici_vkyc_opted_flag" data-filter="icici_vkyc_opted_flag">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_initiated_flag"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_initiated_flag">Initiated Flag</span>
+                                                <icon data-filter="icici_initiated_flag"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_initiated_flag" data-filter="-icici_initiated_flag">Null</button>
+                                            <button class="notNull icici_initiated_flag" data-filter="icici_initiated_flag">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_created_at"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_created_at">Created At</span>
+                                                <icon data-filter="icici_created_at"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_created_at"
+                                                data-filter="-icici_created_at">Null</button>
+                                            <button class="notNull icici_created_at"
+                                                data-filter="icici_created_at">Not
+                                                Null</button>
+
+                                        </th>
+
+                                        <th data-filter-value="0" data-filter="icici_updated_at"
+                                            style="color: rgb(128, 128, 128) !important; text-align:center;">
+                                            <div class="d-flex ">
+                                                <span style="cursor: pointer" data-filter="icici_updated_at">Updated At</span>
+                                                <icon data-filter="icici_updated_at"
+                                                    class="material-icons material-symbols-outlined invisible"
+                                                    style="cursor: pointer;">
+                                                    straight
+                                                </icon>
+                                            </div>
+
+                                            <button class="Null -icici_updated_at"
+                                                data-filter="-icici_updated_at">Null</button>
+                                            <button class="notNull icici_updated_at" data-filter="icici_updated_at">Not
+                                                Null</button>
+
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="table-filter-row" style="border-bottom: 1px solid rgb(199, 199, 199)">
+                                        <th class="text-center mt-10">
+                                            <div style="margin-top: 15px;">
+                                                <input type="checkbox" id="assign_all">
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control"
+                                                id="ua_name">
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control"
+                                                id="icici_id">
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control"
+                                                id="icici_application_number">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="ca_main_table">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_applicant_name">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_flow_type">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_phone_number">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_card_type">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_pricing_code">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_is_card_applied">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_rejection_reason">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_approved_remarks">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_req_income_doc">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_current_address_pincode">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_permanent_address_pincode">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_gems_arn">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_bre_decision">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_ckyc_approver_decision">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_current_status">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_app_status">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_idisb_dma">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_se_id">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_status">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_submission_status">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_current_city">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_region">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_created_date">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_location">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_rbm_name">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_emp_name">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_delink_dat">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_delinker">
+                                        </th>
+                                        <th>
+                                            <input type="text"  class="form-control"  id="icici_vkyc_opted_flag">
+                                        </th>
+                                       
+                                        <th>
+                                            <input type="text" class="form-control"
+                                                id="icici_created_at">
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control"
+                                                id="icici_updated_at">
+                                        </th>
+                                    </tr>
+                                </tbody>
+                                <tbody id="data-to-show"></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="10" style="text-align: center;  color: black !important;">
+                                            <div
+                                                class="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+
+                                                <span class="material-icons material-symbols-outlined"
+                                                    style=" position: relative; top: 4px;right: 8px; font-size: 18px; color: white; background: rgb( 128, 128,128) !important; padding: 2px;border-radius: 50%; cursor: pointer;"
+                                                    id="prevPage">
+                                                    west
+                                                </span>
+
+                                                <label for="pageNo" style="
+                                                        margin-right: 10px;
+                                                        color: rgb(
+                                                            128,
+                                                            128,
+                                                            128
+                                                        ) !important;
+                                                    ">Page No:</label>
+
+                                                <input type="number" style="
+                                                        width: 50px;
+                                                        display: inline;
+                                                        height: 20px;
+                                                        border-radius: 0 !important;
+                                                        padding-right: 0 !important;
+                                                        padding-left: 2px !important;
+                                                    " id="page-no" name="pageNo" class="form-control" max="1"
+                                                    min="1" value="1">
+
+
+                                                <span style="
+                                                        margin-left: 10px;
+                                                        color: rgb(
+                                                            128,
+                                                            128,
+                                                            128
+                                                        ) !important;
+                                                    " id="pages">/ 1</span>
+
+
+                                                <span style="
+                                                        margin-left: 10px;
+                                                        color: rgb(
+                                                            128,
+                                                            128,
+                                                            128
+                                                        ) !important;
+                                                    " id="entries">(0 entries)</span>
+
+                                                <span class="material-icons material-symbols-outlined" style="
+                                                                position: relative;
+                                                                top: 4px;
+                                                                left: 8px;
+                                                                font-size: 18px;
+                                                                color: white;
+                                                                background: rgb(
+                                                                    128,
+                                                                    128,
+                                                                    128
+                                                                ) !important;
+                                                                padding: 2px;
+                                                                border-radius: 50%;
+                                                                cursor: pointer;
+                                                            " id="nextPage">
+                                                    east
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- New Assign Modal -->
+                    <div class="modal fade" id="assignModalNew" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true" style="padding: 10px 40px">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <button type="button" class="btn-close" id="assign-btn-close"></button>
+                                <div class="modal-header">
+                                    <!-- <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button> -->
+                                </div>
+
+                                <div class="assign-modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h5 class="assign-modal-title">
+                                                    Select Telecaller :
+                                                </h5>
+                                                <select name="" id="addTelecallerSelect">
+                                                    <option selected value="">Select Telecaller</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" id="assignLaterBtn">
+                                        Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="assign-submit" disabled>
+                                        Assign
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="/./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/pace/pace.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/highlight/highlight.pack.js"></script>
+                    <script src="/./app/utils/assets/plugins/datatables/datatables.min.js"></script>
+                    <script src="/./app/utils/assets/js/main.min.js"></script>
+                    <script src="/./app/utils/assets/js/custom.js"></script>
+                    <script src="/./app/utils/assets/js/pages/datatables.js"></script>
+                    <script src="/./app/utils/assets/plugins/flatpickr/flatpickr.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                    <script src="/./app/utils/assets/js/custom/iciciAllApplications.js"></script>
+                </div>
+    </div>
+
+    </div><a style="display: none;"></a>
+</body>
+
+</html>

@@ -1,0 +1,318 @@
+<!-- Modal -->
+
+<!-- delete modal here..... -->
+<!-- onclick="USERADMINPERMISSIONS.removePermssion()" -->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are You sure to want to Delete this ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="deleteCloseBtn">
+                    Close
+                </button>
+                <button type="button" id="finalDeleteButton" class="btn btn-danger">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- add new Permission modal form here.....  -->
+
+<div class="modal fade" id="ciFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add New Permission
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-10">
+                    <label for="permissionRoute" class="form-label">Permission Route</label>
+                    <input type="text" class="form-control" id="permissionRoute" name="permissionRoute" required />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" id="ciFormModalBtn" class="ci-btn"
+                    onclick="USERADMINPERMISSIONS.addNewPermission()">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- edit permission modal here........... -->
+
+<div class="modal fade" id="ciFormModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add New Permission
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-10">
+                    <label for="permissionRoute" class="form-label">Permission Route</label>
+                    <input type="text" class="form-control" id="permissionRouteEdit" name="permissionRoute" required />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" id="ciFormModalBtnEdit" class="ci-btn"
+                    onclick="USERADMINPERMISSIONS.updatePermission()">
+                    Change
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Save Button -->
+<div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="saveModalTitle">
+                    Saving new item. . . .
+                </h5>
+            </div>
+
+            <div class="publish-modal-body">
+                <div class="loader" id="saveLoader" role="status"></div>
+                <div style="
+                        display: flex !important;
+                        justify-content: center !important;
+                        width: 100%;
+                        margin-top: 130px;
+                        font-weight: 600;
+                    " id="publishText">
+                    <!-- Do you want to Publish it now? -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="laterBtn" disabled>
+                    May be Later
+                </button>
+                <button type="button" class="btn btn-primary" id="publishBtn" disabled>
+                    Publish
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Publish Modal -->
+<div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">
+                    Publishing changes ..
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="publish-modal-body">
+                <div class="loader" id="publishLoader" role="status"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast bg-danger text-white rounded-top" id="errorToast" data-bs-autohide="true" data-bs-delay="3000"
+    style="position: absolute; top: 10px; right: 10px; z-index: 1000">
+    <div class="toast-header rounded-top" style="transform: translateX(1px)">
+        <strong class="me-auto"><i class="bi-gift-fill"></i> Error!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body" id="errorToastMessage">
+        It's been a long time since you visited us. We've something special for
+        you.
+    </div>
+</div>
+
+<div class="modal fade" id="assignModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="padding: 10px 40px">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close" id="assign-btn-close"></button>
+            <div class="modal-header">
+                <!-- <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button> -->
+            </div>
+
+            <div class="assign-modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-5">
+                            <h5 class="assign-modal-title" id="addPermission">
+                                Give Permission To :
+                            </h5>
+                        </div>
+                        <div class="col-7">
+                            <select name="" multiple="multiple" id="addPermissionSelect"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="assignLaterBtn">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="assign-submit" disabled>
+                    Assign
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="padding: 10px 40px">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close" id="remove-btn-close" data-bs-dismiss="removeModal"></button>
+
+            <div class="remove-modal-body">
+                <div class="row" style="margin-top: 40px">
+                    <div class="col-5">
+                        <h5 class="remove-modal-title" id="removePermission">
+                            Remove Permission From :
+                        </h5>
+                    </div>
+                    <div class="col-7">
+                        <select name="" multiple="multiple" id="removePermissionSelect"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="removeLaterBtn" data-bs-dismiss="removeModal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="remove-submit" disabled>
+                    Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="reassignModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="padding: 10px 40px">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close" id="reassign-btn-close" data-bs-dismiss="reassignModal"></button>
+
+            <div class="reassign-modal-body">
+                <div class="row" style="margin-top: 40px">
+                    <div class="col-5">
+                        <h5 class="reassign-modal-title" id="reassignPermission">
+                            Remove Permission From :
+                        </h5>
+                    </div>
+                    <div class="col-7">
+                        <select name="" multiple="multiple" id="reassignPermissionSelectFrom"></select>
+                    </div>
+                    <div class="col-5">
+                        <h5 class="reassign-modal-title" id="reassignPermission">
+                            Give Permission To :
+                        </h5>
+                    </div>
+                    <div class="col-7">
+                        <select name="" multiple="multiple" id="reassignPermissionSelectTo"></select>
+                    </div>
+                </div>
+                <p id="showError" class="error-text"></p>
+            </div>
+           
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="reassignLaterBtn" data-bs-dismiss="reassignModal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="reassign-submit" disabled>
+                    Reassign
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- user admin new role modal here..... -->
+
+<div
+
+    class="modal fade"
+    id="ciAddNewRoleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Role</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-10">
+                    <label for="permissionRoute" class="form-label"
+                        >Role Name</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="roleName"
+                        name="roleName"
+                        required
+                    />
+                </div>
+                <br />
+                <div class="error-text"></div>
+            </div>
+
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button
+                    type="button"
+                    id="ciFormModalBtn"
+                    class="ci-btn"
+                    onclick="USERROLES.postNewRoleData(document.getElementById('roleName').value)"
+                >
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

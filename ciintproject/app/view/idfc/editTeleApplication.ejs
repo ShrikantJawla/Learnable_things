@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../common/commonHeader'); %>
+        <link href="/./app/utils/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="app align-content-stretch d-flex flex-wrap">
+        <%- include('../common/commonLoader'); %>
+            <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+
+                <div class="app-container">
+                    <div class="d-flex flex-column ">
+                        <div class="app-content">
+                            <h1 class="application-title pb-1">
+                                Edit IDFC Application
+                            </h1>
+                            <div class="top-btns">
+                                <button class="ci-btn ci-btn-blue" id="call_btn">Call</button>
+                                <button class="ci-btn ci-btn-green" id="update" disabled>Update</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="card bg-card">
+                                <form>
+                                    <div class="ci-card-body  card-body">
+                                        <div class="col-6 shadowBox p-4" id="left-form">
+                                            
+                                        </div>
+                                        <div class="col-6 shadowBox p-4 ms-1" id="right-form">
+                                            <div class="col-12">
+                                                <label for="tad_call_status" class="form-label">Call Status</label>
+                                                <select name="tad_call_status" id="tad_call_status"
+                                                    class="form-control">
+                                                    <option value="">Select an Option</option>
+                                                    <option value="Not Called">Not Called</option>
+                                                    <option value="Call Answered">Call Answered</option>
+                                                    <option value="Call Declined">Call Declined</option>
+                                                    <option value="Not Picked">Not Picked</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col-12 mt-4">
+                                                <label for="tad_notes" class="form-label">Notes</label>
+                                                <textarea name="tad_notes" id="tad_notes" class="form-control">
+                                            </textarea>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 mt-4">
+                                                    <label for="tad_automated_call_status"
+                                                        class="form-label text-primary">Automated Call Status</label>
+                                                    <select name="tad_automated_call_status"
+                                                        id="tad_automated_call_status" class="form-control">
+                                                        <option value="">Select an Option</option>
+                                                        <option value="Not Called">Not Called</option>
+                                                        <option value="Call Answered">Call Answered</option>
+                                                        <option value="Call Declined">Call Declined</option>
+                                                        <option value="Not Picked">Not Picked</option>
+                                                        <option value="Call Back">Call Back</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 mt-4 ">
+                                                    <label min="0" for="tad_automated_call_counter"
+                                                        class="form-label text-primary">Automated Call
+                                                        Counter</label>
+                                                    <input type="number" value="0" min="0"
+                                                        name="tad_automated_call_counter" class="form-control"
+                                                        id="tad_automated_call_counter">
+                                                </div>
+                                                <div class="col-6 mt-4">
+                                                    <label for="tad_application_status" class="form-label">Application
+                                                        Status</label>
+                                                    <select name="tad_application_status" id="tad_application_status"
+                                                        class="form-control">
+                                                        <option value="">Select an Option</option>
+                                                        <option value="Accepted">Accepted</option>
+                                                        <option value="Rejected">Rejected</option>
+                                                        <!-- <option value="call_declined">Call Declined</option>
+                                                    <option value="not_picked">Not Picked</option> -->
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 mt-4 ">
+                                                    <label for="tad_call_decline_counter" class="form-label">Call
+                                                        Counter</label>
+                                                    <input min="0" type="number" name="tad_call_decline_counter"
+                                                        class="form-control" id="tad_call_decline_counter">
+                                                </div>
+                                                <div class="col-7 mt-4">
+                                                    <label for="tad_final_call_status"
+                                                        class="form-label text-primary">Final Call Status</label>
+                                                    <select name="tad_final_call_status" id="tad_final_call_status"
+                                                        class="form-control">
+                                                        <option value="">Select an Option</option>
+                                                        <option value="Not Called">Not Called</option>
+                                                        <option value="Call Answered">Call Answered</option>
+                                                        <option value="Call Declined">Call Declined</option>
+                                                        <option value="Not Picked">Not Picked</option>
+                                                        <option value="Call Back">Call Back</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 mt-4 ">
+                                                    <label for="tad_call_scheduled" class="form-label">Call
+                                                        Scheduled</label>
+                                                    <input type="datetime-local" name="tad_call_scheduled"
+                                                        class="form-control" id="tad_call_scheduled">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h5 style="margin-top: 25px;">Send SMS</h5>
+                                                <div class="col-6 mt-4 ">
+                                                    <label for="tad_application_status" class="form-label">SMS
+                                                        Status</label>
+                                                    <select name="tad_sms_status" id="tad_sms_status"
+                                                        class="form-control">
+                                                        <option selected disabled value="">Select an Option</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 mt-4 ">
+                                                    <label for="tad_call_decline_counter" class="form-label">SMS
+                                                        Counter</label>
+                                                    <input type="number" value="" disabled="true" name="tad_sms_counter"
+                                                        class="form-control" id="tad_sms_counter">
+                                                </div>
+                                                <div class="col-6 mt-4 ">
+                                                    <button id="tad_send_sms" disabled="true"
+                                                        class="ci-btn ci-btn-green">Send</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Javascripts -->
+                    <script src="/./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/flatpickr/flatpickr.js"></script>
+                    <script src="/./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                    <script src="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+                    <script src="/./app/utils/assets/js/main.min.js"></script>
+                    <script src="/./app/utils/assets/js/custom.js"></script>
+                    <script src="/./app/utils/assets/js/custom/telecallers/editTeleCommon.js"></script>
+                    <script src="/./app/utils/assets/js/custom/telecallers/editIdfcTeleApplications.js"></script>
+</body>
+
+</html>

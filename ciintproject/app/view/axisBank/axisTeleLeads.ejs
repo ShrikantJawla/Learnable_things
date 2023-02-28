@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../common/commonHeader'); %>
+    <link href="/./app/utils/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="app align-content-stretch d-flex flex-wrap">
+    <%- include('../common/commonLoader'); %>
+      <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+        <%- include('../common/commonModals'); %>
+          <%- include('../common/dynamicFieldsWrapper.ejs'); %>
+
+            <div class="app-container">
+              <div class="d-flex flex-column ">
+                <div class="app-content">
+                  <h1 class="application-title pb-1">
+                    Axis Bank Assigned Leads
+                  </h1>
+
+                </div>
+                <div style="
+                            display: flex;
+                            margin-bottom: 10px;
+                            gap: 10px;
+                            margin-left: auto;
+                            margin-top: 20px;
+                        ">
+                  <button class="btn btn-danger" id="dropOffDiff"> Drop Off Differnce</button>
+                  <button class="btn btn-success" id="filterReset">
+                    Reset Filters
+                  </button>
+
+                </div>
+                <hr>
+                <div class="card ci-scrollX p-4" id="applications-table-wrapper">
+                  <header class=" card-header d-flex justify-content-between">
+                    <div class="d-flex align-items-center" style="margin-bottom: 20px; gap: 12px"
+                      id="entriesPerPageWrapper">
+                      <select name="entriesPerPage" id="entriesPerPage">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                      </select>
+                      <label for="entriesPerPage" style="color: rgb(128, 128, 128)">Entries/Page</label>
+                    </div>
+                    <!-- <icon class="material-icons material-symbols-outlined" style="cursor: pointer;"
+                                data-bs-toggle="collapse" href="#collapseExample" role="button">
+                                filter_list
+                            </icon> -->
+                    <icon class="material-icons material-symbols-outlined" style="cursor: pointer;" role="button"
+                      id="dynamic-form-icon">
+                      dynamic_form
+                    </icon>
+                  </header>
+
+
+                  <table class="table">
+                    <thead style="color: rgb( 128, 128, 128) !important;">
+
+                      <tr style="text-align: center" id="table-header" data-filter-value="0" data-filter="none">
+                      </tr>
+                    </thead>
+                    <tr id="table-filter-row" style="border-bottom: 1px solid rgb(199, 199, 199)"></tr>
+                    <tbody id="data-to-show">
+                      <tr>
+                        <td colspan="10">
+                          <div class="d-flex justify-content-center align-items-center">
+                            <div class="sbl-circ-path"></div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="10" style="text-align: center;  color: black !important;">
+                          <div
+                            class="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+
+                            <span class="material-icons material-symbols-outlined"
+                              style=" position: relative; top: 4px;right: 8px; font-size: 18px; color: white; background: rgb( 128, 128,128) !important; padding: 2px;border-radius: 50%; cursor: pointer;"
+                              id="prevPage">
+                              west
+                            </span>
+                            <%# total pages label %>
+                              <label for="pageNo" style="margin-right: 10px; color: #000 !important;">Page No:</label>
+                              <%# input %>
+                                <input type="number" style="
+                                                width: 50px;
+                                                display: inline;
+                                                height: 20px;
+                                                border-radius: 0 !important;
+                                                padding-right: 0 !important;
+                                                padding-left: 2px !important;
+                                            " id="page-no" name="pageNo" class="form-control" max="50" min="1"
+                                  value="1" />
+                                <%# /50 %>
+
+                                  <span style="
+                                                margin-left: 10px;
+                                                color: rgb(
+                                                    128,
+                                                    128,
+                                                    128
+                                                ) !important;
+                                            " id="pages">/ 50</span>
+                                  <%# no of entries %>
+
+                                    <span style="
+                                                margin-left: 10px;
+                                                color: rgb(
+                                                    128,
+                                                    128,
+                                                    128
+                                                ) !important;
+                                            " id="entries">(2000 entries)</span>
+
+                                    <span class="material-icons material-symbols-outlined" style="
+                                                position: relative;
+                                                top: 4px;
+                                                left: 8px;
+                                                font-size: 18px;
+                                                color: white;
+                                                background: rgb(
+                                                    128,
+                                                    128,
+                                                    128
+                                                ) !important;
+                                                padding: 2px;
+                                                border-radius: 50%;
+                                                cursor: pointer;
+                                            " id="nextPage">
+                                      east
+                                    </span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+              <!-- Javascripts -->
+              <script src="/./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+              <script src="/./app/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+              <script src="/./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+              <script src="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+              <script src="/./app/utils/assets/plugins/pace/pace.min.js"></script>
+              <script src="/./app/utils/assets/plugins/highlight/highlight.pack.js"></script>
+              <script src="/./app/utils/assets/plugins/datatables/datatables.min.js"></script>
+              <script src="/./app/utils/assets/js/main.min.js"></script>
+              <script src="/./app/utils/assets/js/custom.js"></script>
+              <script src="/./app/utils/assets/js/pages/datatables.js"></script>
+              <script src="/./app/utils/assets/plugins/flatpickr/flatpickr.js"></script>
+              <script src="/./app/utils/assets/js/utils/blockModalsEsacping.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+              <script src="/./app/utils/assets/js/custom/telecallers/teleCommon.js"></script>
+              <script src="/./app/utils/assets/js/custom/telecallers/axisBankTele.js"></script>
+</body>
+
+</html>

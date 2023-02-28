@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<%- include('../common/commonHeader'); %>
+		<link href="/./app/utils/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="app align-content-stretch d-flex flex-wrap">
+		<%- include('../common/commonLoader'); %>
+			<%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+
+				<div class="app-container">
+					<div class="d-flex flex-column ">
+						<div class="app-content">
+
+							<h1 class="application-title pb-1">
+								Edit ICICI Bank Application
+							</h1>
+
+							<div class="top-btns">
+								<button class="ci-btn ci-btn-blue" id="call_btn">Call</button>
+								<button class="ci-btn ci-btn-green" id="update">Update</button>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="card bg-card">
+								<div class="loader-hide" id="loader">
+									<div class="sbl-circ-path loader-content"></div>
+								</div>
+								<form action="post" id="leftform">
+									<div class="ci-card-body  card-body">
+										<!-- <form action="post" id="leftform"> -->
+										<div class="col-7 shadowBox p-4" id="left-form">
+											<div class="row">
+												<div class="col-6 input-fields-icici">
+													<label for="leadId" class="form-label">Lead Id</label>
+													<input type="number" class="form-control" id="leadId" name="leadId"
+														value="<%-dataToShow.junction_id%>" disabled>
+												</div>
+												<div class="col-6 input-fields-icici">
+
+													<label for="mainTableId" class="form-label"><a target="_blank"
+															id="mainTableLink"
+															href="/applications/edit-application-ui?id=<%-dataToShow.id%>">CA
+															Main Id</a> </label>
+													<input type="number" class="form-control" id="mainTableId"
+														name="mainTableId" value="<%-dataToShow.id%>" disabled>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="name" class="form-label">Name</label>
+													<input type="text" class="form-control" id="name" name="name"
+														value="<%-dataToShow.name%>" required>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="email" class="form-label">Email</label>
+													<input type="email" class="form-control" id="email" name="email"
+														value="<%-dataToShow.email%>" required>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="phone" class="form-label">Phone</label>
+													<input type="number" class="form-control" id="phone" name="phone"
+														value="<%-dataToShow.phone_number%>" required>
+												</div>
+												
+												<div class="col-6 input-fields-icici">
+													<label for="gender" class="form-label">Gender</label>
+													<select name="gender" id="gender" class="form-control" required>
+														<option value="">Select an Option</option>
+														<option value="Male" <%=dataToShow.gender=="Male" ? 'selected'
+															: '' %> >Male</option>
+														<option value="Female" <%=dataToShow.gender=="Female"
+															? 'selected' : '' %> >Female</option>
+														<option value="Others" <%=dataToShow.gender=="Others"
+															? 'selected' : '' %> >others</option>
+													</select>
+												</div>
+												
+												<div class="col-6 input-fields-icici">
+													<label for="pincode" class="form-label">Pincode</label>
+													<input type="number" class="form-control" id="pincode"
+														value="<%-dataToShow.pin_code%>" name="pincode" required>
+												</div>
+												
+												<div class="col-6 input-fields-icici">
+													<label for="dob" class="form-label">Date Of Birth</label>
+													<input type="date" class="form-control"
+														value="<%-(dataToShow.date_of_birth == '' || dataToShow.date_of_birth == null) ? '' :  new Date(dataToShow.date_of_birth).toLocaleDateString("sv-SE") %>" id="dob"
+														name="dob" required>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="pancard" class="form-label">Pancard</label>
+													<input type="text" class="form-control" id="pancard"
+														value="<%-dataToShow.pan_card_number%>" name="pancard" required>
+												</div>
+												
+												<div class="col-6 input-fields-icici">
+													<label for="employment" class="form-label">Employment</label>
+													<select name="employment" id="employment" class="form-control"
+														required>
+														<option value="">Select an Option</option>
+														<option value="Salaried" <%= dataToShow.employment == "Salaried" ? 'selected' : ''%> >Salaried</option>
+														<option value="Self Employed" <%= dataToShow.employment == "Self Employed" ? 'selected' : ''%> >Self Employed</option>
+														<option value="Professional" <%= dataToShow.employment == "Professional" ? 'selected' : ''%> >Professional</option>
+														<option value="Others" <%= dataToShow.employment == "Others" ? 'selected' : ''%> >Others</option>
+													</select>
+
+												</div>
+												<div class="row">
+													<div class="col-6 input-fields-icici"
+														style="display:flex;flex-direction:column;">
+														<label for="relationship"
+															class="form-label">Relationship</label>
+														<label class="switch">
+															<input type="checkbox" id="relationship" name="relationship"
+																<%- dataToShow.relationship_with_icici ? 'checked ' : ''
+																%>>
+															<span class="slider round"></span>
+														</label>
+													</div>
+													<div class="col-6 input-fields-icici"
+														style="display:flex;flex-direction:column;">
+														<label for="otherbankcard" class="form-label">Other bank
+															card</label>
+														<label class="switch">
+															<input type="checkbox" id="otherbankcard" <%-
+																dataToShow.is_any_credit_card ? 'checked ' : '' %>
+															name="otherbankcard">
+															<span class="slider round"></span>
+														</label>
+													</div>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="company" class="form-label">Company Name</label>
+													<input type="text" class="form-control" id="company" name="company"
+														value="<%-dataToShow.company_name%>" required>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="income" class="form-label">Annual Income</label>
+													<input type="number" class="form-control" id="income" name="income"
+														value="<%-dataToShow.annual_income%>" required>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="address" class="form-label">Current Address</label>
+													<input type="text" class="form-control" id="address" name="address"
+														value="<%-dataToShow.address%>" required>
+												</div>
+												
+												<div class="col-6 input-fields-icici">
+													<label for="qualification" class="form-label">Qualification</label>
+													<select name="qualification" id="qualification" class="form-control"
+														required>
+														<option value="">Select an Option</option> 
+														<option value="Student" <%= dataToShow.qualification == "Student" ? 'selected' : ''%> >Student</option>
+														<option value="Under Graduate" <%= dataToShow.qualification == "Under Graduate" ? 'selected' : ''%> >Under Graduate</option>
+														<option value="Graduate" <%= dataToShow.qualification == "Graduate" ? 'selected' : ''%> >Graduate</option>
+														<option value="Post Graduate" <%= dataToShow.qualification == "Post Graduate" ? 'selected' : ''%> >Post Graduate</option>
+													</select>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="employer" class="form-label">Employer Details</label>
+													<select name="employer" id="employer" class="form-control" required>
+														<option value="">Select an Option</option>
+														<option value="Public Sector" <%= dataToShow.employer_details == "Public Sector" ? 'selected' : ''%> >Public Sector</option>
+														<option value="Proprietorship" <%= dataToShow.employer_details == "Proprietorship" ? 'selected' : ''%> >Proprietorship</option>
+														<option value="Patnership" <%= dataToShow.employer_details == "Patnership" ? 'selected' : ''%> >Patnership</option>
+														<option value="Private Limited" <%= dataToShow.employer_details == "Private Limited" ? 'selected' : ''%> >Private Limited</option>
+														<option value="Public Limited" <%= dataToShow.employer_details == "Public Limited" ? 'selected' : ''%> >Public Limited</option>
+														<option value="Government" <%= dataToShow.employer_details == "Government" ? 'selected' : ''%> >Government</option>
+														<option value="Others" <%= dataToShow.employer_details == "Others" ? 'selected' : ''%> >Others</option>
+													</select>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label for="application-number" class="form-label">Application
+														Number</label>
+													<input type="text" class="form-control" id="application-number"
+														name="application-number"
+														value="<%-dataToShow.icici_application_number%>" required>
+												</div>
+											</div>
+
+
+										</div>
+										<!-- </form> -->
+
+										<div class="col-5 shadowBox p-4 ms-1" id="right-form">
+											<div class="col-4 input-fields-icici"
+												style="display:flex;flex-direction:column;">
+												<label for="work-done" class="form-label">Work Done</label>
+												<label class="switch">
+													<input type="checkbox" id="work-done" name="work-done" <%-
+														dataToShow.is_work_done ? 'checked disabled' : '' %> >
+													<span class="slider round"></span>
+												</label>
+											</div>
+											<div class="col-10 input-fields-icici">
+												<label for="application_status" class="form-label">Application
+													Status</label>
+												<select name="application_status" id="application_status"
+													class="form-control">
+													<option value="">Select an Option</option>
+													<option value="Incomplete" <%= dataToShow.application_status == "Incomplete" ? 'selected' : ''%> >Incomplete</option>
+													<option value="Follow Up" <%= dataToShow.application_status == "Follow Up" ? 'selected' : ''%> >Follow Up</option>
+													<option value="Rejected" <%= dataToShow.application_status == "Rejected" ? 'selected' : ''%> >Rejected</option>
+													<option value="Completed" <%= dataToShow.application_status == "Completed" ? 'selected' : ''%> >Completed</option>
+
+												</select>
+											</div>
+											<div class="col-12 input-fields-icici">
+												<label for="notes" class="form-label">Notes</label>
+												<textarea name="notes" id="notes" class="form-control"><%= dataToShow.notes%></textarea>
+											</div>
+											<div class="row">
+												<div class="col-8 input-fields-icici">
+													<label for="call_status" class="form-label">Call Status</label>
+													<select name="call_status" id="call_status" class="form-control">
+														<option value="">Select an Option</option>
+														<option value="Not Called" <%= dataToShow.call_status == "Not Called" ? 'selected' : ''%> >Not Called</option>
+														<option value="Call Answered" <%= dataToShow.call_status == "Call Answered" ? 'selected' : ''%> >Call Answered</option>
+														<option value="Call Declined" <%= dataToShow.call_status == "Call Declined" ? 'selected' : ''%> >Call Declined</option>
+														<option value="Not Picked" <%= dataToShow.call_status == "Not Picked" ? 'selected' : ''%> >Not Picked</option>
+														<option value="Call Back" <%= dataToShow.call_status == "Call Back" ? 'selected' : ''%> >Call Back</option>
+													</select>
+												</div>
+												<div class="col-4 input-fields-icici">
+													<label for="call_counter" class="form-label">Call Counter</label>
+													<input type="number" class="form-control" id="call_counter" name="call_counter" min="0"
+														value="<%-dataToShow.call_counter%>" required>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-6 input-fields-icici">
+													<label for="automated_call_status"
+														class="form-label text-primary">Automated Call Status</label>
+													<select name="automated_call_status"
+														id="automated_call_status" class="form-control">
+														<option value="">Select an Option</option>
+														<option value="Not Called" <%= dataToShow.automated_call_status == "Not Called" ? 'selected' : ''%> >Not Called</option>
+														<option value="Call Answered" <%= dataToShow.automated_call_status == "Call Answered" ? 'selected' : ''%> >Call Answered</option>
+														<option value="Call Declined" <%= dataToShow.automated_call_status == "Call Declined" ? 'selected' : ''%> >Call Declined</option>
+														<option value="Not Picked" <%= dataToShow.automated_call_status == "Not Picked" ? 'selected' : ''%> >Not Picked</option>
+														<option value="Call Back" <%= dataToShow.automated_call_status == "Call Back" ? 'selected' : ''%> >Call Back</option>
+													</select>
+												</div>
+												<div class="col-6 input-fields-icici">
+													<label min="0" for="automated_call_counter"
+														class="form-label text-primary">Automated Call
+														Counter</label>
+													<input type="number" value="<%-dataToShow.automated_call_counter%>" min="0"
+														name="automated_call_counter" class="form-control"
+														id="automated_call_counter">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-10 input-fields-icici">
+													<label for="final_call_status"
+														class="form-label text-primary">Final Call Status</label>
+													<select name="final_call_status" id="final_call_status"
+														class="form-control">
+														<option value="">Select an Option</option>
+														<option value="Not Called" <%= dataToShow.final_call_status == "Not Called" ? 'selected' : ''%> >Not Called</option>
+														<option value="Call Answered" <%= dataToShow.final_call_status == "Call Answered" ? 'selected' : ''%> >Call Answered</option>
+														<option value="Call Declined" <%= dataToShow.final_call_status == "Call Declined" ? 'selected' : ''%> >Call Declined</option>
+														<option value="Not Picked" <%= dataToShow.final_call_status == "Not Picked" ? 'selected' : ''%> >Not Picked</option>
+														<option value="Call Back" <%= dataToShow.final_call_status == "Call Back" ? 'selected' : ''%> >Call Back</option>
+													</select>
+												</div>
+											</div>
+										
+
+											
+												<!-- <div class="row">
+												
+												
+												<div class="col-6 mt-4">
+													<label for="tad_application_status" class="form-label">Application
+														Status</label>
+													<select name="tad_application_status" id="tad_application_status"
+														class="form-control">
+														<option value="">Select an Option</option>
+														<option value="Accepted">Accepted</option>
+														<option value="Rejected">Rejected</option>
+														
+													</select>
+												</div>
+												<div class="col-6 mt-4 ">
+													<label for="tad_call_decline_counter" class="form-label">Call
+														Counter</label>
+													<input min="0" type="number" name="tad_call_decline_counter"
+														class="form-control" id="tad_call_decline_counter">
+												</div>
+												
+												<div class="col-6 mt-4 ">
+													<label for="tad_call_scheduled" class="form-label">Call
+														Scheduled</label>
+													<input type="datetime-local" name="tad_call_scheduled"
+														class="form-control" id="tad_call_scheduled">
+												</div>
+											</div> -->
+												<div class="row">
+													<h5 style="margin-top: 25px;">Send SMS</h5>
+													<div class="col-6 mt-4 ">
+														<label for="assigning_sms_status" class="form-label">SMS
+															Status</label>
+														<select name="assigning_sms_status" id="assigning_sms_status"
+															class="form-control">
+															<option selected disabled value="">Select an Option</option>
+														</select>
+													</div>
+													<div class="col-6 mt-4 ">
+														<label for="assigning_sms_counter" class="form-label">SMS
+															Counter</label>
+														<input type="number" value="<%-dataToShow.assigning_sms_counter%>" disabled="true"
+															name="assigning_sms_counter" class="form-control"
+															id="assigning_sms_counter">
+													</div>
+													<div class="col-6 mt-4 ">
+														<button id="send_sms" disabled="true"
+															class="ci-btn ci-btn-green">Send</button>
+													</div>
+												</div>
+											</div>
+										</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+					<!-- Javascripts -->
+					<script src="/./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+					<script src="/./app/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+					<script src="/./app/utils/assets/plugins/flatpickr/flatpickr.js"></script>
+					<script src="/./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+					<script src="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+					<script src="/./app/utils/assets/js/main.min.js"></script>
+					<script src="/./app/utils/assets/js/custom.js"></script>
+					<script src="/./app/utils/assets/js/custom/iciciBank/iciciBankEditApplication.js"></script>
+					<!-- <script src="/./app/utils/assets/js/custom/telecallers/editTeleCommon.js"></script> -->
+</body>
+
+</html>

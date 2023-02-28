@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../common/commonHeader'); %>
+        <link href="/./app/utils/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="app align-content-stretch d-flex flex-wrap">
+        <%- include('../common/commonLoader'); %>
+         <%- include('../common/commonSidebar' , {sidebarData :
+            sidebarDataByServer}); %>
+        
+            <div class="app-container">
+                <div class="d-flex flex-column ">
+                    <div class="app-content">
+                        <h1 class="application-title pb-1">
+                            Edit All Leads
+                        </h1>
+                        <div class="top-btns">
+                            <button class="ci-btn ci-btn-green" id="update" disabled >Update</button>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="card bg-card">
+                            <form >
+                                <div class="ci-card-body  card-body">
+                                    <div class="col-12 shadowBox p-4" id="left-form">
+                                        
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                 
+                </div>
+                <!-- Javascripts -->
+                <script src="/./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+                <script src="/./app/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+                <script src="/./app/utils/assets/plugins/flatpickr/flatpickr.js"></script>
+                <script src="/./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                <script src="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+                <script src="/./app/utils/assets/js/main.min.js"></script>
+                <script src="/./app/utils/assets/js/custom.js"></script>
+                <script src="/./app/utils/assets/js/custom/editCommon.js"></script>
+
+                <script src="/./app/utils/assets/js/custom/editAllApplications.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<html lang="en">
+
+<head>
+
+    <title>Card Insider - Cards &amp; Offers</title>
+
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
+    <link href="/./app/utils/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="/./app/utils/assets/plugins/pace/pace.css">
+
+    <!-- Theme Styles -->
+    <link href="/./app/utils/assets/css/custom.css" rel="stylesheet">
+    <link href="/./app/utils/assets/css/main.min.css" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="/./app/utils/assets/images/cardInsiderImages/card-insider-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="/./app/utils/assets/images/cardInsiderImages/card-insider-icon.png">
+    <link href="/./app/utils/assets/plugins/flatpickr/flatpickr.min.css" rel="stylesheet">
+</head>
+
+<body class="no-loader">
+    <div class="app align-content-stretch d-flex flex-wrap">
+        <%- include('../common/commonLoader'); %>
+            <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+                <div class="app-container">
+                    <div class="d-flex flex-column ">
+                        <div class="app-content">
+                            <h1 class="application-title pb-1">
+                                Edit Assigned Cold Calling
+                            </h1>
+                            <div class="top-btns">
+                                <button class="ci-btn ci-btn-blue" id="call_btn">Call</button>
+                                <button class="ci-btn ci-btn-green" id="update" disabled="">Update</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="card bg-card">
+                                <form id="coldCallingForm">
+                                    <div class="ci-card-body  card-body">
+                                        <div class="col-6 shadowBox p-4" id="left-form">
+                                            <div class="row" style="row-gap:20px">
+                                                <div class="col-6">
+                                                    <label for="id" class="form-label">Id</label>
+                                                    <input type="number" class="form-control" id="id" name="id"
+                                                        disabled="" value="<%=data[0].id%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="id" class="form-label">Cold Calling Id</label>
+                                                    <input type="number" class="form-control" id="cc_id" name="cc_id"
+                                                        disabled="" value="<%=data[0].cc_id%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="application_number" class="form-label">Application
+                                                        Number</label>
+                                                    <input type="text" class="form-control" id="application_number"
+                                                        name="application_number" value="<%=data[0].phone_number%>"
+                                                        disabled="" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="name" class="form-label">Name</label>
+                                                    <input type="text" class="form-control" id="name" name="name"
+                                                        disabled="" value="<%=data[0].name%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="date" class="form-label">Date of Birth</label>
+                                                    <input class="form-control flatpickr-input" type="text"
+                                                        placeholder="yyyy-mm-dd" value="<%=data[0].date_of_birth%>"
+                                                        id="date" name="date" disabled="" readonly="readonly">
+                                                </div> 
+                                                <div class="col-6">
+                                                    <label for="revised_date" class="form-label">Revised Date</label>
+                                                    <input class="form-control flatpickr-input" type="text"
+                                                        placeholder="yyyy-mm-dd" id="revised_date" name="revised_date"
+                                                        disabled="" readonly="readonly">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="mobile_number" class="form-label">Mobile Number</label>
+                                                    <input type="text" class="form-control" id="mobile_number"
+                                                        name="mobile_number" disabled=""
+                                                        value="<%=data[0].phone_number%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="city" class="form-label">City</label>
+                                                    <input type="text" class="form-control" id="city"
+                                                        name="mobile_number" disabled="" value="<%=data[0].city%>"
+                                                        required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="city" class="form-label">State</label>
+                                                    <input type="text" class="form-control" id="city" name="state"
+                                                        disabled="" value="<%=data[0].state%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="pincode" class="form-label">Pincode</label>
+                                                    <input type="text" class="form-control" id="pincode" name="pincode"
+                                                        disabled="" value="<%=data[0].pin_code%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="low_cibil_score" class="form-label">Low Credit
+                                                        Score</label>
+                                                    <input type="text" class="form-control" id="low_cibil_score"
+                                                        name="low_cibil_score" disabled=""
+                                                        value="<%=data[0].low_cibil_score%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="occupation" class="form-label">Occupation</label>
+                                                    <input type="text" class="form-control" id="occupation"
+                                                        name="occupation" disabled="" value="<%=data[0].occupation%>"
+                                                        required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="income" class="form-label">Annual Income</label>
+                                                    <input type="text" class="form-control" id="income" name="income"
+                                                        disabled="" value="<%=data[0].monthly_income%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="company_name" class="form-label">Company Name</label>
+                                                    <input type="text" class="form-control" id="company_name"
+                                                        name="company_name" disabled=""
+                                                        value="<%=data[0].company_name%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="form_filled_array" class="form-label">Form Filled Array</label>
+                                                    <input type="text" class="form-control" id="form_filled_array"
+                                                        name="form_filled_array" disabled=""
+                                                        value="<%=data[0].form_filled_array%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="banks_applied_array" class="form-label">Bank Applied Array</label>
+                                                    <input type="text" class="form-control" id="banks_applied_array"
+                                                        name="banks_applied_array" disabled=""
+                                                        value="<%=data[0].banks_applied_array%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="cold_calling_bank_assigned_array" class="form-label">Cold Calling Bank Assigned Array</label>
+                                                    <input type="text" class="form-control" id="cold_calling_bank_assigned_array"
+                                                        name="cold_calling_bank_assigned_array" disabled=""
+                                                        value="<%=data[0].cold_calling_bank_assigned_array%>" required="">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="created_at" class="form-label">Created At</label>
+                                                    <input class="form-control flatpickr-input" type="text"
+                                                        placeholder="yyyy-mm-dd" value="<%=data[0].created_at%>"
+                                                        id="created_at" name="created_at" disabled=""
+                                                        readonly="readonly">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="updated_at" class="form-label">Updated At</label>
+                                                    <input class="form-control flatpickr-input" type="text"
+                                                        placeholder="yyyy-mm-dd" value="<%=data[0].updated_at%>"
+                                                        id="updated_at" name="updated_at" disabled=""
+                                                        readonly="readonly">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 shadowBox p-4 ms-1" id="right-form">
+                                            <span id="card-activated" class="d-none">
+                                                <h2 class="text-success" style="margin-left: 35%; margin-top: 20%;">Card
+                                                    Activated</h2>
+                                            </span>
+                                            <span id="card-rejected" class="d-none">
+                                                <h2 class="text-danger" style="margin-left: 35%; margin-top: 20%;">Card
+                                                    Rejected
+                                                </h2>
+                                            </span>
+                                            <span id="card-cold-calling" class="">
+                                                <a href="#">
+                                                    <h4 class="py-4">Cold Calling Info.</h4>
+                                                </a>
+                                                <div class="col-12">
+                                                    <label for="cc_call_status" class="form-label">Cold
+                                                        Calling
+                                                        Call Status</label>
+                                                    <select name="cc_call_status"
+                                                        id="cc_call_status" class="form-control">
+                                                        <% var options=[ "Select Option", "Not Called" , "Call Declined" , "Call Answered" , "Not Picked"]; for (
+                                                            var i=0; i < options.length; i++ ) { var selected=(
+                                                                data[0].cc_call_status == options[ i ] ) ? "selected" : "" ; %>
+                                                            <option value="<%=options[ i ] %>" <%=selected %>><%=options[ i ] %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 mt-4">
+                                                    <label for="cc_note" class="form-label">Cold Calling
+                                                        Notes</label>
+                                                    <textarea name="cc_note" id="cc_note"
+                                                        class="form-control"><%=data[0].cc_note%></textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6 mt-4 ">
+                                                        <label for="cc_call_declined_counter"
+                                                            class="form-label">Cold Calling
+                                                            Call Counter</label>
+                                                        <input type="number" min="0"
+                                                            name="cc_call_declined_counter" class="form-control"
+                                                            value="<%=data[0].cc_call_declined_counter%>"
+                                                            id="cc_call_declined_counter">
+                                                    </div>
+                                                    <div class="col-6 mt-4 ">
+                                                        <label for="tad_cold_calling_call_scheduled"
+                                                            class="form-label">Cold Calling
+                                                            Call Scheduled</label>
+                                                        <input type="datetime-local"
+                                                            name="cc_call_scheduled" class="form-control"
+                                                            value="<%=data[0].cc_call_scheduled%>"
+                                                            id="cc_call_scheduled">
+                                                           
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span id="card-completion-sms">
+                                                <div class="row">
+                                                    <h5 style="margin-top: 25px;">Cold SMS</h5>
+                                                    <div class="col-6 mt-4 ">
+                                                        <label for="cc_sms_status" class="form-label">SMS
+                                                            Status</label>
+                                                        <select name="cc_sms_status" id="cc_sms_status"
+                                                            class="form-control">
+                                                            <option selected="" disabled="" value="">Select an Option
+                                                            </option>
+                                                            <option value="40">vkyc</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-6 mt-4 ">
+                                                        <label for="tad_call_decline_counter" class="form-label">SMS
+                                                            Counter</label>
+                                                        <input type="number" disabled="true" name="cc_sms_counter"
+                                                            class="form-control" value="<%=data[0].cc_sms_counter%>"
+                                                            id="cc_sms_counter">
+                                                    </div>
+                                                    <div class="col-6 mt-4 ">
+                                                        <button id="cc_send_sms" disabled="true"
+                                                            class="ci-btn ci-btn-green">Send</button>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Javascripts -->
+                <script src="/./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+                <script src="/./app/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+                <script src="/./app/utils/assets/plugins/flatpickr/flatpickr.js"></script>
+                <script src="/./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                <script src="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+                <script src="/./app/utils/assets/js/main.min.js"></script>
+                <script src="/./app/utils/assets/js/custom.js"></script>
+                <script src="/./app/utils/assets/js/custom/telecallers/editColdCallingCommon.js"></script>
+    </div>
+</body>
+
+</html>

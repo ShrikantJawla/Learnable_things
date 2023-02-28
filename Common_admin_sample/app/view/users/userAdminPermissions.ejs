@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<%- include('../common/commonHeader'); %>
+		<link href="/./app/utils/assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="app align-content-stretch d-flex flex-wrap">
+		<%- include('../common/commonSidebar' , {sidebarData :
+            sidebarDataByServer}); %>
+			<%- include('../common/commonModals'); %>
+				<div class="app-container">
+					<div class="app-content">
+						<div class="content-wrapper">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col">
+										<div class="app-content">
+											<h1 class="application-title">
+												Admin User Permissions
+											</h1>
+
+											<div class="top-btns">
+												<a class="ci-btn" data-bs-toggle="modal" data-bs-target="#ciFormModal"
+													onclick="">Add New Permission</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										<div class="card">
+											<div class="card-header">
+												<h1 class="card-title">
+													User Permissions
+												</h1>
+											</div>
+											<div class="card-body" id="dataToShow">
+												<div class="d-flex justify-content-center align-items-center">
+													<div class="sbl-circ-path"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>
+
+	<!-- Javascripts -->
+	<script src="/./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+	<script src="/./app/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+	<script src="/./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+	<script src="/./app/utils/assets/plugins/pace/pace.min.js"></script>
+	<script src="/./app/utils/assets/plugins/highlight/highlight.pack.js"></script>
+	<script src="/./app/utils/assets/plugins/datatables/datatables.min.js"></script>
+	<script src="/./app/utils/assets/js/main.min.js"></script>
+	<script src="/./app/utils/assets/js/custom.js"></script>
+	<script src="/./app/utils/assets/js/pages/datatables.js"></script>
+	<script src="/./app/utils/assets/js/utils/blockModalsEsacping.js"></script>
+
+	<script>
+		let USERADMINPERMISSIONS = {};
+		USERADMINPERMISSIONS.permissionid = "";
+		USERADMINPERMISSIONS.permissionUrl = "";
+		USERADMINPERMISSIONS.removePermssionId = "";
+
+
+
+
+		USERADMINPERMISSIONS.getPermissionsData = function () {
+			console.log("ready to fetch data ");
+			$.ajax({
+				url: "/users/admin-permission-data",
+				type: "GET",
+				success: function (result) {
+					console.log("ajax data to be replaced ");
+					$("#dataToShow").html(result);
+				},
+			});
+		};
+
+
+		document
+			.getElementById("finalDeleteButton")
+			.addEventListener("click", () => {
+				USERADMINPERMISSIONS.removePermssion();
+			});
+
+
+
+		//This function is used to add new permission to the database.
+		USERADMINPERMISSIONS.addNewPermission = function () {
+			let pUrlVal = $("#permissionRoute").val();
+			console.log(pUrlVal, "sdgfe");
+			if (pUrlVal != null && pUrlVal != "") {
+				$.ajax({
+					url: "/users/admin-post-new-permission",
+					type: "POST",
+					data: {
+						permissionUrl: pUrlVal,
+					},
+					success: function (result) {
+						console.log(
+							"new permisssion result ---------- >>>>>>>",
+							result
+						);
+						USERADMINPERMISSIONS.getPermissionsData();
+						if (result.status === true) {
+							console.log("hy");
+							$("#ciFormModal").modal("toggle");
+						}
+					},
+				});
+			}
+		};
+
+
+
+		//This function is used to update the status of the permission.
+		USERADMINPERMISSIONS.updateStatusCheck = function (id) {
+			let statusCheckVal = $("#accessStatusCheck-" + id).is(
+				":checked"
+			);
+			let readStatusVal = $("#readStatusCheck-" + id).is(":checked");
+			let writeStatusVal = $("#writeStatusCheck-" + id).is(
+				":checked"
+			);
+			let removeStatusVal = $("#removeStatusCheck-" + id).is(
+				":checked"
+			);
+			console.log("hey check value -----", statusCheckVal);
+			console.log("hey check value -----", readStatusVal);
+			console.log("hey check value -----", writeStatusVal);
+			console.log("hey check value -----", removeStatusVal);
+			$.ajax({
+				url: "/users/admin-update-permission",
+				type: "POST",
+				data: {
+					permissionId: id,
+					pStatus: statusCheckVal,
+					rStatus: readStatusVal,
+					wStatus: writeStatusVal,
+					dStatus: removeStatusVal,
+				},
+				success: function (result) {
+					console.log("response from api ------ >>>>>>>", result);
+				},
+			});
+		};
+
+		USERADMINPERMISSIONS.updatePermission = function () {
+			let permissionUrlNew = $("#permissionRouteEdit").val();
+			$.ajax({
+				url: "/admin-update-permission",
+				type: "POST",
+				data: {
+					permissionId: USERADMINPERMISSIONS.permissionid,
+					permissionUrl: permissionUrlNew,
+				},
+				// beforeSend: function() {
+				//     let bodyData = document.getElementById("dataToShow");
+				//     bodyData.innerHTML = `<div class="d-flex justify-content-center align-items-center">
+				//                                     <div class="sbl-circ-path"></div>
+				//                                 </div>`;
+				// },
+				success: function (result) {
+					console.log("response from api ------ >>>>>>>", result);
+					USERADMINPERMISSIONS.getPermissionsData();
+					if (result.status === true) {
+						console.log("hy");
+						$("#ciFormModalEdit").modal("toggle");
+					}
+				},
+			});
+		};
+
+		USERADMINPERMISSIONS.removePermssion = function () {
+			if (
+				USERADMINPERMISSIONS.removePermssionId != "" ||
+				USERADMINPERMISSIONS.removePermssionId != null
+			) {
+				$.ajax({
+					url: "/admin-remove-permssion",
+					type: "POST",
+					data: {
+						removeId: USERADMINPERMISSIONS.removePermssionId,
+					},
+					success: function (result) {
+						console.log(result);
+						USERADMINPERMISSIONS.getPermissionsData();
+						if (result.status === true) {
+							console.log("hy");
+							$("#deleteModal").modal("toggle");
+						}
+					},
+				});
+			}
+		};
+
+		USERADMINPERMISSIONS.handleCheckBoxes = function () {
+			let overStatus = $("");
+		};
+
+		$(document).ready(function () {
+			USERADMINPERMISSIONS.getPermissionsData();
+			//  USERADMINPERMISSIONS.addNewPermission();
+		});
+
+		$("#deleteModal").on("show.bs.modal", function (e) {
+			//get data-id attribute of the clicked element
+			USERADMINPERMISSIONS.removePermssionId = $(
+				e.relatedTarget
+			).data("p-removeid");
+		});
+
+		$("#ciFormModalEdit").on("show.bs.modal", function (e) {
+			//get data-id attribute of the clicked element
+			USERADMINPERMISSIONS.permissionid = $(e.relatedTarget).data(
+				"p-id"
+			);
+			USERADMINPERMISSIONS.permissionUrl = $(e.relatedTarget).data(
+				"p-url"
+			);
+			//populate the textbox
+			$(e.currentTarget)
+				.find('input[name="permissionRoute"]')
+				.val(USERADMINPERMISSIONS.permissionUrl);
+		});
+
+		function exportToCsv(filename, rows) {
+			console.log("hi im in exportToCsv");
+			var processRow = function (row) {
+				var finalVal = "";
+				for (var j = 0; j < row.length; j++) {
+					var innerValue =
+						row[j] === null ? "" : row[j].toString();
+					if (row[j] instanceof Date) {
+						innerValue = row[j].toLocaleString();
+					}
+					var result = innerValue.replace(/"/g, '""');
+					if (result.search(/("|,|\n)/g) >= 0)
+						result = '"' + result + '"';
+					if (j > 0) finalVal += ",";
+					finalVal += result;
+				}
+				return finalVal + "\n";
+			};
+
+			var csvFile = "";
+			for (var i = 0; i < rows.length; i++) {
+				csvFile += processRow(rows[i]);
+			}
+
+			var blob = new Blob([csvFile], {
+				type: "text/csv;charset=utf-8;",
+			});
+			if (navigator.msSaveBlob) {
+				// IE 10+
+				navigator.msSaveBlob(blob, filename);
+			} else {
+				var link = document.createElement("a");
+				if (link.download !== undefined) {
+					// feature detection
+					// Browsers that support HTML5 download attribute
+					var url = URL.createObjectURL(blob);
+					link.setAttribute("href", url);
+					link.setAttribute("download", filename);
+					link.style.visibility = "hidden";
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link);
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

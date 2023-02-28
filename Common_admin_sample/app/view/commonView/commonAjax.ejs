@@ -1,0 +1,34 @@
+<% for(let i=0; i < applicationsList.length ; i++){%>
+    <tr class="dynamicTableRow" style=" font-size:13px;" id="table-row-2">
+        <% let dataObj=applicationsList[i]; 
+        Object.keys(dataObj).forEach(key=> {%>
+            <%if (key == 'select'){%>
+                <td style="text-align:center">
+                    <input type="checkbox"
+                      id="<%=dataObj[key]%>">
+                </td>
+            <%} else if (key == 'Edit') { %>
+                <% if(currentIssuer == "icici"){%>
+                    <td data-edit-id="1" class="editIcon"><a href="<%=dataObj[key]%>" target="_blank" class="editIconLink editIcon"><i class="material-icons has-sub-menu editIcon">edit</i></a>
+                <%}else{ %>
+                    <td data-edit-id="1" class="editIcon"><a href="<%=dataObj[key]%>" target="_blank" class="editIconLink editIcon"><i class="material-icons has-sub-menu editIcon">edit</i></a>
+                <%}%>
+                
+            </td>
+                <%}else if(key == 'int|ca_main_table|Main Table' && dataObj['int|ca_main_table|Main Table'] != null && dataObj['int|ca_main_table|Main Table'] != ''){%>
+                <td style="text-align:center">
+                    <a href="/applications/edit-application-ui?id=<%=dataObj[key]%>" target="_blank"><%=dataObj[key]%>
+                </a> </td>
+                <%}else if(key.split("|")[0] == "url"){%>
+                    <td style="text-align:center">
+                    <a href="<%=dataObj[key]%>" target="_blank"><%=dataObj[key].split("/")[2]%>
+                </a> </td>
+                    
+                <%}else{ %>
+                <td style="text-align:center">
+                    <%=dataObj[key]%> </td>
+            <%}
+        }) %>
+    </tr>
+    <%}%>
+        <input id="newTotalCount" type="hidden" value="<%=totalCount%>"></input>

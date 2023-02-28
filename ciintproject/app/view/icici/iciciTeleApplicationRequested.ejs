@@ -1,0 +1,118 @@
+<% for(let i=0; i < applicationsList.length ; i++){%>
+    <tr class="dynamicTableRow" style=" font-size:13px;" id="table-row-2">
+        <%if (applicationsList[i].junction_id && applicationsList[i].junction_id > 0){%>
+        <td data-edit-id="2" class="editIcon"><a href="/<%=currentIssuer%>/edit-icici-application?id=<%=applicationsList[i].junction_id%>"
+                class="editIconLink editIcon"><i class="material-icons has-sub-menu editIcon">edit</i>
+            </a></td>
+        <%} else {%>
+            <td data-edit-id="2" class="editIcon"><a
+                class="editIconLink editIcon disabledButton"><i class="material-icons has-sub-menu editIcon">edit</i>
+            </a></td>
+        <%}%>
+        <td style="text-align:center">
+            <input onclick="assignValue('<%=applicationsList[i].id%>')" type="checkbox"
+              id="<%=applicationsList[i].id%>">
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].ua_name%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].id%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_application_number%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].application_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].is_work_done%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].automated_call_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].call_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].final_call_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].automated_call_counter%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].call_counter%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].name%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].email%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].phone_number%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].pin_code%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].device_type%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].city%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_flow_type%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_card_type%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_rejection_reason%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_req_income_doc%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_gems_arn%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_bre_decision%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_vkyc_opted_flag%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_initiated_flag%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_app_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_submission_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_current_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].icici_created_date%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].notes%>
+        </td>
+        
+        <td style="text-align:center">
+            <%=applicationsList[i].is_auto_assigned%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].created_at%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].updated_at%>
+        </td>
+    </tr>
+    <%}%>
+        <input id="newTotalCount" type="hidden" value="<%=totalCount%>"></input>

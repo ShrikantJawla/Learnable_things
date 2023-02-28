@@ -1,0 +1,114 @@
+<% for(let i=0; i < applicationsList.length ; i++){%>
+    <tr class="dynamicTableRow" style=" font-size:13px;" id="table-row-2">
+        <td data-edit-id="2" class="editIcon"><a href="/<%=currentIssuer%>/edit-cold-calling?id=<%=applicationsList[i].id%>"
+                class="editIconLink editIcon"><i class="material-icons has-sub-menu editIcon">edit</i>
+            </a></td>
+        <td style="text-align:center">
+            <input onclick="assignValue('<%=applicationsList[i].id%>')" type="checkbox"
+                id="<%=applicationsList[i].cc_id%>">
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].cc_id%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].id%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].ua_name %>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].bank_short_value%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].tracking_id%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].name%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].email%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].phone_number%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].is_salaried%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].ipa_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].created_at%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].updated_at%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].form_filled_array%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].banks_applied_array%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].banks_approved_array%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].low_cibil_score_bool%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].device_type%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].city%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].state%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].salary%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].date_of_birth%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].pin_code%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].mp_idfc_available%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].mp_axis_available%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].mp_au_available%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].mp_yes_available%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].mp_bob_available%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].sms_status%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].occupation%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].monthly_income%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].company_name%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].adhar_name%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].aadhar_pin%>
+        </td>
+        <td style="text-align:center">
+            <%=applicationsList[i].low_cibil_score%>
+        </td>
+    </tr>
+    <%}%>
+        <input id="newTotalCount" type="hidden" value="<%=totalCount%>"></input>
