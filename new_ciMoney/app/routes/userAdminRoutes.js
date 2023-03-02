@@ -85,19 +85,6 @@ router.get('/manage-tele-permission', permissionsController.getUserManagePermiss
 
 
 
-/** These are routes related to external users */
-
-
-router.get('/external-users-list-ui',userController.externalUsersListUI)
-
-router.post("/external-users-list-ui-ajax", userController.externalUsersListAjax)
-
-
-
-
-
-
-
 /* This is a catch all route. If the user tries to access a route that is not defined in the router,
 then this route will be executed. */
 router.get('*', function (req, res, next) {

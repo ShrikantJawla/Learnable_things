@@ -23,6 +23,7 @@ router.post("/sign-out-user", authController.signOutData);
 
 
 router.use('/users', sessionMiddleware.checkTheLoginStatus, require('./userAdminRoutes'));
+router.use('/siteUsers', sessionMiddleware.checkTheLoginStatus, require('./siteUsersRoutes'));
 router.use('/categories', sessionMiddleware.checkTheLoginStatus,require('./categoriesRoutes'))
 router.use('/offers', sessionMiddleware.checkTheLoginStatus,require('./offersRoutes'))
 

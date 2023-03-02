@@ -703,11 +703,13 @@ cashbackModelObj.getTransactionReportData = async function (body) {
     }
 
     let newSelect = `, CAST(approved_payment_tables.created_at as varchar) , CAST(approved_payment_tables.updated_at as varchar)  , (CASE WHEN (card_insider_users.ciu_first_name != '' OR card_insider_users.ciu_last_name != '') THEN CONCAT(card_insider_users.ciu_first_name, ' ', card_insider_users.ciu_last_name)  ELSE '' END) as user_name , cashback_claimed , account_informations.method , account_informations.upi_id , account_informations.is_upi_valid , 
-    account_informations.is_bank_valid , account_informations.upi_valid_name`;
+    account_informations.is_bank_valid , account_informations.upi_valid_name , transaction_details.td_status`;
 
     let leftJoin = ` 
     LEFT JOIN card_insider_users ON card_insider_users.id = approved_payment_tables.user_id
     LEFT JOIN account_informations ON account_informations.card_insider_user = card_insider_users.id
+    LEFT JOIN transaction_details ON CAST(transaction_details.td_id as varchar) = approved_payment_tables.transaction_id
+
      `;
 
 

@@ -197,7 +197,7 @@ const validateMultiSelect = () => {
         document.getElementById('creditCardsDropdownIcon').disabled = false
     }
 }
-multiSelectWrapper.addEventListener('click', e => {
+multiSelectWrapper.addEventListener('click', e => { 
     if (['BUTTON', 'INPUT', 'OPTION'].includes(e.target.tagName)) {
         inputObject['creditCards'] = getSelectedOptions('creditCards')
         inputObject['brands'] = getSelectedOptions('brands')

@@ -12,6 +12,7 @@
     <div class="app align-content-stretch d-flex flex-wrap">
       <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
             <%- include('../common/commonModals'); %>
+            <%- include('../common/commonLoader'); %>
                 <div class="app-container">
                     <div class="app-content">
                         <div class="content-wrapper">
@@ -70,7 +71,7 @@
                                                                 <div class="preview">
                                                                     <img id="brandLogo-preview" class="previewImg" >
                                                                 </div>
-                                                               <i class="material-icons has-sub-menu action-btns deleteImage" onclick="clearPreview(event)" >close</i>
+                                                               <i class="material-icons has-sub-menu action-btns deleteImage" >close</i>
                                                                 <label for="brandLogo" class="">Choose</label>
                                                                 <input type="file" id="brandLogo" accept="image/*" onchange="showPreview(event);">
                                                             </div>
@@ -179,6 +180,7 @@
                 <script src="./admin/assets/js/utils/multiUniSelectObject.js"></script>
                 <script src="./admin/assets/js/commonEdit.js"></script>
                 <script src="./admin/assets/js/editBrand.js"></script>
+
 </body>
 
 </html>

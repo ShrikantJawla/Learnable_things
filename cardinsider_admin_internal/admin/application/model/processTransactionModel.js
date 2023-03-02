@@ -396,21 +396,30 @@ async function checkIfTransactionAlreadyCreatedForRefferals(referedToId, reffera
 modelObj.processTransactionNew = async function (paymentReportId, userSessionId) {
 	let transactionNeedToInsert = false;
 	let returnObj = {
-		allDone : false,
-		message : 'SOMETHING WENTS WRONG'
+		allDone: false,
+		message: 'SOMETHING WENTS WRONG'
 
 	}
-	let paymentReportQuery = ` SELECT approved_payment_tables.*  , card_insider_users.cashback_claimed , account_informations.method , account_informations.upi_id , account_informations.is_upi_valid ,  
+	let paymentReportQuery = ` SELECT approved_payment_tables.*  , card_insider_users.cashback_claimed , account_informations.method , account_informations.upi_id , account_informations.is_upi_valid , transaction_details.td_status , 
     account_informations.is_bank_valid , account_informations.upi_valid_name , account_informations.id as accountInformationId 
 	, account_informations.account_number , account_informations.ifsc_code , account_informations.bank_name as user_bank_name , account_informations.account_name
 	FROM public.approved_payment_tables  
     LEFT JOIN card_insider_users ON card_insider_users.id = approved_payment_tables.user_id
+	LEFT JOIN transaction_details ON CAST(transaction_details.td_id as varchar) = approved_payment_tables.transaction_id
     LEFT JOIN account_informations ON account_informations.card_insider_user = card_insider_users.id where approved_payment_tables.id = ${paymentReportId} ;`;
 	let paymentReport = await commonModel.getDataOrCount(paymentReportQuery, [], 'D');
 	let paymnetMode = '';
 	if (paymentReport && paymentReport.length > 0) {
 		let paymentReportResult = paymentReport[0];
-		if (paymentReportResult.is_paid != true && paymentReportResult.transaction_id == null) {
+		let checkTransactionNeedForFurtherProcess = false;
+		if (paymentReportResult.transaction_id > 1){
+			if(paymentReportResult.td_status != 'Completed' && paymentReportResult.td_status != 'Processing'){
+				checkTransactionNeedForFurtherProcess = true;
+			}
+		} else if (paymentReportResult.transaction_id == null || paymentReportResult.is_paid != true){
+			checkTransactionNeedForFurtherProcess = true;
+		}
+		if (checkTransactionNeedForFurtherProcess) {
 			paymnetMode = paymentReportResult.method;
 			if (paymentReportResult.method == 'upi') {
 				if (paymentReportResult.upi_id != null) {
@@ -418,15 +427,15 @@ modelObj.processTransactionNew = async function (paymentReportId, userSessionId)
 						transactionNeedToInsert = true;
 					} else {
 						let verifyUpiResult = await upiVerification.verifyUpiId(paymentReportResult.upi_id);
-						console.log(verifyUpiResult , "verifyUpiResultverifyUpiResultverifyUpiResult")
+						console.log(verifyUpiResult, "verifyUpiResultverifyUpiResultverifyUpiResult")
 						if (verifyUpiResult) {
 							let upiUpdateResponse = await updatePaymentDetailsWithUpi(verifyUpiResult, paymentReportResult.accountinformationid, userSessionId);
-							if ( verifyUpiResult.upiStatus == true || verifyUpiResult.valid == true){
+							if (verifyUpiResult.upiStatus == true || verifyUpiResult.valid == true) {
 								transactionNeedToInsert = true;
 							} else {
 								returnObj.message = 'UPI ID NOT VALID 1';
 							}
-							
+
 						} else {
 							returnObj.message = 'UPI ID NOT VALID';
 						}
@@ -437,20 +446,22 @@ modelObj.processTransactionNew = async function (paymentReportId, userSessionId)
 
 			} else if (paymentReportResult.method == 'bank') {
 				if (paymentReportResult.account_number && paymentReportResult.ifsc_code) {
-					if ( paymentReportResult.is_bank_valid == true) {
+					if (paymentReportResult.is_bank_valid == true) {
 						transactionNeedToInsert = true;
 					} else {
-						let verifyBankResult = await bankAccVerification.verifiyBankAcc(paymentReportResult.account_number, paymentReportResult.ifsc_code);
-						console.log(verifyBankResult , "verifyBankResultverifyBankResultverifyBankResultverifyBankResult");
-						if (verifyBankResult) {
+						let verifyBankResult = false;
+						// let verifyBankResult = await bankAccVerification.verifiyBankAcc(paymentReportResult.account_number, paymentReportResult.ifsc_code);
+						// console.log(verifyBankResult, "verifyBankResultverifyBankResultverifyBankResultverifyBankResult");
+						transactionNeedToInsert = true;
+						if (verifyBankResult ) {
 
 							let bankUpdateResponse = await updatePaymentDetailsWithBank(verifyBankResult, paymentReportResult.accountinformationid, userSessionId);
-							if (verifyBankResult.bankVaildStatus == true || verifyUpiResult.valid == true){
+							if (verifyBankResult.bankVaildStatus == true || verifyUpiResult.valid == true) {
 								transactionNeedToInsert = true;
 							} else {
 								returnObj.message = 'BANK INFORMATION NOT VAILD';
 							}
-							
+
 						} else {
 							returnObj.message = 'BANK INFORMATION NOT VAILD';
 						}
@@ -464,56 +475,106 @@ modelObj.processTransactionNew = async function (paymentReportId, userSessionId)
 		} else {
 			returnObj.message = 'PAYMENT ALLREADY DONE  OR IN PROCESS';
 		}
-		if (  transactionNeedToInsert){
+		if ( transactionNeedToInsert) {
 			let insertedData = {
-				td_status : 'Processing',
-				td_method : paymnetMode,
-				td_user_id : paymentReportResult.user_id,
-				td_amount : paymentReportResult.payment_amount,
-				td_created_by : userSessionId
+				td_status: 'Processing',
+				td_method: paymnetMode,
+				td_user_id: paymentReportResult.user_id,
+				td_amount: paymentReportResult.payment_amount,
+				td_created_by: userSessionId
 			};
 			let insertinJunction = {
-				tarj_transaction_detail : '',
-				
-				tarj_created_by : userSessionId
-	
+				tarj_transaction_detail: '',
+
+				tarj_created_by: userSessionId
+
 			}
-			if (paymnetMode == 'upi'){
+			if (paymnetMode == 'upi') {
 				insertedData.td_upi_id = paymentReportResult.upi_id;
-			} else if(paymnetMode == 'bank') {
+			} else if (paymnetMode == 'bank') {
 				insertedData.td_account_name = paymentReportResult.account_name;
 				insertedData.td_account_number = paymentReportResult.account_number;
 				insertedData.td_bank_name = paymentReportResult.user_bank_name;
 				insertedData.td_ifsc_code = paymentReportResult.ifsc_code;
 			}
-				
-			if (paymentReportResult.payment_type == 'cashback'){
+
+			if (paymentReportResult.payment_type == 'cashback') {
 				insertinJunction.tarj_application = paymentReportResult.application_id;
 				insertinJunction.tarj_application_cashback = paymentReportResult.payment_amount;
 				insertinJunction.tarj_is_referred = false;
-			} else if(paymentReportResult.payment_type == 'referral') {
+			} else if (paymentReportResult.payment_type == 'referral') {
 				insertinJunction.tarj_referred_user = paymentReportResult.referred_to_id;
 				insertinJunction.tarj_referred_amount = paymentReportResult.payment_amount;
 				insertinJunction.tarj_is_referred = true;
 			}
-			console.log(insertedData , "insertedDatainsertedDatainsertedData");
-			let inserQueryOfTransaction = await commonModel.insert('transaction_details' , insertedData , true);
-			inserQueryOfTransaction = inserQueryOfTransaction + ` returning *`;
-			let insertedDataTransaction = await commonModel.getDataOrCount(inserQueryOfTransaction, [], 'D');
-			console.log(insertedDataTransaction , "insertedDataTransaction");
-			if (insertedDataTransaction  && insertedDataTransaction.length > 0){
-				insertinJunction.tarj_transaction_detail = insertedDataTransaction[0].td_id;
-				let inserQueryOfTransactionJunction = await commonModel.insert('transation_applications_referrals_junction' , insertinJunction , true);
-				inserQueryOfTransactionJunction = inserQueryOfTransactionJunction + ` returning *`;
-				let insertedDataTransactionJunction = await commonModel.getDataOrCount(inserQueryOfTransactionJunction, [], 'D');
-				console.log(insertedDataTransactionJunction , "insertedDataTransactionJunctioninsertedDataTransactionJunction");
+			let checkSimilerTransaction = false;
+			let checkSimilerTransactionId = 0;
+			let checkSimilerTransactionIsPaid = false;
+			console.log(paymentReportResult.payment_type , "paymentReportResult.payment_typepaymentReportResult.payment_type");
+			if (paymentReportResult.payment_type == 'cashback') {
+				console.log(' hi i am in')
+				let checkSql = `SELECT * FROM public.transation_applications_referrals_junction LEFT JOIN transaction_details
+				ON transaction_details.td_id = transation_applications_referrals_junction.tarj_transaction_detail 
+				where tarj_application = ${paymentReportResult.application_id} AND (td_status = 'Completed' or td_status = 'Processing') `;
+				let checkAlreadyData = await commonModel.getDataOrCount(checkSql, [], 'D');
+				console.log(checkAlreadyData , "checkAlreadyDatacheckAlreadyData");
+				if (checkAlreadyData && checkAlreadyData.length > 0) {
+					checkSimilerTransaction = true;
+					checkSimilerTransactionId = checkAlreadyData[0].tarj_transaction_detail;
+					if (checkAlreadyData[0].td_status == 'Completed'){
+						checkSimilerTransactionIsPaid = true;
+					}
+				}
+			} else if (paymentReportResult.payment_type == 'referral'){
+				let checkSql = `SELECT * FROM public.transation_applications_referrals_junction LEFT JOIN transaction_details
+				ON transaction_details.td_id = transation_applications_referrals_junction.tarj_transaction_detail 
+				where tarj_referred_user = ${paymentReportResult.referred_to_id} AND (td_status = 'Completed' or td_status = 'Processing') AND  td_user_id = ${paymentReportResult.user_id}`;
+				let checkAlreadyData = await commonModel.getDataOrCount(checkSql, [], 'D');
+				console.log(checkAlreadyData , "checkAlreadyDatacheckAlreadyData");
+				if (checkAlreadyData && checkAlreadyData.length > 0) {
+					checkSimilerTransaction = true;
+					checkSimilerTransactionId = checkAlreadyData[0].tarj_transaction_detail;
+					if (checkAlreadyData[0].td_status == 'Completed'){
+						checkSimilerTransactionIsPaid = true;
+					}
+				}
+			}
+			console.log(checkSimilerTransaction , "checkSimilerTransactioncheckSimilerTransaction");
+			//checkSimilerTransaction = true;
+			if (!checkSimilerTransaction) {
+				console.log(insertedData, "insertedDatainsertedDatainsertedData");
+				let inserQueryOfTransaction = await commonModel.insert('transaction_details', insertedData, true);
+				inserQueryOfTransaction = inserQueryOfTransaction + ` returning *`;
+				let insertedDataTransaction = await commonModel.getDataOrCount(inserQueryOfTransaction, [], 'D');
+				console.log(insertedDataTransaction, "insertedDataTransaction");
+				if (insertedDataTransaction && insertedDataTransaction.length > 0) {
+					insertinJunction.tarj_transaction_detail = insertedDataTransaction[0].td_id;
+					let inserQueryOfTransactionJunction = await commonModel.insert('transation_applications_referrals_junction', insertinJunction, true);
+					inserQueryOfTransactionJunction = inserQueryOfTransactionJunction + ` returning *`;
+					let insertedDataTransactionJunction = await commonModel.getDataOrCount(inserQueryOfTransactionJunction, [], 'D');
+					console.log(insertedDataTransactionJunction, "insertedDataTransactionJunctioninsertedDataTransactionJunction");
 
-				let queryForPaymentReport = ` UPDATE approved_payment_tables SET transaction_id = ${insertinJunction.tarj_transaction_detail}  WHERE id = ${paymentReportId}`;
-				console.log(queryForPaymentReport , "queryForPaymentReportqueryForPaymentReportqueryForPaymentReport");
+					let queryForPaymentReport = ` UPDATE approved_payment_tables SET transaction_id = ${insertinJunction.tarj_transaction_detail}  WHERE id = ${paymentReportId}`;
+					console.log(queryForPaymentReport, "queryForPaymentReportqueryForPaymentReportqueryForPaymentReport");
+					let updatePaymentReport = await commonModel.getDataOrCount(queryForPaymentReport, [], 'U');
+					returnObj.allDone = true;
+					returnObj.message = " ALL OK";
+				}
+			} else {
+				console.log('RAHULLLLLLLL');
+				let markPaidStatus = '';
+				if (checkSimilerTransactionIsPaid){
+					markPaidStatus = ` , is_paid = true `;
+				}
+				let queryForPaymentReport = ` UPDATE approved_payment_tables SET transaction_id = ${checkSimilerTransactionId} ${markPaidStatus}  WHERE id = ${paymentReportId}`;
+				console.log(queryForPaymentReport, "queryForPaymentReportqueryForPaymentReportqueryForPaymentReport");
 				let updatePaymentReport = await commonModel.getDataOrCount(queryForPaymentReport, [], 'U');
 				returnObj.allDone = true;
-				returnObj.message = " ALL OK";
+				returnObj.message = " ALLREADY rahul EXIST";
 			}
+
+		} else {
+			returnObj.allDone = false;
 		}
 	} else {
 		returnObj.message = 'INVALID ENTRY';
