@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../common/commonHeader'); %>
+    <script src="https://kit.fontawesome.com/a7e9f794eb.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="app align-content-stretch d-flex flex-wrap">
+    <%- include('../common/commonSidebar' , {sidebarData : sidebarDataByServer}); %>
+
+      <div class="app-container">
+        <div class="app-content">
+          <div class="content-wrapper">
+            <div class="container">
+              <div class="row">
+                <div class="col mb-5 d-flex">
+                  <div class="page-description">
+                    <h1>
+                      Welcome,
+                      <span id="dashboard-user" class="text-success"></span>
+                    </h1>
+                  </div>
+                  <div class="switch-toggle d-none" id="daily_punch_in" style="padding-top: 30px;">
+                    <input type="checkbox" id="punch_in_button">
+                    <label for="punch_in_button"></label>
+                  </div>
+                </div>
+                <div class="row bank-data" id="admin-data">
+                  <div class="col-xl-6">
+                    <div class="card widget widget-list">
+                      <div class="card-header d-flex">
+                        <span class="material-icons-outlined text-info">
+                          inventory
+                        </span>
+                        <h5 class="card-title text-info dashboard-title"> Form Filled Info.</h5>
+                        <span class="filter-button-wrapper">
+                          <span class="badge rounded-pill badge-success badge-style-light">All</span>
+                          <span class="badge rounded-pill badge-light badge-style-light">Month</span>
+                          <span class="badge rounded-pill badge-light badge-style-light">Today</span>
+                        </span>
+                      </div>
+                      <div class="card-body">
+                        <ul class="widget-list-content list-unstyled">
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title ">
+                                Axis Bank Forms
+                              </a>
+                              <span id="axis-forms-filled" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                Yes Bank Forms
+                              </a>
+                              <span id="yes-forms-filled" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                IDFC Bank Forms
+                              </a>
+                              <span id="idfc-forms-filled" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                AU Bank Forms
+                              </a>
+                              <span id="au-forms-filled" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                BOB Forms
+                              </a>
+                              <span id="bob-forms-filled" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title ">
+                                Total Forms
+                              </a>
+                              <span id="total-forms-filled" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="card widget widget-list">
+                      <div class="card-header d-flex">
+                        <span class="material-icons-outlined text-info">
+                          inventory
+                        </span>
+                        <h5 class="card-title text-info dashboard-title"> Card Application Info.</h5>
+                        <span class="filter-button-wrapper">
+                          <span class="badge rounded-pill badge-success badge-style-light">All</span>
+                          <span class="badge rounded-pill badge-light badge-style-light">Month</span>
+                          <span class="badge rounded-pill badge-light badge-style-light">Today</span>
+                        </span>
+                      </div>
+                      <div class="card-body">
+                        <ul class="widget-list-content list-unstyled">
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title ">
+                                Axis Bank Credit Cards
+                              </a>
+                              <span id="axis-credit-cards" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                Yes Bank Credit Cards
+                              </a>
+                              <span id="yes-credit-cards" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                IDFC Bank Credit Cards
+                              </a>
+                              <span id="idfc-credit-cards" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                AU Bank Credit Cards
+                              </a>
+                              <span id="au-credit-cards" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title">
+                                BOB Credit Cards
+                              </a>
+                              <span id="bob-credit-cards" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                          <li class="widget-list-item widget-list-item-green">
+                            <span class="widget-list-item-description dashboard-stats">
+                              <a href="#" class="widget-list-item-description-title ">
+                                Total Credit Cards
+                              </a>
+                              <span id="total-credit-cards" class="widget-list-item-description-subtitle">
+                                <div class="container-box">
+                                  <div class="box">
+                                    <div class="spinner spinner--12">
+                                      <div></div>
+                                      <div></div>
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 card card-body">
+                    <div class="tele-card-container d-flex justify-content-end">
+                      <!-- <select name="tele-info" id="tele-info-banks" class="card tele-info-banks">
+                        <option value="Axis Bank">Axis Bank</option>
+                        <option value="Au bank">Au bank</option>
+                        <option value="IDFC bank">IDFC bank</option>
+                        <option value="Yes bank">Yes bank</option>
+                        <option value="Bob bank">Bob bank</option>
+                      </select> -->
+                      <select name="tele-info" id="tele-info-callers" class="card tele-info-callers">
+                        <option value="all">All callers</option>
+                      </select>
+                    </div>
+                    <div class=" widget widget-stats">
+                      <div>
+                        <h5 class="tele-info-heading">Axis Bank Tele Info.</h5>
+                        <span class="stats-button-wrapper">
+                          <span class="badge rounded-pill badge-success badge-style-light">All</span>
+                          <span class="badge rounded-pill badge-light badge-style-light">Month</span>
+                          <span class="badge rounded-pill badge-light badge-style-light">Today</span>
+                        </span>
+                        <div class="widget-stats-container d-flex text-center">
+                          <div class="col tele-stats">
+                            <div class="d-flex tele-stats-icons">
+                              <span class="material-icons text-primary">
+                                person
+                              </span>
+                              <div class="tele-stats-title">
+                                Caller Name
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="col tele-stats">
+                            <div class="d-flex tele-stats-icons">
+                              <span class="material-icons text-primary">
+                                assignment
+                              </span>
+                              <div class="tele-stats-header">
+                                100
+                              </div>
+                            </div>
+                            Assigned
+                          </div>
+                          <div class="col tele-stats">
+                            <div class="d-flex tele-stats-icons">
+                              <span class="material-icons text-primary">
+                                assignment
+                              </span>
+                              <div class="tele-stats-header">
+                                100
+                              </div>
+                            </div>
+                            Pending Cases
+                          </div>
+                          <div class="col tele-stats">
+                            <div class="d-flex tele-stats-icons">
+                              <span class="material-icons text-primary">
+                                assignment
+                              </span>
+                              <div class="tele-stats-header">
+                                100
+                              </div>
+                            </div>
+                            Total Calls
+                          </div>
+                          <div class="col tele-stats">
+                            <div class="d-flex tele-stats-icons">
+                              <span class="material-icons text-primary">
+                                assignment
+                              </span>
+                              <div class="tele-stats-header">
+                                100
+                              </div>
+                            </div>
+                            Activation Calls
+                          </div>
+                          <div class="col tele-stats">
+                            <div class="d-flex tele-stats-icons">
+                              <span class="material-icons text-primary">
+                                assignment
+                              </span>
+                              <div class="tele-stats-header">
+                                100
+                              </div>
+                            </div>
+                            Total SMS
+                          </div>
+                          <div class="col tele-stats">
+                            <div class="d-flex tele-stats-icons">
+                              <span class="material-icons text-primary">
+                                assignment
+                              </span>
+                              <div class="tele-stats-header">
+                                100
+                              </div>
+                            </div>
+                            Activation SMS
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Javascripts -->
+      <script src="./app/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+      <script src="./app/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <script src="./app/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+      <script src="./app/utils/assets/plugins/pace/pace.min.js"></script>
+      <script src="../../../app/utils/assets/plugins/chartjs/chart.bundle.min.js"></script>
+      <script src="./app/utils/assets/js/main.min.js"></script>
+      <script src="./app/utils/assets/js/custom.js"></script>
+      <script src="../../../app/utils/assets/js/custom/dashboard.js"></script>
+</body>
+
+</html>

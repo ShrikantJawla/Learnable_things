@@ -1,0 +1,67 @@
+<table id="datatable1" class="display text-center" style="width:100%">
+    <thead>
+        <tr>
+            <th> ID</th>
+            <th> Module</th>
+            <th> Role</th>
+            <th> Overall Status</th>
+            <th> Access Permission</th>
+        </tr>
+    </thead>
+    <tbody id="js-append-offer-rows">
+        <% for(let i = 0; i < allPermissions.length; i++){ %>
+            <tr>
+                <td>
+                    <%=allPermissions[i]['uap_id']%>
+                </td>
+                <td>
+                    <%=allPermissions[i]['module_name']%>
+                </td>
+                <td>
+                    <%=allPermissions[i]['uap_role_name']%>
+                </td>
+                <td>
+                    <% if(allPermissions[i]['uap_access_status'] == true){%>
+                        <% if(allPermissions[i]['uap_uar'] === 1){%>
+                            <input type="checkbox" name="accessStatus" value="true" id="accessStatusCheck-<%=allPermissions[i]['uap_id']%>" onchange="" checked disabled>
+                            <%} else{%>
+                                <input type="checkbox" name="accessStatus" value="true" id="accessStatusCheck-<%=allPermissions[i]['uap_id']%>" onchange="USERADMINPERMISSIONS.updateStatusCheck(`<%=allPermissions[i]['uap_id']%>`)" checked>
+
+                                <%}} else{%>
+
+
+                                    <input type="checkbox" value="false" name="accessStatus" id="accessStatusCheck-<%=allPermissions[i]['uap_id']%>" onchange="USERADMINPERMISSIONS.updateStatusCheck(`<%=allPermissions[i]['uap_id']%>`)">
+                                    <%}%>
+
+                </td>
+                <td>
+                    <% let readStatus = allPermissions[i]['uap_access_read'] ? "checked" : ""%>
+                        <% let writeStatus = allPermissions[i]['uap_access_write'] ? "checked" : ""%>
+                            <% let removeStatus = allPermissions[i]['uap_access_remove'] ? "checked" : ""%>
+                                <% let disabledStatus = (allPermissions[i]['uap_uar'] === 1) ? "disabled" : ""%>
+                                    <div>Read: <input type="checkbox" value="<%=allPermissions[i]['uap_access_read']%>" name="accessStatus" id="readStatusCheck-<%=allPermissions[i]['uap_id']%>" onchange="USERADMINPERMISSIONS.updateStatusCheck(`<%=allPermissions[i]['uap_id']%>`)"
+                                            <%=readStatus%>
+                                        <%=disabledStatus%>>
+                                    </div>
+                                    <div>Write: <input type="checkbox" value="<%=allPermissions[i]['uap_access_write']%>" name="accessStatus" id="writeStatusCheck-<%=allPermissions[i]['uap_id']%>" onchange="USERADMINPERMISSIONS.updateStatusCheck(`<%=allPermissions[i]['uap_id']%>`)"
+                                            <%=writeStatus%>
+                                        <%=disabledStatus%>>
+                                    </div>
+                                    <div>Delete: <input type="checkbox" value="<%=allPermissions[i]['uap_access_remove']%>" name="accessStatus" id="removeStatusCheck-<%=allPermissions[i]['uap_id']%>" onchange="USERADMINPERMISSIONS.updateStatusCheck(`<%=allPermissions[i]['uap_id']%>`)"
+                                            <%=removeStatus%>
+                                        <%=disabledStatus%>>
+                                    </div>
+                                    <!-- <a href="#"><i data-bs-toggle="modal" data-bs-target="#ciFormModalEdit"
+                        data-p-id="<%=allPermissions[i]['uap_id']%>" data-p-url="<%=allPermissions[i][' uap_module_id']%>"
+                        class="material-icons has-sub-menu action-btns">edit</i></a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-p-removeid="<%=allPermissions[i]['uap_id']%>"><i
+                        class="material-icons has-sub-menu action-btns">delete</i></a> -->
+                </td>
+            </tr>
+            <% }%>
+    </tbody>
+</table>
+<script src="/./app/utils/assets/plugins/datatables/datatables.min.js"></script>
+<script src="/./app/utils/assets/js/pages/datatables.js"></script>
+<script>
+</script>
