@@ -1,0 +1,327 @@
+<div class="app-sidebar">
+    <div class="logo" style="display: flex">
+        <a href="/">
+            <img
+                src="/./admin/utils/assets/images/cardInsiderImages/card-insider-logo.png"
+                class="logo-my"
+            />
+        </a>
+        <div class="nav-item" style="margin-top: 7px">
+            <a class="nav-link hide-sidebar-toggle-button" href="#"
+                ><i class="material-icons">first_page</i></a
+            >
+        </div>
+        <div class="sidebar-user-switcher user-activity-online"></div>
+    </div>
+    <div class="app-menu">
+        <ul class="accordion-menu">
+            <li class="sidebar-title">Banks</li>
+            <% for(let i = 0; i < sidebarData.length; i++){%>
+                <li>
+                    <a href=""
+                        ><i class="material-icons-two-tone"
+                            ><%= sidebarData[i].icon %></i
+                        ><%= sidebarData[i].title %><i
+                            class="material-icons has-sub-menu"
+                            >keyboard_arrow_right</i
+                        ></a
+                    >
+                    <ul class="sub-menu">
+                        <% for(let k = 0; k < sidebarData[i].child.length; k++){%>
+                        <li>
+                            <a href="<%=sidebarData[i].child[k].childUrl%>">
+                                <%=sidebarData[i].child[k].childTitle%>
+                            </a>
+                        </li>
+                        <% }%>
+                    </ul>
+                </li>
+                <% }%>
+            <!-- <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">inventory</i
+                    >Applications<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/applications/application-upload"
+                            >Upload From Old Database</a
+                        >
+                    </li>
+                    <li>
+                        <a href="/applications/application-upload-sms"
+                            >Upload SMS Status</a
+                        >
+                    </li>
+                    <li>
+                        <a href="/applications/export-sms-file"
+                            >Export SMS File</a
+                        >
+                    </li>
+                    <li>
+                        <a href="/applications/get-applications">All Leads</a>
+                    </li>
+                    <li>
+                        <a href="/applications/all-banks-in-applications"
+                            >All Banks</a
+                        >
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>Axis
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/axis/axis-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/axis/axis-applications">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>Bank
+                    of Baroda<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/bob/bob-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/bob/bob-applications">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>State
+                    bank of India<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>ICICI
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>AU
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/au/au-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/au/au-applications">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i
+                    >IndusInd<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>IDFC
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/idfc/idfc-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/idfc/idfc-applications">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>HDFC
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>CITI
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/citi/citi-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/citi/citi-applications">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>RBL
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>YES
+                    Bank<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i>Kotak
+                    Mahindra<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i
+                    >American Express<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""
+                    ><i class="material-icons-two-tone">account_balance</i
+                    >Standard Charted<i class="material-icons has-sub-menu"
+                        >keyboard_arrow_right</i
+                    ></a
+                >
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/application-upload">Upload File</a>
+                    </li>
+                    <li>
+                        <a href="/card-application">All Leads</a>
+                    </li>
+                </ul>
+            </li> -->
+            <!-- <li class="sidebar-title">Users</li>
+            <li>
+                <a href="">
+                    <i class="material-icons-two-tone">person</i>
+                    Manage Users
+                    <i class="material-icons has-sub-menu">
+                        keyboard_arrow_right
+                    </i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/users/admin/users-list-ui">Admin Users</a>
+                    </li>
+                    <li>
+                        <a href="/users/user-roles">User Roles</a>
+                    </li>
+                    <li>
+                        <a href="/users/permissions">Permissions</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li class="sidebar-title">Profile</li>
+            <li class="sign-out-c">
+                <a href="#" onclick="signOutUser()"
+                    ><i class="material-icons-two-tone">exit_to_app</i
+                    ><span>Sign Out</span></a
+                >
+            </li>
+        </ul>
+    </div>
+</div>

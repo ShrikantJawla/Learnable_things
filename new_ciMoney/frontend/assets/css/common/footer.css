@@ -1,0 +1,93 @@
+/**========================================================================
+     *                           Footer
+     *========================================================================**/
+
+     .footer {
+        width: 100%;
+        min-height: 290px;
+        padding: 20px 120px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      @media all and (max-width: 768px) {
+        .footer {
+          flex-direction: column;
+          gap: 15px;
+          padding: 20px 60px;
+        }
+      }
+      
+      .footer > div:not(:nth-child(2)) {
+        width: 230px;
+        min-height: 160px;
+        text-align: center;
+        /* border: 1px solid red; */
+      }
+      
+      @media all and (max-width: 768px) {
+        .footer > div {
+          width: 180px;
+        }
+      }
+      
+      .footer_first_box,
+      .footer_third_box {
+        text-align: center;
+        color: #fff;
+      }
+      
+      @media all and (max-width: 768px) {
+        .footer_first_box,
+        .footer_third_box {
+          text-align: left;
+        }
+      }
+      
+      .footer_first_box > h2,
+      .footer_sec_box > h2,
+      .footer_third_box > h2 {
+        font-size: 22px;
+        font-weight: 700;
+      }
+      
+      @media all and (max-width: 428px) {
+        .footer_first_box > h2,
+        .footer_sec_box > h2,
+        .footer_third_box > h2 {
+          font-size: 15px;
+        }
+      }
+      
+      .footer_first_box > p,
+      .footer_third_box > p {
+        font-size: 14px;
+      }
+      
+      .footer_sec_box {
+        color: #fff;
+      }
+      
+      .footer_sec_box > ul {
+        font-size: 15px;
+      }
+      .footer_sec_box > ul > li > a {
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+      }
+      .footer_sec_box > ul > li > a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      
+      @media all and (max-width: 428px) {
+        .footer_first_box > p,
+        .footer_third_box > p {
+          font-size: 11px;
+        }
+        .footer_sec_box > ul {
+          font-size: 11px;
+        }
+      }
+      

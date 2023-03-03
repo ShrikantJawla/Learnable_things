@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160px" height="160px" viewBox="0 0 160 160" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Artboard@2x</title>
+    <defs>
+        <circle id="path-1" cx="73" cy="58" r="58"></circle>
+        <filter x="-29.3%" y="-27.6%" width="158.6%" height="158.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="11" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.894117647   0 0 0 0 0.901960784   0 0 0 0 0.960784314  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="815-excellent-" transform="translate(7.000000, 22.000000)">
+            <path d="M22.059154,57.5521893 L23.6724034,61.7718928 L21.2064344,74.4483278 C20.8883206,76.0836073 19.3047825,77.1513811 17.669503,76.8332673 C17.1539408,76.7329741 16.6735009,76.4998013 16.2757224,76.1568211 L6.77924523,67.9685848 C6.40063445,67.6421317 6.10909586,67.2266971 5.93084513,66.7596378 L4.67240337,63.4622209 L4.67240337,63.4622209 C8.93479552,62.5769795 12.0673422,61.7665549 14.0700433,61.0309471 C16.0727445,60.2953393 18.7357814,59.1357534 22.059154,57.5521893 Z" id="Rectangle" fill="#040317" transform="translate(14.172403, 68.552189) scale(-1, 1) rotate(-62.000000) translate(-14.172403, -68.552189) "></path>
+            <g id="Oval">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <circle id="Oval" stroke="#F1F1F1" stroke-width="0.791815501" fill="#FFFFFF" cx="73" cy="58" r="52.6040922"></circle>
+        </g>
+    </g>
+</svg>

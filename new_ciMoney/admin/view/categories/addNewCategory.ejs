@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../common/commonHeader'); %>
+    <link
+      href="/./admin/utils/assets/plugins/flatpickr/flatpickr.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/admin/utils/assets/css/uploadImageBox.css" />
+  </head>
+  <body>
+    <div class="app align-content-stretch d-flex flex-wrap">
+      <%- include('../common/commonLoader'); %> <%-
+      include('../common/commonSidebar' , {sidebarData : sidebarDataByServer});
+      %>
+
+      <div class="app-container">
+        <div class="d-flex flex-column">
+          <div class="app-content">
+            <h1 class="application-title pb-1">Add new Category</h1>
+            <div class="top-btns">
+              <button
+                onclick="addAOffer()"
+                class="ci-btn ci-btn-green"
+                id="update"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card bg-card">
+              <form>
+                <div class="ci-card-body newoffer card-body">
+                  <div class="col-8 shadowBox p-4" id="left-form">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="row">
+                          <label for="name" class="form-label"
+                            >Name<span class="required">*</span></label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            required
+                          />
+                        </div>
+                        <div class="row mt-3">
+                          <label for="desc" class="form-label"
+                            >Description</label
+                          >
+                          <!-- <input
+                            type="text"
+                            class="form-control"
+                            id="desc"
+                            name="desc"
+                            required
+                          /> -->
+                          <textarea class="form-control largeTextarea" name="desc" id="desc"></textarea>
+                        </div>
+                        <div class="row px-0 mt-3">
+                          <div class="col-6">
+                            <label for="sequence" class="form-label"
+                              >sequence</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="sequence"
+                              name="sequence"
+                              required
+                            />
+                          </div>
+                          <div
+                            class="col-6"
+                            style="display: flex; flex-direction: column"
+                          >
+                            <label
+                              for="status"
+                              style="display: inline-block"
+                              class="form-label d-inline-block"
+                              >Status</label
+                            >
+                            <select name="status" id="status">
+                              <option value="on">ON</option>
+                              <option value="off">OFF</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Offer image -->
+                      <div
+                        class="col-6"
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: flex-start;
+                          padding: 0 20px;
+                        "
+                      >
+                        <label for="img" class="form-label">Image</label>
+                        <div class="imageUploadBox form-input">
+                          <div class="preview">
+                            <img id="img-preview" class="previewImg" src="" />
+                          </div>
+                          <i
+                            class="material-icons has-sub-menu action-btns deleteImage closeButtonLogo"
+                            onclick="clearPreview();"
+                            >close</i
+                          >
+                          <label for="img" class="">Choose</label>
+                          <!-- <input type="file" id="brandLogo" accept="image/*" onchange="showPreview(event);"> -->
+                          <input
+                            type="file"
+                            id="img"
+                            accept="image/*"
+                            onchange="showPreview(event);"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row"></div>
+                  </div>
+                  <div class="col-4" style="padding-left: 28px !important">
+                    <div class="col-md-12">
+                      <div
+                        class="px-4 py-2 h-2 rounded-1 my-0 py-0 shadowBox information"
+                      >
+                        <div class="">
+                          <label class="info-label"
+                            ><span>Last Update</span>
+                            <span><%= `offers` %></span></label
+                          >
+                        </div>
+                        <div class="">
+                          <label class="info-label"
+                            ><span>Published at</span>
+                            <span><%=`offers` %></span></label
+                          >
+                        </div>
+                        <div class="">
+                          <label class="info-label"
+                            ><span>By</span><span><%= `offers`%></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="requiredWrapper mt-4">
+                        <div class="">
+                          <span class="required">*</span> <span>Required</span>
+                        </div>
+                        <!-- <div class=""><span class="oneofrequired">**</span><span>One of the marked is required</span></div> -->
+                      </div>
+                      <div
+                        class="title ms-3 fs-5 mt-2"
+                        style="font-weight: 600"
+                      >
+                        All Offers
+                      </div>
+                      <div
+                        class="form-group d-flex flex-column gap-3 mt-1"
+                        style="
+                          padding: 5px;
+                          height: 300px;
+                          overflow-y: scroll;
+                          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                        "
+                        id="multiSelectWrapper"
+                      >
+                        <% for (let offer of offers) { %>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value="<%= offer.of_id %>"
+                            id="flexCheckChecked"
+                          />
+                          <label
+                            class="form-check-label"
+                            for="flexCheckChecked"
+                          >
+                            <%= offer.of_name %>
+                          </label>
+                        </div>
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Javascripts -->
+    <script src="/./admin/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+    <script src="/./admin/utils/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="/./admin/utils/assets/plugins/flatpickr/flatpickr.js"></script>
+    <script src="/./admin/utils/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/./admin/utils/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+    <script src="/./admin/utils/assets/js/main.min.js"></script>
+    <script src="/./admin/utils/assets/js/custom.js"></script>
+    <script src="/./admin/utils/assets/js/categories/addNewCategories.js"></script>
+  </body>
+</html>

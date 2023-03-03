@@ -15,7 +15,7 @@ const redis = require("redis")
 const connectRedis = require("connect-redis")
 
 
-const router = require('./app/routes/homeRoutes')
+const router = require('./mainRouts')
 
 // if(cluster.isMaster){
 // 	console.log(`Master PID ${process.pid} is running`);
@@ -104,7 +104,7 @@ app.use(function (req, res, next) {
 
 // setting ejs view here.... 
 app.use(express.static(__dirname + ""))
-app.set('views', [path.join(__dirname, 'app/view/')])
+app.set('views', [path.join(__dirname, 'frontend/view/') , path.join(__dirname, 'admin/view/')])
 app.set('view engine', 'ejs')
 
 

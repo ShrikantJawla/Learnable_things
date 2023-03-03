@@ -1,0 +1,323 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: rgb(252, 239, 252);
+  font-style: Inter, Helvetica, "sans-serif";
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #086ad8;
+  border-radius: 10px;
+}
+
+
+/**========================================================================
+ *                           Section Total Earnings
+ *========================================================================**/
+
+.total_earning_section {
+  font-size: 22px;
+  margin-left: 70px;
+}
+
+.total_earning_section > span {
+  padding-left: 20px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/**========================================================================
+   *                           Carousel Sections
+   *========================================================================**/
+
+.crausel_container {
+  width: 90%;
+  margin: auto;
+}
+@media all and (max-width:480px){
+  .crausel_container{
+    width:80%;
+    margin: auto;
+  }
+}
+.slick-arrow::before {
+  font-size: 22px;
+  color: rgb(114, 100, 100);
+}
+.crausel_item {
+  width: 30%;
+  height: 340px;
+  border: 1px solid red;
+}
+
+/**========================================================================
+    *                           Text section near crausel
+    *========================================================================**/
+
+.categories_container {
+  width: 100%;
+  height: 60px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 25px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: white;
+}
+.categories_container::-webkit-scrollbar {
+  height: 7px;
+}
+.categories_container::-webkit-scrollbar-thumb {
+  background-color: rgb(165, 165, 227);
+}
+.categories_container > p {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 300;
+  color: black;
+  white-space: nowrap;
+  cursor: pointer;
+  margin: auto
+}
+.categories_container > p:hover {
+  text-decoration: underline;
+  text-decoration-color: rgb(209, 81, 81);
+}
+.categories_container > p.active {
+  color: rgb(203, 81, 81);
+  font-weight: 500;
+}
+
+/**========================================================================
+*                           Second crausel Section
+*========================================================================**/
+
+.second_offers_crausel {
+  width: 100%;
+  height: fit-content;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  display: grid;
+  grid-template-columns: repeat(3, 330px);
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+  padding: 0px 120px;
+}
+
+.second_offers_crausel .card {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  margin: auto;
+}
+
+.discount_tag {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top: -18px;
+  right: -12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  color: white;
+}
+
+.second_offers_crausel::-webkit-scrollbar {
+  height: 10px;
+}
+.second_offers_crausel::-webkit-scrollbar-thumb {
+  background-color: #0f4574;
+  border-radius: 10px;
+}
+
+.card_content {
+  width: 100%;
+  position: relative;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.earning_badge {
+  position: absolute;
+  top: -13px;
+  background: rgb(204, 203, 203);
+  padding: 1px 17px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.card-text {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.card-img-top {
+  width: 160px;
+  height: 50px;
+}
+
+.card_footer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.card_footer > .btn:first-child {
+  color: #fff;
+  background-color: #25d366;
+}
+.card_footer > .btn {
+  width: 200px;
+}
+
+@media all and (max-width: 320px) {
+  .card_footer > .btn {
+    width: 130px;
+    font-size: 14px;
+  }
+}
+.copy_link_btn {
+  border: 1px solid gray;
+}
+
+.card-body {
+  height: fit-content;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+@media all and (max-width: 991px) {
+  .second_offers_crausel {
+    grid-template-columns: repeat(2, 300px);
+    gap: 30px;
+    padding: 0px 0px;
+  }
+}
+@media all and (max-width: 768px) {
+  
+}
+
+@media all and (max-width: 428px) {
+  .second_offers_crausel {
+    grid-template-columns: repeat(1, 300px);
+    gap: 30px;
+    padding: 0px 0px;
+  }
+}
+
+/**========================================================================
+     *                           Footer
+     *========================================================================**/
+
+     .footer {
+      width: 100%;
+      min-height: 290px;
+      padding: 20px 120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    @media all and (max-width: 768px) {
+      .footer {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 60px;
+      }
+    }
+    
+    .footer > div:not(:nth-child(2)) {
+      width: 230px;
+      min-height: 160px;
+      text-align: center;
+      /* border: 1px solid red; */
+    }
+    
+    @media all and (max-width: 768px) {
+      .footer > div {
+        width: 180px;
+      }
+    }
+    
+    .footer_first_box,
+    .footer_third_box {
+      text-align: center;
+      color: #fff;
+    }
+    
+    @media all and (max-width: 768px) {
+      .footer_first_box,
+      .footer_third_box {
+        text-align: left;
+      }
+    }
+    
+    .footer_first_box > h2,
+    .footer_sec_box > h2,
+    .footer_third_box > h2 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    
+    @media all and (max-width: 428px) {
+      .footer_first_box > h2,
+      .footer_sec_box > h2,
+      .footer_third_box > h2 {
+        font-size: 15px;
+      }
+    }
+    
+    .footer_first_box > p,
+    .footer_third_box > p {
+      font-size: 14px;
+    }
+    
+    .footer_sec_box {
+      color: #fff;
+    }
+    
+    .footer_sec_box > ul {
+      font-size: 15px;
+    }
+    .footer_sec_box > ul > li > a {
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+    }
+    .footer_sec_box > ul > li > a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    
+    @media all and (max-width: 428px) {
+      .footer_first_box > p,
+      .footer_third_box > p {
+        font-size: 11px;
+      }
+      .footer_sec_box > ul {
+        font-size: 11px;
+      }
+    }
+    
