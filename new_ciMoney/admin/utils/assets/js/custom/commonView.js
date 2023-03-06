@@ -1,5 +1,6 @@
 let GET_APPLICATIONS = {};
 let ALLICATIONS_DATA = [];
+let idsToRemove = [];
 let REQ_DATA = {};
 let newTotalCount;
 let prevPage = document.querySelector("#prevPage");
@@ -14,6 +15,8 @@ let issuerName =
 let currentPath =
   window.location.href.split("/")[window.location.href.split("/").length - 1];
 let ajaxUrl = `/${issuerName}/${currentPath}-ajax`;
+
+console.log(issuerName,currentPath)
 
 let filterObject = {
   sort_asec: "",
@@ -150,14 +153,17 @@ $(document).ready(function () {
           sendData.applicationIdList.push(this.id);
         }
       });
-      
-    // Request to assign new leads to telecallers
+      if(!sendData.applicationIdList.length){
+        alert("Please select any entry to delete!")
+        $('#loader').hide();
+        return;
+      }
+    // Request to remove new leads to telecallers
     $.ajax({
-      url: "/admin/ts/manage-tele-assignments",
+      url: `/admin/${issuerName}/${currentPath}-delete`,
       type: "POST",
       data: sendData,
       success: function (result) {
-        $("#removeTelecallerSelect").val(null).trigger('change');
         $("#loader").hide();
         $("#removeModalNew").modal("hide");
         GET_APPLICATIONS.getData();

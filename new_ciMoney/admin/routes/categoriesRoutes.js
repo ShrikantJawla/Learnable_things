@@ -48,4 +48,9 @@ router.patch(
   categoriesControllerObject.editExistingCategory
 );
 
+router.post(
+  "/categories-list-ui-delete",
+  categoriesControllerObject.deleteCategories
+);
+
 module.exports = router;

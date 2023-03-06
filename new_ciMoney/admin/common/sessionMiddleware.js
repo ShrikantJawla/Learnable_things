@@ -11,6 +11,7 @@ middleObj.checkTheLoginStatus = function (req, res, next) {
 	} else {
 		const loggedUser = jwt.decode(req.session.userToken);
 		req.body.loggedUser = loggedUser;
+		req.loggedUser = loggedUser;
 		next()
 	}
 }

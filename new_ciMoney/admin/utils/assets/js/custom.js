@@ -26,7 +26,7 @@ function ValidateProcesSigninData() {
             },
 
             success: function (result) {
-                window.location.href = "/";
+                window.location.href = "/admin";
             },
             error: function(error){
               document.getElementById("sign-in-error").innerHTML = `${error.responseJSON.message} Please Contact Admin`;

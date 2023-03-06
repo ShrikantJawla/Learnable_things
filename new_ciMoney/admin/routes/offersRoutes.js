@@ -37,7 +37,10 @@ router.patch(
   offersControllerObject.updateAnyExistingOffer
 );
 
-
+router.post(
+  "/offers-list-ui-delete",
+  offersControllerObject.deleteOffers
+);
 
 
 module.exports = router;

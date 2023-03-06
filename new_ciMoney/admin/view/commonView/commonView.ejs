@@ -31,14 +31,8 @@
                                 <button class="btn btn-success" id="add_entry" onclick="window.location.href='<%=addEntryUrl%>'">
                                     Add Entry
                                 </button>
-                            <button class="btn btn-success" id="assign">
-                                Assign
-                            </button>
                             <button class="btn btn-danger" id="remove">
                                 Remove
-                            </button>
-                            <button class="btn btn-primary" id="reassign">
-                                Reassign
                             </button>
                             <button class="btn btn-info" id="filterReset">
                                 Reset Filters
@@ -318,38 +312,6 @@
                             </table>
                         </div>
                     </div>
-                    <!--Assign Modal -->
-                    <div class="modal fade" id="assignModalNew" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true" style="padding: 10px 40px">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <button type="button" class="btn-close" id="assign-btn-close"></button>
-                                <div class="assign-modal-body">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <h5 class="assign-modal-title">
-                                                    Select Telecaller :
-                                                </h5>
-                                                <select name="" multiple class="multiple_tele" placeholder="Select Telecallers" id="addTelecallerSelect">
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" id="assignLaterBtn">
-                                        Cancel
-                                    </button>
-                                    <button type="button" class="btn btn-primary" id="assign-submit" disabled>
-                                        Assign
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!--Remove Modal -->
                     <div class="modal fade" id="removeModalNew" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true" style="padding: 10px 40px">
@@ -361,10 +323,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <h5 class="assign-modal-title">
-                                                    Select Telecaller :
+                                                    Are you sure?
                                                 </h5>
-                                                <select name="" multiple class="multiple_tele" placeholder="Select Telecallers" id="removeTelecallerSelect" >
-                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -374,52 +334,12 @@
                                     <button type="button" class="btn btn-secondary" id="removeLaterBtn">
                                         Cancel
                                     </button>
-                                    <button type="button" class="btn btn-primary" id="remove-submit" disabled>
+                                    <button type="button" class="btn btn-primary" id="remove-submit">
                                         Remove
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!--Reassign Modal -->
-                    <div class="modal fade" id="reassignModalNew" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true" style="padding: 10px 40px">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <button type="button" class="btn-close" id="remove-btn-close"></button>
-                            <div class="reassign-modal-body">
-                                <div class="row" style="margin-top: 40px">
-                                    <div class="col-5">
-                                        <h5 class="reassign-modal-title" id="reassignPermission">
-                                            Remove Permission From :
-                                        </h5>
-                                    </div>
-                                    <div class="col-7">
-                                        <select name="" multiple="multiple" class="multiple_tele" id="reassignPermissionSelectFrom"></select>
-                                    </div>
-                                    <div class="col-5">
-                                        <h5 class="reassign-modal-title" id="reassignPermission">
-                                            Give Permission To :
-                                        </h5>
-                                    </div>
-                                    <div class="col-7">
-                                        <select name="" multiple="multiple" class="multiple_tele" id="reassignPermissionSelectTo"></select>
-                                    </div>
-                                </div>
-                                <p id="showError" class="error-text"></p>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" id="reassignLaterBtn">
-                                    Cancel
-                                </button>
-                                <button type="button" class="btn btn-primary" id="reassign-submit" disabled>
-                                    Reassign
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     </div>
 
                     <script src="/./admin/utils/assets/plugins/jquery/jquery-3.5.1.min.js"></script>

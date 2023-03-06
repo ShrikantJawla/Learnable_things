@@ -50,11 +50,15 @@ categoriesControllerObject.categoriesListAjax = async (req, res) => {
           cim_categories.cat_img as "string|cat_img|Image",
           cim_categories.cat_sequence as "int|cat_sequence|Sequence",
           cim_categories.cat_status as "bool|cat_status|Status",
-          cim_categories.cat_created_by as "int|cat_created_by|Created by",
+          created_by_u.ua_name as "string|created_by_u.ua_name|Created by",
+          updated_by_u.ua_name as "string|updated_by_u.ua_name|Updated by",
           CAST(cim_categories.cat_created_at as varchar) as "date|cat_created_at|Created at",
-          CAST(cim_categories.cat_updated_at as varchar) as "date|cat_updated_at|Updated at"
+          CAST(cim_categories.cat_updated_at as varchar) as "date|cat_updated_at|Updated at",
+          CAST(cim_categories.publish_at as varchar) as "date|publish_at|Publish at"
 	`;
-  let leftJoin = `LEFT JOIN user_admin AS ua ON ua.uar_id=user_admin.ua_role`;
+  let leftJoin = `LEFT JOIN user_admin AS created_by_u ON created_by_u.ua_id = cim_categories.cat_created_by
+  LEFT JOIN user_admin AS updated_by_u ON updated_by_u.ua_id = cim_categories.cat_updated_by
+  `;
   let tableName = "cim_categories";
   let dataFromDb = await commonModel.getDataByPagination({
     body: req.body,
@@ -62,6 +66,7 @@ categoriesControllerObject.categoriesListAjax = async (req, res) => {
     selectColumns: selectColumns,
     tableName: tableName,
     shortByColumn: "cat_id",
+    leftJoin,
   });
   if (dataFromDb) {
     res.render("commonView/commonAjax", {
@@ -90,6 +95,7 @@ categoriesControllerObject.addNewCategoryUI = async (req, res) => {
 };
 
 categoriesControllerObject.addNewCategory = async (req, res) => {
+  const { ua_id } = req.loggedUser;
   let { name, desc, sequence, status, offers_array } = req.body;
   let response;
   try {
@@ -114,7 +120,8 @@ categoriesControllerObject.addNewCategory = async (req, res) => {
           desc,
           response.Location,
           sequence,
-          status
+          status,
+          ua_id
         )
       );
       offers_array = offers_array.split(",");
@@ -186,9 +193,26 @@ categoriesControllerObject.getCategoriesToDisplay = async (req, res) => {
 };
 
 categoriesControllerObject.editExistingCategory = async (req, res) => {
+  const { ua_id } = req.loggedUser;
   let id = req.params.id;
   let { name, desc, status, sequence, offers_array } = req.body;
   let resp;
+  let propsWithImgUrl = {
+    id,
+    name,
+    desc,
+    sequence,
+    status,
+    ua_id,
+  };
+  let propsWithoutImgUrl = {
+    id,
+    name,
+    desc,
+    sequence,
+    status,
+    ua_id,
+  };
   try {
     let uploadedImg;
     if (req.file) {
@@ -198,25 +222,13 @@ categoriesControllerObject.editExistingCategory = async (req, res) => {
           return res;
         });
       const { Location } = uploadedImg;
+      propsWithImgUrl.Location = Location;
       resp = await pool.query(
-        categoriesModel.editExistingCategoryQuery(
-          id,
-          name,
-          desc,
-          sequence,
-          status,
-          Location
-        )
+        categoriesModel.editExistingCategoryQuery(propsWithImgUrl)
       );
     } else {
       resp = await pool.query(
-        categoriesModel.editExistingCategoryQuery(
-          id,
-          name,
-          desc,
-          sequence,
-          status
-        )
+        categoriesModel.editExistingCategoryQuery(propsWithoutImgUrl)
       );
     }
     offers_array = offers_array.split(",").map(Number);
@@ -226,7 +238,7 @@ categoriesControllerObject.editExistingCategory = async (req, res) => {
 
     let { rows: allConnectedOffersInJunction } =
       await pool.query(`SELECT * FROM offer_category_junction AS junc
-    WHERE junc.cat_fk_id = ${id}`);
+    WHERE junc.cat_fk_id = ${id} AND publish_at IS NOT NULL`);
 
     for (let i = 0; i < allConnectedOffersInJunction.length; i++) {
       allExistingOffersId.push(+allConnectedOffersInJunction[i].off_fk_id);
@@ -234,7 +246,7 @@ categoriesControllerObject.editExistingCategory = async (req, res) => {
 
     for (let i = 0; i < allConnectedOffersInJunction.length; i++) {
       if (!offers_array.includes(+allConnectedOffersInJunction[i].off_fk_id)) {
-        idsToExclude.push(allConnectedOffersInJunction[i].off_fk_id);
+        idsToExclude.push(+allConnectedOffersInJunction[i].off_fk_id);
       }
     }
 
@@ -243,21 +255,24 @@ categoriesControllerObject.editExistingCategory = async (req, res) => {
         idsToInclude.push(+offers_array[i]);
     }
 
-    let query = "";
+    let valuesToBeAdded = "";
     for (let i = 0; i < idsToInclude.length; i++) {
-      query += `(${idsToInclude[i]},${resp.rows[0].cat_id}),`;
+      valuesToBeAdded += `(${idsToInclude[i]},${resp.rows[0].cat_id}),`;
     }
 
-    let finalQuery = `INSERT INTO offer_category_junction (off_fk_id,cat_fk_id) VALUES ${query.substring(
-      0,
-      query.length - 1
-    )};`;
-    let q1 = `UPDATE offer_category_junction
-    SET publish_at = NULL WHERE off_fk_id IN(${idsToExclude.join(",")});`;
-    if (idsToExclude) {
-      finalQuery += q1;
+    let finalQuery = "";
+    if (idsToInclude.length) {
+      finalQuery += `INSERT INTO offer_category_junction (off_fk_id,cat_fk_id) VALUES ${valuesToBeAdded.substring(
+        0,
+        valuesToBeAdded.length - 1
+      )};`;
     }
-    console.log(finalQuery)
+    if (idsToExclude.length) {
+      finalQuery += `UPDATE offer_category_junction
+      SET publish_at = NULL WHERE off_fk_id IN(${idsToExclude.join(
+        ","
+      )}) AND cat_fk_id = ${id};`;
+    }
     let resAfterUpdatingJunctionOfOffAndCat = await pool.query(finalQuery);
 
     res.status(200).send({
@@ -283,6 +298,32 @@ categoriesControllerObject.getSingleCategoryToDisplay = async (req, res) => {
     res.status(500).json({
       msg: error,
     });
+  }
+};
+
+categoriesControllerObject.deleteCategories = async (req, res) => {
+  let { applicationIdList, table } = req.body;
+  applicationIdList = applicationIdList.map(Number);
+  let finalData = {
+    status: false,
+    code: "CIP-APPLICATION-ERR-101",
+    message: "Something went wrong",
+    payload: [],
+  };
+  try {
+    let response = await pool.query(
+      categoriesModel.deleteExistingCategoriesQuery(applicationIdList)
+    );
+    finalData = {
+      ...finalData,
+      code: "",
+      message: "",
+      payload: response,
+    };
+    commonHelper.successHandler(res, finalData);
+  } catch (error) {
+    console.log(error);
+    commonHelper.errorHandler(res, finalData);
   }
 };
 

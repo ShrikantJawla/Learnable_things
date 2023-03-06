@@ -67,11 +67,15 @@ offersControllerObject.offersListAjax = async (req, res) => {
       cim_offers.of_logo as "string|of_logo|Logo",
       cim_offers.of_sequence as "int|of_sequence|Sequence",
       cim_offers.of_active_status as "bool|of_active_status|Status",
-      cim_offers.of_updated_by as "int|of_updated_by|Updated by",
+      created_by_u.ua_name as "string|created_by_u.ua_name|Created by",
+      updated_by_u.ua_name as "string|updated_by_u.ua_name|Updated by",
       CAST(cim_offers.of_created_at as varchar) as "date|of_created_at|Created at",
-      CAST(cim_offers.of_updated_at as varchar) as "date|of_updated_at|Updated at"
+      CAST(cim_offers.of_updated_at as varchar) as "date|of_updated_at|Updated at",
+      CAST(cim_offers.of_publish_at as varchar) as "date|of_publish_at|Publish at"
         `;
-  let leftJoin = `LEFT JOIN user_admin AS ua ON ua.uar_id=user_admin.ua_role`;
+  let leftJoin = `LEFT JOIN user_admin AS created_by_u ON created_by_u.ua_id = cim_offers.of_created_by
+                  LEFT JOIN user_admin AS updated_by_u ON updated_by_u.ua_id = cim_offers.of_updated_by
+                  `;
   let tableName = "cim_offers";
   let dataFromDb = await commonModel.getDataByPagination({
     body: req.body,
@@ -79,8 +83,8 @@ offersControllerObject.offersListAjax = async (req, res) => {
     selectColumns: selectColumns,
     tableName: tableName,
     shortByColumn: "of_id",
+    leftJoin
   });
-  console.log(dataFromDb);
   if (dataFromDb) {
     res.render("commonView/commonAjax", {
       applicationsList: dataFromDb.applicationsData,
@@ -125,6 +129,7 @@ offersControllerObject.getSingleOffer = async (req, res) => {
 };
 
 offersControllerObject.addNewOffer = async (req, res) => {
+  const {ua_id} = req.loggedUser;
   const { name, desc, sequence, status, share_link, category_id } = req.body;
   try {
     if (
@@ -149,7 +154,8 @@ offersControllerObject.addNewOffer = async (req, res) => {
           status,
           share_link,
           resArr[0].Location,
-          resArr[1].Location
+          resArr[1].Location,
+          ua_id
         )
       );
       let resAfterAddingToJunctionTable = await pool.query(
@@ -174,6 +180,7 @@ offersControllerObject.addNewOffer = async (req, res) => {
 };
 
 offersControllerObject.updateAnyExistingOffer = async (req, res) => {
+  const {ua_id} = req.loggedUser;
   const { name, desc, sequence, status, share_link, category_id } = req.body;
   const id = req.params.id;
   const common = [id, name, desc, sequence, status, share_link];
@@ -199,7 +206,8 @@ offersControllerObject.updateAnyExistingOffer = async (req, res) => {
               img: resArr[0].Location,
               logo: resArr[1].Location,
             },
-            category_id
+            category_id,
+            ua_id
           )
         );
       } else if (req.files.img) {
@@ -210,7 +218,8 @@ offersControllerObject.updateAnyExistingOffer = async (req, res) => {
             {
               img: resp.Location,
             },
-            category_id
+            category_id,
+            ua_id
           )
         );
       } else if (req.files.logo) {
@@ -221,12 +230,13 @@ offersControllerObject.updateAnyExistingOffer = async (req, res) => {
             {
               logo: resp.Location,
             },
-            category_id
+            category_id,
+            ua_id
           )
         );
       }
       resAfterAddingToDB = await pool.query(
-        offersModel.updateAnyExistingDataQuery(...common, {})
+        offersModel.updateAnyExistingDataQuery(...common, {},ua_id)
       );
       
         // Here I have updated the offer and category junction table 
@@ -252,5 +262,34 @@ offersControllerObject.updateAnyExistingOffer = async (req, res) => {
     });
   }
 };
+
+
+
+offersControllerObject.deleteOffers = async(req,res)=>{
+  let { applicationIdList, table } = req.body;
+  applicationIdList = applicationIdList.map(Number);
+  let finalData = {
+    status: false,
+    code: "CIP-APPLICATION-ERR-101",
+    message: "Something went wrong",
+    payload: [],
+  };
+  try {
+    let response = await pool.query(
+      offersModel.deleteExistingCategoriesQuery(applicationIdList)
+    );
+    finalData = {
+      ...finalData,
+      code: "",
+      message: "",
+      payload: response,
+    };
+    commonHelper.successHandler(res, finalData);
+  } catch (error) {
+    console.log(error);
+    commonHelper.errorHandler(res, finalData);
+  }
+}
+
 
 module.exports = offersControllerObject;
