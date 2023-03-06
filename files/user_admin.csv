@@ -1,0 +1,4 @@
+"ua_id","ua_name","ua_email","ua_password","ua_role","created_at","updated_at","active_user"
+1,"Manish","manish@amtechnetworks.com","$2b$06$GAT/pYL5d.hcAP0PAHp/AO1wlk8E9cof1zjA2waogqZGOvL9HMyi.",1,"2023-02-27 05:52:28.364134+00",NULL,True
+4,"manishhh","manishh@amtechnetworks.com","$2b$06$.sHvWlPWgjubJFoZMTXpoevraLyeuloKc4r57/t/LAH/1ckEgDl0q",1,"2023-02-27 05:52:28.364134+00","2023-03-01 04:41:49.127133+00",True
+9,"shri","shri@gmail.com","$2b$06$5cuhLQP5Cg2M8if0HH7LI.smmihht76UVnt6MdT5HvkLIiYvVBv0e",1,"2023-02-27 05:52:28.364134+00","2023-03-03 07:03:27.291968+00",True

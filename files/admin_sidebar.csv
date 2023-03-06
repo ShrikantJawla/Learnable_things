@@ -1,0 +1,11 @@
+"as_id","as_title","as_is_parent","as_parent_id","as_url","as_icon","as_created","as_permission_of","as_is_enabled","as_module_key"
+1,"Admin Users",False,2,"/admin/users/users-list-ui",NULL,NULL,"W",True,"users-list-ui_c"
+2,"Manage Users",True,NULL,NULL,"person",NULL,NULL,True,"users_p"
+3,"User Roles",False,2,"/admin/users/user-roles",NULL,NULL,"W",True,"user-roles_c"
+4,"Permissions",False,2,"/admin/users/permissions",NULL,NULL,"W",True,"permissions_c"
+6,"Categories",True,NULL,NULL,"person",NULL,"W",True,"categories_p"
+7,"All Categories",False,6,"/admin/categories/categories-list-ui",NULL,NULL,"W",True,"categories-list-ui_c"
+8,"Offers",True,NULL,NULL,"person",NULL,"W",True,"offers_p"
+9,"All Offers",False,8,"/admin/offers/offers-list-ui",NULL,NULL,"W",True,"offers-list-ui_c"
+10,"All Users",False,11,"/admin/siteUsers/site-users-list-ui",NULL,NULL,"W",True,"site-users-list-ui"
+11,"Site Users",True,NULL,NULL,"person",NULL,"W",True,NULL

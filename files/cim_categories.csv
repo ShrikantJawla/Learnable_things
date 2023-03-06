@@ -1,0 +1,8 @@
+"cat_id","cat_name","cat_desc","cat_img","cat_sequence","cat_status","cat_created_by","cat_updated_at","cat_created_at","publish_at","cat_updated_by"
+20,"sdfsdf","sdfsdf","asdfad",3,True,4,"2023-03-06 11:22:16.302267+00","2023-02-23 08:08:50.000313",NULL,3
+21,"HDFC","ksjdflkj","https://ciwebback.sgp1.digitaloceanspaces.com/Partners/1677736669335.jpg",1,False,4,"2023-03-02 05:57:49.835574+00","2023-02-23 08:09:15.126542",NULL,4
+22,"BOB","sklfjlkj","https://ciwebback.sgp1.digitaloceanspaces.com/Partners/1677139774536.jpg",3,False,9,"2023-02-23 11:33:24.200195+00","2023-02-23 08:09:34.76293",NULL,1
+24,"Credit Cards","Credit Cards","https://ciwebback.sgp1.digitaloceanspaces.com/Partners/1677755257273.jpg",1,False,9,"2023-03-06 12:25:12.126178+00","2023-03-02 11:07:38.619974",NULL,1
+37,"name121223232","For your business, too, your customers’ wins are your wins. If you’re a small retailer, this is","1",3,False,4,"2023-03-06 11:40:01.171396+00","2023-03-03 11:37:04.541099",NULL,4
+38,"adf12123444","adsfsadf","https://ciwebback.sgp1.digitaloceanspaces.com/Partners/1678103377654.jpg",3,False,9,"2023-03-06 11:51:49.08781+00","2023-03-06 04:50:25.045123",NULL,1
+39,"23232345aab","23232","https://ciwebback.sgp1.digitaloceanspaces.com/Partners/1678103907197.jpg",3,False,2,"2023-03-06 12:00:41.742113+00","2023-03-06 11:58:26.802366",NULL,1

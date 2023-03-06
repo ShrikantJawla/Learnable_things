@@ -1,0 +1,2 @@
+"cim_id","cim_name","cim_number","cim_email","cim_number_otp","cim_email_otp","cim_is_verified","created_at","updated_at","cim_uuid"
+144,"Shrikant","9045946661","anmolchaudhary661@gmail.com","0     ","0     ",True,"2023-02-24 14:05:55.069447","2023-02-24 14:05:55.069447","c694e00d-bdc6-47f0-b09d-d56cf7d882c1"
